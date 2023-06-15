@@ -4,6 +4,9 @@ module.exports = {
       '@typescript-eslint',
       'react-hooks' // eslint-plugin-react-hooks 설치한 경우
     ],
+    env: {
+      browser: true
+    },
     extends: [
       'airbnb-base', // or airbnb
       // 'prettier',
