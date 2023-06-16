@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css';
+import HeaderBefore from './components/HeaderBefore';
 
 function App() {
   return (
     <div className="App">
-      
+      <HeaderBefore />
     </div>
   );
 }
