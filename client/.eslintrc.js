@@ -28,8 +28,8 @@ module.exports = {
               "ts": "never",
               "tsx": "never"
             }
-         ],
-         "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+        ],
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
     },
     settings: {
         'import/resolver': {

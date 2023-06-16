@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import QuestionItem from './components/QuestionItem'
 import QuestionDetail from './pages/QuestionDetail/QuestionDetail';
 
 function App() {
@@ -7,6 +8,8 @@ function App() {
 
     return (
         <div className="App">
+            <QuestionItem />
+            <QuestionItem />
             <QuestionDetail questionId={questionId}/>
         </div>
     );
