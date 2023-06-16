@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "allowImportingTsExtensions": true,
+        //"allowImportingTsExtensions": true,
         "noEmit": true,
         "moduleResolution": "node",
         "resolveJsonModule": true,
