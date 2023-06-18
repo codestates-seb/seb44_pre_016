@@ -35,19 +35,17 @@ const ButtonBase = styled.button<Props>`
   justify-content: center;
   align-items: center;
   vertical-align: center;
-  /* position: relative;
-  min-width: 64px; */
   cursor: pointer;
-  line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   user-select: none;
   transition: background-color 0.1s ease;
-  border: none;
   border-radius: 6px;
   padding: 10px 12px;
   text-transform: capitalize;
+  //${`inline-flex gap-4 justify-center items-center align-middle cursor-pointer whitespace-nowrap overflow-hidden text-ellipsis select-none transition duration-100 ease-in-out rounded-md capitalize`}
+
   ${buttonRoleStyle}
 `;
 
