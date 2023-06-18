@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import tw from 'tailwind-styled-components';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Button from '../button/Button';
@@ -32,6 +32,25 @@ const Form = styled.form`
     text-transform: capitalize;
     font-weight: bold;
   }
+`;
+const commonInput = css`
+  width: 100%;
+  margin-top: 5px;
+  padding: 8px 9px;
+  background-color: #fff;
+  color: hsl(210, 8%, 5%);
+  font-size: 13px;
+  border: 1px solid black;
+  border-radius: 3px;
+  outline: none;
+  &:focus {
+    box-shadow: 0px 0px 0px 4px black;
+    border-color: blue;
+  }
+`;
+
+const Input = styled.input`
+  ${commonInput}
 `;
 
 const Login = () => {
@@ -112,17 +131,17 @@ const Login = () => {
       <div>
         <Form>
           <label htmlFor="id">email</label>
-          <input
+          <Input
             id="email"
             type="email"
             value={loginInfo.email}
             onChange={event =>
               loginInfoSet({ ...loginInfo, email: event.target.value })
             }
-            border={emptyEmail || loginFailed ? '#d0390e' : null}
-            focusBorder={emptyEmail || loginFailed ? '#d0390e' : null}
-            shadow={emptyEmail || loginFailed ? 'rgb(246,224,224)' : null}
-          ></input>
+            border-color={emptyEmail || loginFailed ? '#d0390e' : null}
+            // focusBorder={emptyEmail || loginFailed ? '#d0390e' : null}
+            // shadow={emptyEmail || loginFailed ? 'rgb(246,224,224)' : null}
+          ></Input>
           <label htmlFor="password">password</label>
           <input type="text" id="password"></input>
           <Button variant="default" size="md">
