@@ -5,14 +5,15 @@ import styled, { css } from 'styled-components';
 type Variant = 'default' | 'login';
 type Size = 'sm' | 'md';
 
+// props 형식
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: Variant;
   size: Size;
-  fullWidth: boolean;
 }
 
 export type Props = Partial<ButtonProps>;
 
+// 버튼 타입에 따라 달라지는 css
 const buttonRoleStyle = (props: Props) => css`
   background-color: ${props.variant === 'default' ? '#0A95FF' : '#E3ECF3'};
   color: ${props.variant === 'default' ? 'white' : '#83A6C4'};
@@ -34,8 +35,8 @@ const ButtonBase = styled.button<Props>`
   justify-content: center;
   align-items: center;
   vertical-align: center;
-  position: relative;
-  min-width: 64px;
+  /* position: relative;
+  min-width: 64px; */
   cursor: pointer;
   line-height: 1.2;
   white-space: nowrap;
