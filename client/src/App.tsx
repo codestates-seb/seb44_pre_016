@@ -35,6 +35,7 @@ function App() {
         <Link to="/member/signup">
           <Button variant="default" >sign up</Button>
         </Link>
+        <Button variant="default" size='md' >sign up</Button>
       </header>
       <Routes>
         {/* routes 에 직접 스타일을 줄 수 있을까? */}

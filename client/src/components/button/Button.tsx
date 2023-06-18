@@ -25,6 +25,7 @@ const buttonRoleStyle = (props: Props) => css`
   &:active {
     background-color: ${props.variant === 'default' ? '#2960B7' : '#A6C4DF'};
   }
+  width:${props.size === 'md' ? "100%": "auto"};
 `;
 
 const ButtonBase = styled.button<Props>`
