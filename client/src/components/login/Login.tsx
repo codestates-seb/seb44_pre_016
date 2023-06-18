@@ -1,23 +1,24 @@
 import React from 'react';
 import tw from 'tailwind-styled-components';
+import styled from 'styled-components';
+import Button from "../button/Button";
 
-const Container = tw.div`
-//   absolute
-//   top-50%;
-//   left-50%;
-//   background-color: hsl(210, 8%, 85%)
-  
+const Container = styled.div`
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
 `;
 
 const Login = () => {
   return (
     <Container className="">
-      <form>
+      <form className='' >
         <label htmlFor="id">아이디</label>
         <input type="text" id="id"></input>
         <label htmlFor="password">비밀번호</label>
         <input type="text" id="password"></input>
-        <button>submit</button>
+        <Button variant="default" size='md' >sign up</Button>
       </form>
     </Container>
   );
