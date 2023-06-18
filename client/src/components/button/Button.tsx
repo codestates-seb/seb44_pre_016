@@ -1,9 +1,9 @@
 import React, { ButtonHTMLAttributes } from 'react';
-import tw from "tailwind-styled-components";
-import styled, { css } from "styled-components";
+import tw from 'tailwind-styled-components';
+import styled, { css } from 'styled-components';
 
-type Variant = 'default' | 'login' ;
-type Size = 'sm' | 'md' ;
+type Variant = 'default' | 'login';
+type Size = 'sm' | 'md';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: Variant;
@@ -16,7 +16,7 @@ export type Props = Partial<ButtonProps>;
 const buttonRoleStyle = (props: Props) => css`
   background-color: ${props.variant === 'default' ? '#0A95FF' : '#E3ECF3'};
   color: ${props.variant === 'default' ? 'white' : '#83A6C4'};
-  border : 1px solid ${props.variant === 'default' ? '#4393F7' : '#83A6C4'};
+  border: 1px solid ${props.variant === 'default' ? '#4393F7' : '#83A6C4'};
 
   &:hover {
     background-color: ${props.variant === 'default' ? '#0064C2' : '#B9D2E8'};
@@ -25,7 +25,7 @@ const buttonRoleStyle = (props: Props) => css`
   &:active {
     background-color: ${props.variant === 'default' ? '#2960B7' : '#A6C4DF'};
   }
-  width:${props.size === 'md' ? "100%": "auto"};
+  width: ${props.size === 'md' ? '100%' : 'auto'};
 `;
 
 const ButtonBase = styled.button<Props>`
