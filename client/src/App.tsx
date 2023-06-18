@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Main from './pages/Main';
 import QuestionItem from './components/QuestionItem';
 import Login from './components/login/Login';
-import Button from "./components/button/Button"
+import Button from "./components/button/Button";
 import SignUp from './components/signUp/SignUp';
 
 function App() {
