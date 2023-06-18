@@ -7,7 +7,7 @@ import Main from './pages/Main';
 import QuestionItem from './components/QuestionItem';
 import Login from './components/login/Login';
 import Button from "./components/button/Button"
-
+import SignUp from './components/signUp/SignUp';
 // const Button = styled.button`
 //   border-radius: 0.3rem;
 //   background-color: rgb(225, 236, 244);
@@ -28,18 +28,19 @@ function App() {
     return (
         <div className="App">
             <QuestionItem />
-            <header>
+      <header>
         <Link to="/login">
-          {/* <Button type="sigin">Log in</Button> */}
-          <Button variant="default">sign up</Button>
+          <Button variant="login">log in</Button>
         </Link>
-        {/* <SignUp type="sigup">sign up</SignUp> */}
-        <Button  />
+        <Link to="/member/signup">
+          <Button variant="default" >sign up</Button>
+        </Link>
       </header>
       <Routes>
         {/* routes 에 직접 스타일을 줄 수 있을까? */}
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/member/signup" element={<SignUp />} />
       </Routes>
         </div>
     );
