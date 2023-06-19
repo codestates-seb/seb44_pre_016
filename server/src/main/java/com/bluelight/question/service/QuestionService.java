@@ -25,7 +25,6 @@ public class QuestionService {
 
     public Question createQuestion(Question question) {
         Question savedQuestion = questionRepository.save(question);
-
         return savedQuestion;
     }
 
@@ -40,7 +39,7 @@ public class QuestionService {
             return questionRepository.findAll(
                 PageRequest.of(page, size, Sort.by("questionId").descending()));
         } else if(filters.equals("noanswer")) {
-            return questionRepository.findAll()
+
         } else if (filters.equals("highestscore")) {
             
         }

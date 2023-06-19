@@ -1,6 +1,8 @@
 package com.bluelight.question.entity;
 
 import com.bluelight.audit.Auditable;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,4 +26,6 @@ public class Question extends Auditable {
 
     @Column(nullable = false)
     private String questionContent;
+
+    private Timestamp createdAt;
 }

@@ -1,7 +1,7 @@
 package com.bluelight.question.controller;
 
 import com.bluelight.dto.MultiResponseDto;
-import com.bluelight.question.dto.QuestionDto;
+import com.bluelight.question.dto.AskQuestionDto;
 import com.bluelight.question.entity.Question;
 import com.bluelight.question.mapper.QuestionMapper;
 import com.bluelight.question.service.QuestionService;
@@ -35,10 +35,9 @@ public class QuestionController {
     }
 
     @PostMapping("/questions/ask")
-    public ResponseEntity postQuestion(
-        @Valid @RequestBody QuestionDto.Post requestBody) {
-        Question question = mapper.questionPostToQuestion(requestBody);
-
+    public ResponseEntity postAskQuestion(
+        @Valid @RequestBody AskQuestionDto.Post requestBody) {
+        Question question = mapper.askquestionPostToQuestion(requestBody);
         Question createQuestion = questionService.createQuestion(question);
 
         return new ResponseEntity<>(
@@ -46,7 +45,7 @@ public class QuestionController {
     }
 
     @GetMapping
-    public ResponseEntity getTopQuestions() {
+    public ResponseEntity getTopQuestion() {
         Page<Question> pageQuestions = questionService.findQuestions(0, 50);
         List<Question> questions = pageQuestions.getContent();
         return new ResponseEntity<>(
@@ -55,7 +54,7 @@ public class QuestionController {
     }
 
     @GetMapping("/questions")
-    public ResponseEntity getAllQuestions(
+    public ResponseEntity getAllQuestion(
         @Positive @RequestParam(required = false) int page,
         @Positive @RequestParam(required = false) int size,
         @RequestParam(required = false) String filters) {
@@ -73,7 +72,7 @@ public class QuestionController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity getSearchQuestions(
+    public ResponseEntity getSearchQuestion(
         @Positive @RequestParam(required = false) int page,
         @Positive @RequestParam(required = false) int size,
         @RequestParam(required = false) String title,
