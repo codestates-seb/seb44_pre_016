@@ -5,7 +5,7 @@ import {
   ONE_MINUTE_MILLISECOND,
   ONE_SECOND_MILLISECOND,
 } from '../common/data/ConstantValue';
-import { QuestionItemData } from '../pages/Main';
+import { QuestionItemData } from './TopQuestionList';
 import {
   QuestionItemContainer,
   QuestionItemActive,
