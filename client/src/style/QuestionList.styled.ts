@@ -1,3 +1,4 @@
+import { Link, LinkProps } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
 export const TopQuestionContainer = tw.div`
@@ -24,4 +25,10 @@ export const ContentHeader = tw.div`
 
 export const ContentButtonContainer = tw.div`
   ml-3
+`;
+
+export const BlueLinkText = tw(Link)<LinkProps>`
+  text-blue-text
+  hover:text-blue
+  visit:text-[#0061BD]
 `;
