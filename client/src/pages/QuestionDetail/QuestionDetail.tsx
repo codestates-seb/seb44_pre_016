@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { DummyData, detailData } from "../../common/data/detailData"
 import Button from '../../components/button/Button';
+import AnswerItem from '../../components/AnswerItem';
 
 import {
   AllContainer,
@@ -61,7 +62,12 @@ const QuestionDetail = ({ questionId }: QuestionDetailProps) => {
             </div>
           </ContentContainer>
           <AllAnswer>
-            <div>{data.answer}{ data.answer === 1 ? ` Answer` : ` Answers` }</div>
+            <div className='font-medium text-xl mb-10'>{data.answer}{ data.answer === 1 ? ` Answer` : ` Answers` }</div>
+            <div>
+              {data.answerList.map((answer,index) => (
+                <AnswerItem key={index} answer={answer} />
+              ))}
+            </div>
           </AllAnswer>
         </>
       ) : (

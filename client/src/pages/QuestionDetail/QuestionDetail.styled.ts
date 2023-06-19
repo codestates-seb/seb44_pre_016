@@ -41,6 +41,7 @@ mb-10
 export const AllAnswer = tw.div`
 flex
 flex-col
+w-full
 `
 
 export const Blank = tw.div`

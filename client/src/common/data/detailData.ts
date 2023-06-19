@@ -1,6 +1,8 @@
 export interface AnswerListItem {
-  nickname: string;
+  nickName: string;
+  profileImage:string;
   content: string;
+  createdAt: string;
 }
 
 export interface DummyData {
@@ -24,8 +26,10 @@ export const detailData: DummyData[] = [
     "answer": 1,
     "answerList": [
       {
-        "nickname": "kimcoding",
-        "content": "이렇게 해보세요~!"
+        "nickName": "kimcoding",
+        "profileImage": "/images/profile.jpg",
+        "content": "이렇게 해보세요~!",
+        "createdAt": "2023-06-15 16:18:14"
       }
     ],
     "profileImage": "/images/profile.jpg",
@@ -40,12 +44,16 @@ export const detailData: DummyData[] = [
     "answer": 2,
     "answerList": [
       {
-        "nickname": "kimcoding",
-        "content": "또 이렇게 해보세요~!"
+        "nickName": "kimcoding",
+        "profileImage": "/images/profile.jpg",
+        "content": "또 이렇게 해보세요~!",
+        "createdAt": "2023-06-15 16:18:14"
       },
       {
-        "nickname": "kimcoding",
-        "content": "아니면 또 이렇게 해보시는거 어때요~!"
+        "nickName": "kimcoding",
+        "profileImage": "/images/profile.jpg",
+        "content": "아니면 또 이렇게 해보시는거 어때요~!",
+        "createdAt": "2023-06-15 16:18:14"
       }
     ],
     "profileImage": "/images/profile.jpg",
