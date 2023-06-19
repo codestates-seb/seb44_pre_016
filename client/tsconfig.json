@@ -1,10 +1,9 @@
 {
-    "compilerOptions": {
-        //"allowImportingTsExtensions": true,
-        "noEmit": true,
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "esModuleInterop": true,
-        "jsx": "react",
-    }
+  "compilerOptions": {
+    "noEmit": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "jsx": "react"
+  }
 }

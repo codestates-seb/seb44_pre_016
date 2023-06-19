@@ -7,11 +7,13 @@ export const GlobalStyle = createGlobalStyle`
   --white: #FFFFFF;
   --black: #000000;
   --orange-point: #F48225;
+  --blue-text: #0074CC;
   --blue: #0A95FF;
   --blue-hover: #0064C2;
   --lightblue: #B3D3EA;
   --lightblue-hover: #2774AA;
   --gray-nav-active: #F1F2F3;
+  --green: #2F6F44;
   --black-nav-active: #0C0D0E;
   --black-footer: #232629;
   --main-width: 1280px;
@@ -34,7 +36,6 @@ html, body, div, span, applet, object, iframe,
   time, mark, audio, video {
     margin: 0;
     padding: 0;
-    border: 0;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;

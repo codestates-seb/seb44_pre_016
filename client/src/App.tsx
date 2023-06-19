@@ -3,7 +3,6 @@ import './App.css';
 import { Routes, Route } from 'react-router';
 import { Link } from 'react-router-dom';
 import Main from './pages/Main';
-import QuestionItem from './components/QuestionItem';
 import Login from './components/login/Login';
 import Button from './components/button/Button';
 import SignUp from './components/signUp/SignUp';
@@ -11,7 +10,6 @@ import SignUp from './components/signUp/SignUp';
 function App() {
   return (
     <div className="App">
-      <QuestionItem />
       <header>
         <Link to="/login">
           <Button variant="login">log in</Button>
