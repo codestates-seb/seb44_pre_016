@@ -45,7 +45,6 @@ const ButtonBase = styled.button<Props>`
   padding: 10px 12px;
   text-transform: capitalize;
   //${`inline-flex gap-4 justify-center items-center align-middle cursor-pointer whitespace-nowrap overflow-hidden text-ellipsis select-none transition duration-100 ease-in-out rounded-md capitalize`}
-
   ${buttonRoleStyle}
 `;
 
