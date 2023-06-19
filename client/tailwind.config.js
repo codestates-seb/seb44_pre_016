@@ -13,6 +13,7 @@ module.exports = {
       'blue': "var(--blue)",
       'black-nav-active': "var(--black-nav-active)",
       'green': "var(--green)",
+      'gray-text': "var(--gray-text)",
     },
     extend: {},
   },

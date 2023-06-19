@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import tw from 'tailwind-styled-components';
 import { AnswerListItem } from '../common/data/detailData';
 
@@ -21,8 +20,8 @@ const Foot = tw.div`
   w-full
 `
 
-const TextBtn = tw.p`
-text-stone-600
+const TextBtn = tw.div`
+text-gray-text
 `
 
 const AnswerItem = ({answer}: {answer:AnswerListItem}) => {

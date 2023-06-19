@@ -19,6 +19,7 @@ export const GlobalStyle = createGlobalStyle`
   --main-width: 1280px;
   --main-heigth: 80px;
   --main-padding: 76px;
+  --gray-text: #6C737B;
 //header height 80px / 패딩 값 0 76px
 }
 html, body, div, span, applet, object, iframe,
