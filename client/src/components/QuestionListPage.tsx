@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import TopQuestionList from './TopQuestionList';
 import ButtonBase from './button/Button';
 import {
@@ -9,6 +10,8 @@ import {
   BlueLinkText,
 } from '../style/QuestionList.styled';
 import { QUESTION_PAGE_TITLE } from '../common/data/ConstantValue';
+import AllQuestionList from './AllQuestionList';
+import { RootState } from '../redux/store';
 
 interface QuestionListPageProps {
   page: string;
@@ -16,6 +19,15 @@ interface QuestionListPageProps {
 
 function QuestionListPage({ page }: QuestionListPageProps) {
   const [questionsPage, setQuestionsPage] = useState<boolean>(false);
+  const maxPages = useSelector((state: RootState) => state.test);
+
+  const handleNumberDivision = number => {
+    return number.toLocaleString();
+  };
+
+  useEffect(() => {
+    console.log(maxPages);
+  }, [maxPages]);
 
   useEffect(() => {
     if (page === 'Main') {
@@ -39,17 +51,22 @@ function QuestionListPage({ page }: QuestionListPageProps) {
             </ButtonBase>
           </ContentButtonContainer>
         </ContentHeader>
-        <TopQuestionList questionsPage={questionsPage} />
+        <div className="flex-1 mb-3 text-[17px] items-center h-9">
+          {handleNumberDivision(maxPages.totalPageCnt)} questions
+        </div>
         {questionsPage ? (
-          <h2 className="pt-4 mb-4 pr-2 text-[17px]">
-            Looking for more? Browse the
-            <BlueLinkText to="/questions">
-              complete list of questions
-            </BlueLinkText>
-            , or popular tags. Help us answer unanswered questions.
-          </h2>
+          <>
+            <TopQuestionList />
+            <h2 className="pt-4 mb-4 pr-2 text-[17px]">
+              Looking for more? Browse the{' '}
+              <BlueLinkText to="/questions">
+                complete list of questions
+              </BlueLinkText>
+              , or popular tags. Help us answer unanswered questions.
+            </h2>
+          </>
         ) : (
-          <></>
+          <AllQuestionList />
         )}
       </ContentContainer>
     </MainContainer>

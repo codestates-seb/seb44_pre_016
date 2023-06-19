@@ -1,6 +1,6 @@
 import React from 'react';
 import QuestionItem from './QuestionItem';
-import data from '../common/data/data.json';
+import TopQuestionData from '../common/data/data.json';
 import { TopQuestionContainer } from '../style/QuestionList.styled';
 
 export interface Tags {
@@ -8,31 +8,24 @@ export interface Tags {
   tagName: string;
 }
 
-export interface QuestionItemData {
+export interface TopQuestionItemData {
   questionId: number;
-  title: string;
-  votes: number;
+  questionTitle: string;
+  questionVoteCount: number;
   answer: number;
   tags: Tags[];
-  memberId: number;
   profileImage: string;
   nickName: string;
   createdAt: string;
 }
 
-interface TopQuestionListProps {
-  questionsPage: boolean;
-}
-
-function TopQuestionList({ questionsPage }: TopQuestionListProps) {
-  const listCnt = questionsPage ? 30 : 50;
-
+function TopQuestionList() {
   return (
     <TopQuestionContainer>
-      {data.map(
+      {TopQuestionData.map(
         (e, idx) =>
-          idx < listCnt && (
-            <QuestionItem questionProps={e} key={e.questionId} />
+          idx < 50 && (
+            <QuestionItem pageType="Top" questionProps={e} key={e.questionId} />
           ),
       )}
     </TopQuestionContainer>

@@ -61,7 +61,7 @@ export const QuestionBodyContainer = tw(FlexWrap)`
 
 export const QuestionTagList = tw.li`
   list-none
-  inline
+  // inline
   mr-1
 `;
 
