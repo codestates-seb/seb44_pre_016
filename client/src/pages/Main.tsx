@@ -1,32 +1,8 @@
 import React from 'react';
-import QuestionItem from '../components/QuestionItem';
-import data from '../common/data/data.json';
+import QuestionListPage from '../components/QuestionListPage';
 
-export interface Tags {
-  tagId: number;
-  tagName: string;
+function Main() {
+  return <QuestionListPage page="Main" />;
 }
-
-export interface QuestionItemData {
-  questionId: number;
-  title: string;
-  votes: number;
-  answer: number;
-  tags: Tags[];
-  memberId: number;
-  profileImage: string;
-  nickName: string;
-  createdAt: string;
-}
-
-const Main = () => {
-  return (
-    <div className="App">
-      {data.map(e => (
-        <QuestionItem questionProps={e} key={e.questionId} />
-      ))}
-    </div>
-  );
-};
 
 export default Main;
