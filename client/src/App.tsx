@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Main from './pages/Main';
 import Login from './components/login/Login';
 import Button from './components/button/Button';
-import SignUp from './components/signUp/SignUp'
+import SignUp from './components/signUp/SignUp';
 import QuestionDetail from './pages/QuestionDetail/QuestionDetail';
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/member/signup" element={<SignUp />} />
       </Routes>
-      <QuestionDetail questionId={questionId}/>
+      <QuestionDetail questionId={questionId} />
     </div>
   );
 }
