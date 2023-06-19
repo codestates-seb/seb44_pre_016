@@ -10,11 +10,13 @@ p-5
 export const TitleContainer = tw.div`
 flex
 flex-col
+grow
+w-full
 `
 
 export const Title = tw.p`
 text-xl
-m-[0.5rem]
+mb-[0.5rem]
 font-medium
 `
 

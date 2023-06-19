@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { DummyData, detailData } from "../../common/data/detailData"
+import Button from '../../components/button/Button';
 
 import {
   AllContainer,
@@ -33,10 +34,15 @@ const QuestionDetail = ({ questionId }: QuestionDetailProps) => {
     <AllContainer>
       {data ? (
         <>
-          <TitleContainer>
-            <Title>{data.title}</Title>
-            {data.createdAt}
-          </TitleContainer>
+          <div className='flex w-full'>
+            <TitleContainer>
+              <Title>{data.title}</Title>
+              {data.createdAt}
+            </TitleContainer>
+            <Button variant="default" size="sm" className='h-10 grow-0'>
+              ask question
+            </Button>
+          </div>
           <Line />
           <ContentContainer>
             <div className='flex items-start'>{data.content}</div>
@@ -56,7 +62,6 @@ const QuestionDetail = ({ questionId }: QuestionDetailProps) => {
           </ContentContainer>
           <AllAnswer>
             <div>{data.answer}{ data.answer === 1 ? ` Answer` : ` Answers` }</div>
-
           </AllAnswer>
         </>
       ) : (
