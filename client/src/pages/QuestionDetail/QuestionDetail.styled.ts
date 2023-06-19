@@ -19,12 +19,15 @@ font-medium
 `
 
 export const ContentContainer = tw.div`
-
-`
-export const Userbox = tw.div`
 flex
-m-10
+flex-col
+w-full
+`
+export const UserBox = tw.div`
+flex
+m-5
 items-center
+w-full
 `
 
 export const Line = tw.hr`
@@ -36,5 +39,9 @@ mb-10
 export const AllAnswer = tw.div`
 flex
 flex-col
+`
+
+export const Blank = tw.div`
+grow
 `
 

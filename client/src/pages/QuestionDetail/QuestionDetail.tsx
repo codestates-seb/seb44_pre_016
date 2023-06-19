@@ -7,9 +7,10 @@ import {
   TitleContainer,
   Title,
   ContentContainer,
-  Userbox,
+  UserBox,
   Line,
-  AllAnswer
+  AllAnswer,
+  Blank
 } from "./QuestionDetail.styled";
 
 
@@ -38,15 +39,20 @@ const QuestionDetail = ({ questionId }: QuestionDetailProps) => {
           </TitleContainer>
           <Line />
           <ContentContainer>
-            {data.content}
-            <Userbox>
-              <img
-                className="w-10 h-10 mr-3"
-                src={data.profileImage}
-                alt="프로필 사진"
-              />
-              {data.nickName}
-              </Userbox>
+            <div className='flex items-start'>{data.content}</div>
+            <div>
+              <UserBox>
+                <Blank />
+                <div className='flex grow-0 mr-10'>
+                  <img
+                    className="w-10 h-10 mr-3"
+                    src={data.profileImage}
+                    alt="프로필 사진"
+                  />
+                  {data.nickName}
+                </div>
+              </UserBox>
+            </div>
           </ContentContainer>
           <AllAnswer>
             <div>{data.answer}{ data.answer === 1 ? ` Answer` : ` Answers` }</div>
