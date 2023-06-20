@@ -76,7 +76,6 @@ html, body, div, span, applet, object, iframe,
   }
   button {
     background: none;
-    border: none;
     padding: 0;
     display: flex;
     justify-content: center;

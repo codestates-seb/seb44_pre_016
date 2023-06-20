@@ -1,8 +1,8 @@
 [
   {
     "questionId": 50,
-    "title": "How to design a good JWT authentication filter",
-    "votes": 49,
+    "questionTitle": "How to design a good JWT authentication filter",
+    "questionVoteCount": 49,
     "answer": 4,
     "tags": [
       {
@@ -18,15 +18,14 @@
         "tagName": "jwt"
       }
     ],
-    "memberId": 24,
     "profileImage": "/images/profile.jpg",
     "nickName": "dumbpotato24",
-    "createdAt": "2023-06-16 15:59:14"
+    "createdAt": "2023-06-15 12:18:14"
   },
   {
     "questionId": 49,
-    "title": "merge sort program in java",
-    "votes": -2,
+    "questionTitle": "merge sort program in java",
+    "questionVoteCount": -2,
     "answer": 0,
     "tags": [
       {
@@ -34,9 +33,8 @@
         "tagName": "java"
       }
     ],
-    "memberId": 61,
     "profileImage": "/images/profile.jpg",
     "nickName": "Michal",
-    "createdAt": "2023-06-15 12:17:54"
+    "createdAt": "2023-06-15 14:17:54"
   }
 ]
