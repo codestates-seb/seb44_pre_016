@@ -10,7 +10,6 @@ export interface DummyData {
   title: string;
   votes: number;
   content: string;
-  answer: number;
   answerList: AnswerListItem[];
   profileImage:string;
   nickName: string;
@@ -23,7 +22,6 @@ export const detailData: DummyData[] = [
     "title": "질문 제목입니다.",
     "votes": 49,
     "content": "질문 내용입니다~~ 모르겠어잉",
-    "answer": 1,
     "answerList": [
       {
         "nickName": "kimcoding",
@@ -41,7 +39,6 @@ export const detailData: DummyData[] = [
     "title": "또 다른 질문 제목입니다.",
     "votes": 30,
     "content": "또 질문질문합니다~~ 또 모르겠어잉",
-    "answer": 2,
     "answerList": [
       {
         "nickName": "kimcoding",
@@ -56,6 +53,16 @@ export const detailData: DummyData[] = [
         "createdAt": "2023-06-15 16:18:14"
       }
     ],
+    "profileImage": "/images/profile.jpg",
+    "nickName": "dumbpotato24",
+    "createdAt": "2023-06-16 12:18:00"
+  },
+  {
+    "questionId": 48,
+    "title": "배고파요.",
+    "votes": 30,
+    "content": "배고픈데 저메추해주세요",
+    "answerList": [],
     "profileImage": "/images/profile.jpg",
     "nickName": "dumbpotato24",
     "createdAt": "2023-06-16 12:18:00"

@@ -29,9 +29,7 @@ const AnswerItem = ({answer}: {answer:AnswerListItem}) => {
     <Container>
       <Content>{answer.content}</Content>
       <Foot>
-        <div>
-          <TextBtn>delete</TextBtn>
-        </div>
+        <TextBtn>delete</TextBtn>
         <UserBox>
           <Blank />
           <div className='flex grow-0 mr-10'>
