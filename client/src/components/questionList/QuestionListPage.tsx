@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import TopQuestionList from './TopQuestionList';
-import ButtonBase from '../button/Button';
+import Button from '../button/Button';
 import {
   MainContainer,
   ContentContainer,
@@ -39,9 +39,7 @@ function QuestionListPage({ page }: QuestionListPageProps) {
             {QUESTION_PAGE_TITLE[page]}
           </h1>
           <ContentButtonContainer className="ml-3">
-            <ButtonBase variant="default" size="md">
-              Ask Question
-            </ButtonBase>
+            <Button>Ask Question</Button>
           </ContentButtonContainer>
         </ContentHeader>
         <div className="flex-1 mb-3 text-[17px] items-center h-9">
