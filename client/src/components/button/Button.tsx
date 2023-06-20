@@ -13,6 +13,8 @@ const Button = ({ children, customStyle, ...attributes }: ButtonProps) => {
   border-[1px]
   border-solid
   border-[#4393F7]
+ text-[13px]
+  p-[7px]
 
   hover:bg-[#0064C2]
   active:bg-[#2960B7]
