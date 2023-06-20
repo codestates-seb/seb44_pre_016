@@ -12,10 +12,10 @@ function App() {
     <div className="App">
       <header>
         <Link to="/login">
-          <Button variant="login">log in</Button>
+          <Button>log in</Button>
         </Link>
         <Link to="/member/signup">
-          <Button variant="default">sign up</Button>
+          <Button>sign up</Button>
         </Link>
       </header>
       <Routes>

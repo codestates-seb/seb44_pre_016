@@ -1,51 +1,18 @@
-import React, { ButtonHTMLAttributes } from 'react';
-import tw from 'tailwind-styled-components';
-import styled, { css } from 'styled-components';
+import React, { ButtonHTMLAttributes, Children } from 'react';
 
-type Variant = 'default' | 'login';
-type Size = 'sm' | 'md';
-
-// props 형식
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: Variant;
-  size: Size;
+  children: React.ReactNode;
 }
 
-export type Props = Partial<ButtonProps>;
+const Button = ({ children, ...attributes }: ButtonProps) => {
+  return (
+    <button
+      className="h-[38px] w-[100px] rounded-sm bg-sky-500 text-xs text-white hover:bg-sky-700"
+      {...attributes}
+    >
+      {children}
+    </button>
+  );
+};
 
-// 버튼 타입에 따라 달라지는 css
-const buttonRoleStyle = (props: Props) => css`
-  background-color: ${props.variant === 'default' ? '#0A95FF' : '#E3ECF3'};
-  color: ${props.variant === 'default' ? 'white' : '#83A6C4'};
-  border: 1px solid ${props.variant === 'default' ? '#4393F7' : '#83A6C4'};
-
-  &:hover {
-    background-color: ${props.variant === 'default' ? '#0064C2' : '#B9D2E8'};
-  }
-
-  &:active {
-    background-color: ${props.variant === 'default' ? '#2960B7' : '#A6C4DF'};
-  }
-  width: ${props.size === 'md' ? '100%' : 'auto'};
-`;
-
-const ButtonBase = styled.button<Props>`
-  display: inline-flex;
-  gap: 4px;
-  justify-content: center;
-  align-items: center;
-  vertical-align: center;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  user-select: none;
-  transition: background-color 0.1s ease;
-  border-radius: 6px;
-  padding: 10px 12px;
-  text-transform: capitalize;
-  //${`inline-flex gap-4 justify-center items-center align-middle cursor-pointer whitespace-nowrap overflow-hidden text-ellipsis select-none transition duration-100 ease-in-out rounded-md capitalize`}
-  ${buttonRoleStyle}
-`;
-
-export default ButtonBase;
+export default Button;
