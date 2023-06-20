@@ -1,13 +1,18 @@
-import tw from "tailwind-styled-components";
+import tw from 'tailwind-styled-components';
 
 export const FlexWrap = tw.div`
   flex
   flex-wrap
 `;
 
+export const BlueLinkText = tw.p`
+  text-blue-text
+  hover:text-blue
+  visit:text-[#0061BD]
+`;
+
 export const QuestionItemContainer = tw.div`
   p-4
-  max-w-3xl
   flex
   min-h-6.875
   border-t
@@ -39,11 +44,8 @@ export const QuestionDataContainer = tw.div`
   text-start
 `;
 
-export const QuestionItemTitle = tw.div`
+export const QuestionItemTitle = tw(BlueLinkText)`
   text-lg
-  text-blue-text
-  hover:text-blue
-  visit:text-[#0061BD]
   pr-6
   mb-1
 `;
@@ -59,7 +61,7 @@ export const QuestionBodyContainer = tw(FlexWrap)`
 
 export const QuestionTagList = tw.li`
   list-none
-  inline
+  // inline
   mr-1
 `;
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import QuestionListPage from '../components/questionList/QuestionListPage';
 
-function Main() {
-  return <QuestionListPage page="Main" />;
+function Questions() {
+  return <QuestionListPage page="Questions" />;
 }
 
-export default Main;
+export default Questions;

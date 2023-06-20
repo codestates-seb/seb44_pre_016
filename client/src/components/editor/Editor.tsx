@@ -4,7 +4,7 @@ import ReactQuill from 'react-quill';
 
 import 'react-quill/dist/quill.snow.css';
 import 'highlight.js/styles/default.css'; // 기본 하이라이트 스타일 불러오기
-import './myQuillStyles.css';
+import './myQuillStyle.css';
 
 interface EditorProps {
   value: string;
