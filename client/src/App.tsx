@@ -16,10 +16,12 @@ function App() {
     <div className="App">
       <header>
         <Link to="/login">
-          <Button variant="login">log in</Button>
+          <Button customStyle="bg-[#d8deff] border-[#83A6C4] text-[#487299] hover:bg-[#B9D2E8] active:bg-[#A6C4DF]  ">
+            log in
+          </Button>
         </Link>
         <Link to="/member/signup">
-          <Button variant="default">sign up</Button>
+          <Button>sign up</Button>
         </Link>
       </header>
       <Routes>

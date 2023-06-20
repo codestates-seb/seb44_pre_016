@@ -144,9 +144,7 @@ const Login = () => {
           ></Input>
           <label htmlFor="password">password</label>
           <input type="text" id="password"></input>
-          <Button variant="default" size="md">
-            log in
-          </Button>
+          <Button>log in</Button>
         </Form>
       </div>
     </Container>
