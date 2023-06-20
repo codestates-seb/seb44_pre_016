@@ -5,8 +5,11 @@ import {
   ONE_MINUTE_MILLISECOND,
   ONE_SECOND_MILLISECOND,
 } from '../common/data/ConstantValue';
-import { TopQuestionItemData } from './TopQuestionList';
-import { AllQuestionItemData } from './AllQuestionList';
+import {
+  TopQuestionItemData,
+  AllQuestionItemData,
+} from '../common/interface/QuestionList.interface';
+
 import {
   QuestionItemContainer,
   QuestionItemActive,
@@ -84,9 +87,9 @@ function QuestionItem({ pageType, questionProps }: QuestionItemProps) {
         </div>
         <QuestionBodyContainer>
           <ul>
-            {tags.map(e => (
-              <QuestionTagList key={e.tagId}>
-                <QuestionTagName>{e.tagName}</QuestionTagName>
+            {tags.map(tag => (
+              <QuestionTagList key={tag.tagId}>
+                <QuestionTagName>{tag.tagName}</QuestionTagName>
               </QuestionTagList>
             ))}
           </ul>

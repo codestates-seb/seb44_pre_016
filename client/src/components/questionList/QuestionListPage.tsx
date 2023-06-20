@@ -1,33 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import TopQuestionList from './TopQuestionList';
-import ButtonBase from './button/Button';
+import ButtonBase from '../button/Button';
 import {
   MainContainer,
   ContentContainer,
   ContentHeader,
   ContentButtonContainer,
   BlueLinkText,
-} from '../style/QuestionList.styled';
-import { QUESTION_PAGE_TITLE } from '../common/data/ConstantValue';
+} from '../../style/QuestionList.styled';
+import { QUESTION_PAGE_TITLE } from '../../common/data/ConstantValue';
 import AllQuestionList from './AllQuestionList';
-import { RootState } from '../redux/store';
-
-interface QuestionListPageProps {
-  page: string;
-}
+import { RootState } from '../../redux/store';
+import { QuestionListPageProps } from '../../common/interface/QuestionList.interface';
 
 function QuestionListPage({ page }: QuestionListPageProps) {
   const [questionsPage, setQuestionsPage] = useState<boolean>(false);
-  const maxPages = useSelector((state: RootState) => state.test);
+  const maxPages = useSelector((state: RootState) => state.PaginationReducer);
 
   const handleNumberDivision = number => {
     return number.toLocaleString();
   };
-
-  useEffect(() => {
-    console.log(maxPages);
-  }, [maxPages]);
 
   useEffect(() => {
     if (page === 'Main') {

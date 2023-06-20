@@ -1,7 +1,7 @@
 import { Link, LinkProps } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 
-export const TopQuestionContainer = tw.div`
+export const QuestionContainer = tw.div`
   mb-7
   -ml-6
 `;

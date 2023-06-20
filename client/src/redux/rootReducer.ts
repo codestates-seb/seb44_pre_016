@@ -1,8 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import test from './test';
+import PaginationReducer from './paginationReducer';
 
 const reducer = combineReducers({
-  test,
+  PaginationReducer,
 });
 
 export type ReducerType = ReturnType<typeof reducer>;

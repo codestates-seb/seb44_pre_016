@@ -4,8 +4,8 @@ type State = {
   totalPageCnt: number;
 };
 
-const test = createSlice({
-  name: 'test',
+const PaginationReducer = createSlice({
+  name: 'PaginationReducer',
   initialState: {
     totalPageCnt: 0,
   },
@@ -16,6 +16,6 @@ const test = createSlice({
   },
 });
 
-export const { totalPageCntSet } = test.actions;
+export const { totalPageCntSet } = PaginationReducer.actions;
 
-export default test.reducer;
+export default PaginationReducer.reducer;
