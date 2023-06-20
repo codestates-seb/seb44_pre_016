@@ -12,7 +12,9 @@ function App() {
     <div className="App">
       <header>
         <Link to="/login">
-          <Button>log in</Button>
+          <Button customStyle=" bg-[#E3ECF3] border-[#83A6C4] text-[#83A6C4] hover:bg-[#B9D2E8] active:bg-[#A6C4DF] ">
+            log in
+          </Button>
         </Link>
         <Link to="/member/signup">
           <Button>sign up</Button>
