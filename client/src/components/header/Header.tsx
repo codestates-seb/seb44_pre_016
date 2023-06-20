@@ -6,7 +6,7 @@ import Button from '../button/Button';
 import Dropdown from './Dropdown';
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef(null);
 
   const dropdownHandler = (): void => {
