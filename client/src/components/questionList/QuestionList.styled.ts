@@ -4,9 +4,11 @@ import tw from 'tailwind-styled-components';
 export const QuestionContainer = tw.div`
   mb-7
   -ml-6
+  w-full
 `;
 
 export const MainContainer = tw.div`
+  flex-1
   max-w-[1100px]
   p-6
   border-l
@@ -15,8 +17,9 @@ export const MainContainer = tw.div`
 `;
 
 export const ContentContainer = tw.div`
-  w-[calc(100%-300px)] m-0 p-0 
+  w-full m-0 p-0 
   min-w-[450px]
+  max-w-[750px]
 `;
 
 export const ContentHeader = tw.div`
