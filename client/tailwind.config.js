@@ -14,6 +14,7 @@ module.exports = {
         'blue': "var(--blue)",
         'black-nav-active': "var(--black-nav-active)",
         'green': "var(--green)",
+        'orange-point': "var(--orange-point)",
       },
     },
   },

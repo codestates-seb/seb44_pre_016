@@ -5,7 +5,11 @@ import {
   ONE_MINUTE_MILLISECOND,
   ONE_SECOND_MILLISECOND,
 } from '../common/data/ConstantValue';
-import { QuestionItemData } from './TopQuestionList';
+import {
+  TopQuestionItemData,
+  AllQuestionItemData,
+} from '../common/interface/QuestionList.interface';
+
 import {
   QuestionItemContainer,
   QuestionItemActive,
@@ -21,13 +25,23 @@ import {
   QuestionAnswer,
 } from '../style/QuestionItem.styled';
 
-type QuestionItemProps = {
-  questionProps: QuestionItemData;
-};
+type QuestionItemProps =
+  | {
+      pageType: 'Top';
+      questionProps: TopQuestionItemData;
+    }
+  | { pageType: 'All'; questionProps: AllQuestionItemData };
 
-function QuestionItem({ questionProps }: QuestionItemProps) {
-  const { votes, answer, title, tags, profileImage, nickName, createdAt } =
-    questionProps;
+function QuestionItem({ pageType, questionProps }: QuestionItemProps) {
+  const {
+    questionVoteCount,
+    answer,
+    questionTitle,
+    tags,
+    profileImage,
+    nickName,
+    createdAt,
+  } = questionProps;
 
   const changeDate = (date: string) => {
     const nowDate = Date.now();
@@ -57,7 +71,7 @@ function QuestionItem({ questionProps }: QuestionItemProps) {
   return (
     <QuestionItemContainer>
       <QuestionItemActive>
-        <QuestionVote>{votes} votes</QuestionVote>
+        <QuestionVote>{questionVoteCount} votes</QuestionVote>
         <QuestionAnswer
           className={
             answer ? `border-green border text-green` : `text-[#6A737C]`
@@ -67,12 +81,15 @@ function QuestionItem({ questionProps }: QuestionItemProps) {
         </QuestionAnswer>
       </QuestionItemActive>
       <QuestionDataContainer>
-        <QuestionItemTitle>{title}</QuestionItemTitle>
+        <QuestionItemTitle>{questionTitle}</QuestionItemTitle>
+        <div className="text-[13px] mb-2 text-[#3B4045]">
+          {pageType === 'All' && questionProps.questionContent}
+        </div>
         <QuestionBodyContainer>
           <ul>
-            {tags.map(e => (
-              <QuestionTagList key={e.tagId}>
-                <QuestionTagName>{e.tagName}</QuestionTagName>
+            {tags.map(tag => (
+              <QuestionTagList key={tag.tagId}>
+                <QuestionTagName>{tag.tagName}</QuestionTagName>
               </QuestionTagList>
             ))}
           </ul>
