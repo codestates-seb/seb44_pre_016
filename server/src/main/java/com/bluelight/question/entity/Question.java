@@ -27,5 +27,4 @@ public class Question extends Auditable {
     @Column(nullable = false)
     private String questionContent;
 
-    private Timestamp createdAt;
 }

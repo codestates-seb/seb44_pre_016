@@ -1,6 +1,7 @@
 package com.bluelight.question.controller;
 
 import com.bluelight.dto.MultiResponseDto;
+import com.bluelight.dto.SingleResponseDto;
 import com.bluelight.question.dto.AskQuestionDto;
 import com.bluelight.question.entity.Question;
 import com.bluelight.question.mapper.QuestionMapper;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/questions")
 @Validated
 @Slf4j
 public class QuestionController {
@@ -34,7 +36,7 @@ public class QuestionController {
         this.mapper = mapper;
     }
 
-    @PostMapping("/questions/ask")
+    @PostMapping("/ask")
     public ResponseEntity postAskQuestion(
         @Valid @RequestBody AskQuestionDto.Post requestBody) {
         Question question = mapper.askquestionPostToQuestion(requestBody);
@@ -44,6 +46,17 @@ public class QuestionController {
             createQuestion, HttpStatus.CREATED);
     }
 
+    @GetMapping("/{question-id}")
+    public ResponseEntity getQuestionDetail(@Positive @PathVariable("question-id") long questionId) {
+        Question question = questionService.findQuestionDetail(questionId);
+
+        return new ResponseEntity<>(mapper.questionToQuestionDetail(question),
+            HttpStatus.OK);
+    }
+
+
+
+    /*
     @GetMapping
     public ResponseEntity getTopQuestion() {
         Page<Question> pageQuestions = questionService.findQuestions(0, 50);
@@ -80,4 +93,5 @@ public class QuestionController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    */
 }
