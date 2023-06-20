@@ -24,6 +24,7 @@ function App() {
       <QuestionDetail questionId={questionId} />
     </div>
   );
+
 }
 
 export default App;
