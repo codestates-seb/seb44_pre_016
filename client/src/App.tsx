@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Routes, Route } from 'react-router';
-
+import { Routes, Route, useLocation } from 'react-router';
 import Header from './components/header/Header';
 import Main from './pages/Main';
 import Questions from './pages/Questions';
@@ -13,22 +12,23 @@ import Footer from './components/footer/Footer';
 
 function App() {
   const questionId = 50;
+  const location = useLocation();
 
   return (
     <div className="App">
       <Header />
       <div className="flex max-w-[1264px] mx-auto w-full">
-        <NavBar />
+        {!(
+          location.pathname.includes('/login') ||
+          location.pathname.includes('/member/signup')
+        ) && <NavBar />}
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/:questions" element={<Questions />} />
+          <Route path="/questions" element={<Questions />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/member/signup" element={<SignUp />} />
         </Routes>
       </div>
-      <Routes>
-        {/* routes 에 직접 스타일을 줄 수 있을까? */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/member/signup" element={<SignUp />} />
-      </Routes>
       <QuestionDetail questionId={questionId} />
       <Footer />
     </div>
