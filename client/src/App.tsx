@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import { Routes, Route, useLocation } from 'react-router';
 import Header from './components/header/Header';
