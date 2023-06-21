@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import { DummyData, detailData } from "../../common/data/detailData"
 import Button from '../../components/button/Button';
-import AnswerItem from '../../components/AnswerItem';
+import AnswerItem, {TextBtn, Foot} from '../../components/AnswerItem';
 import Editor from '../../components/editor/Editor'
+import VoteBox from '../../components/vote/VoteBox';
 
 import "highlight.js/styles/github.css";
 
@@ -23,6 +24,7 @@ const SLICE_DATE_NUMBER = -2;
 
 export interface AnswerListItem {
   nickName: string;
+  answerVoteCount: number;
   profileImage:string;
   content: string;
   createdAt: string;
@@ -32,7 +34,7 @@ interface QuestionDetailProps {
   questionId: number;
 };
 
-const QuestionDetail = ({ questionId }: QuestionDetailProps) => {
+function QuestionDetail({ questionId }: QuestionDetailProps) {
   const [data, setData] = useState<DummyData | null>(null);
   const [answerContent, setAnswerContent] = useState('');
   const [newAnswerList, setNewAnswerList] = useState(data ? data.answerList : [])
@@ -63,6 +65,7 @@ const QuestionDetail = ({ questionId }: QuestionDetailProps) => {
 
     const newAnswer: AnswerListItem = {
       "nickName": "kimcoding",
+      "answerVoteCount": 10,
       "profileImage": "/images/profile.jpg",
       "content": answerContent,
       "createdAt": date,
@@ -85,22 +88,26 @@ const QuestionDetail = ({ questionId }: QuestionDetailProps) => {
             </Button>
           </div>
           <Line />
-          <ContentContainer>
-            <div className='flex items-start'>{data.content}</div>
-            <div>
-              <UserBox>
-                <Blank />
-                <div className='flex grow-0 mr-10'>
-                  <img
-                    className="w-10 h-10 mr-3"
-                    src={data.profileImage}
-                    alt="프로필 사진"
-                  />
-                  <UserName>{data.nickName}</UserName>
-                </div>
-              </UserBox>
-            </div>
-          </ContentContainer>
+          <div className='flex w-full mb-10'>
+            <VoteBox count={data.questionVoteCount}/>
+            <ContentContainer>
+              <div className='flex items-start min-h-[150px]'>{data.content}</div>
+              <Foot>
+                <TextBtn>delete</TextBtn>
+                <UserBox>
+                  <Blank />
+                  <div className='flex grow-0 mr-10'>
+                    <img
+                      className="w-10 h-10 mr-3"
+                      src={data.profileImage}
+                      alt="프로필 사진"
+                    />
+                    <UserName>{data.nickName}</UserName>
+                  </div>
+                </UserBox>
+              </Foot>
+            </ContentContainer>
+          </div>
           {(newAnswerList.length !== 0) && (newAnswerList) ? (
             <AllAnswer>
               <div className='font-medium text-xl mb-10'>{newAnswerList.length}{ newAnswerList.length === 1 ? ` Answer` : ` Answers` }</div>
