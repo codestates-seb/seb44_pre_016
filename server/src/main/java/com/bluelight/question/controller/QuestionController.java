@@ -45,10 +45,9 @@ public class QuestionController {
     public ResponseEntity postAskQuestion(
         @Valid @RequestBody AskQuestionDto.Post requestBody) {
 
-        Response response = new Response(questionService.createQuestion(requestBody));
+        questionService.createQuestion(requestBody);
 
-        return new ResponseEntity<>(
-            response, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 
@@ -58,13 +57,16 @@ public class QuestionController {
 //        return new ResponseEntity<>(questions.stream().map().collect(Collectors.toList()), HttpStatus.OK);
 //    }
 
-    @GetMapping("/questions/{question-id}")
-    public ResponseEntity getQuestionDetail(@Positive @PathVariable("question-id") long questionId) {
-        Question question = questionService.findQuestionDetail(questionId);
-
-        return new ResponseEntity<>(mapper.questionToResponse(question),
-            HttpStatus.OK);
-    }
+//    @GetMapping("/questions/{question-id}")
+//    public ResponseEntity getQuestionDetail(@Positive @PathVariable("question-id") long questionId) {
+//        Question question = questionService.findQuestionDetail(questionId);
+//
+//
+//
+//
+//        return new ResponseEntity<>(mapper.questionToResponse(question),
+//            HttpStatus.OK);
+//    }
     @GetMapping
     public ResponseEntity allQuestions(@Positive @RequestParam int page,
                                     @Positive @RequestParam int size) {

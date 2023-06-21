@@ -1,6 +1,7 @@
 package com.bluelight.question.entity;
 
 import com.bluelight.audit.Auditable;
+import com.bluelight.member.entity.Member;
 import com.bluelight.tag.entity.Tag;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -63,12 +64,13 @@ public class Question extends Auditable {
     public void addQuestionTag(QuestionTag questionTag) {
         questionTags.add(questionTag);
     }
-//
-//    @ManyToOne
-//    @JoinColumn(name = "member_id")
-//    private Member member;
-//
 
-//    public void addMember(Member member) {
-//    }
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+
+    public void addMember(Member member) {
+        this.member = member;
+    }
 }

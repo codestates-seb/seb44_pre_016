@@ -2,6 +2,8 @@ package com.bluelight.question.service;
 
 import com.bluelight.exception.BusinessLogicException;
 import com.bluelight.exception.ExceptionCode;
+import com.bluelight.member.entity.Member;
+import com.bluelight.member.service.MemberService;
 import com.bluelight.question.dto.AskQuestionDto;
 import com.bluelight.question.dto.AskQuestionDto.TagDto;
 import com.bluelight.question.entity.Question;
@@ -29,14 +31,15 @@ public class QuestionService {
 
     private final QuestionMapper mapper;
 
+    private final MemberService memberService;
 
-    public QuestionService(QuestionRepository questionRepository,
-        TagRepository tagRepository,
-        QuestionMapper mapper) {
+
+    public QuestionService(QuestionRepository questionRepository, TagRepository tagRepository,
+        QuestionMapper mapper, MemberService memberService) {
         this.questionRepository = questionRepository;
         this.tagRepository = tagRepository;
         this.mapper = mapper;
-
+        this.memberService = memberService;
     }
 
     @Transactional
@@ -48,8 +51,9 @@ public class QuestionService {
         // Question Dto -> Question Entity 만듬
         Question question = mapper.askquestionPostToQuestion(requestBody);
 
-        // memberRepository.findById(memberId);
-        // question.addMember(member);
+        Member findMember = memberService.findMember(requestBody.getMemberId());
+
+        question.addMember(findMember);
 
         // Tag id들을 검증하기 위한 작업 단계
         //[4, 5]
@@ -72,8 +76,10 @@ public class QuestionService {
         return savedQuestion;
     }
 
+    @Transactional(readOnly = true)
     public Question findQuestionDetail(long questionId) {
-        return findVerifiedQuestionByQuery(questionId);
+        Question findQuestion = findVerifiedQuestionByQuery(questionId);
+        return findQuestion;
     }
 
     public Page<Question> findQuestions(int page, int size) {
@@ -87,6 +93,7 @@ public class QuestionService {
         questionRepository.delete(findQuestion);
     }
 
+    @Transactional(readOnly = true)
     private Question findVerifiedQuestionByQuery(long questionId) {
         Optional<Question> optionalQuestion = questionRepository.findByQuestion(questionId);
         Question findQuestion =

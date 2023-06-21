@@ -18,7 +18,7 @@ public class AllQuestionDto {
         private List<Tag> questionTag;
         private long memberId;
         private String profileImage;
-        private String nickName;
+        private String displayName;
         private String createdAt;
     }
 }

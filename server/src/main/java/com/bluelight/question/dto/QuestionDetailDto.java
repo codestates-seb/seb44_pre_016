@@ -13,13 +13,11 @@ public class QuestionDetailDto {
     public static class Response {
         private String questionTitle;
         private String questionContent;
-        private int questionVoteCount;
+//        private int questionVoteCount;
         private List<Tag> questionTag;
-        private long memberId;
         private String profileImage;
-        private String nickName;
+        private String displayName;
         private String createdAt;
-
     }
 
 }

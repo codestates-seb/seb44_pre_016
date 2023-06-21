@@ -20,7 +20,7 @@ public class AskQuestionDto {
         @NotBlank (message = "내용을 입력하세요.")
         private String questionContent;
         private List<TagDto> questionTag;
-
+        private Long memberId;
     }
 
     // 임시적 조치

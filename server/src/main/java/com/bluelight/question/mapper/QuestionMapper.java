@@ -22,7 +22,9 @@ public interface QuestionMapper {
 
     QuestionDetailDto questionToQuestionDetail(Question question);
 
-    ResponseDto questionToResponse(Question question);
+//    default ResponseDto questionToResponse(Question question){
+//
+//    }
 
     List<ResponseDto> questionsToResponse(List<Question> questions);
 }
