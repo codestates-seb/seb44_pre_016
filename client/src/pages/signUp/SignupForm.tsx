@@ -1,6 +1,10 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React, { ChangeEvent, useState } from 'react';
+import { displayName } from 'react-quill';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
+import styled from 'styled-components';
 import Button from '../../components/button/Button';
+import { RootState } from '../../redux/store';
 
 const Form = styled.form`
   width: 100%;
@@ -41,15 +45,52 @@ const Input = styled.input`
 `;
 
 function SignupForm() {
+  const navigation = useNavigate(); // ?
+  // const isLogin = useSelector((state: RootState) => state.userInfos); //
+  const dispatch = useDispatch();
+  const [signUpInfo, setSignUpInfo] = useState({
+    displayName: '',
+    email: '',
+    password: '',
+  });
+  const [isidValid, setisidValid] = useState(false); // 아이디 유효한지
+  const [ispasswordValid, setisPasswordValid] = useState(false); // 패스워드 유효한지
+  const [emailMSG, setEmailMSG] = useState(''); // 이메일 주소값
+  const [passwordMSG, setPasswordMSG] = useState(''); // 패스워드 값
+
+  // 네임 input 작성할때마다 signUpInfo 안에 네임 값을 넣는 함수
+  const handleNameValue = (e: ChangeEvent<HTMLInputElement>) => {
+    setSignUpInfo({ ...signUpInfo, displayName: e.target.value });
+  };
+
+  // email 정규식과 패스워드 정규식
+  const regexEmail = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/;
+  const regexPassword = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
+
+  // 이메일 input 작성할때마다 정규식
+  const handleEmailValue = (e: ChangeEvent<HTMLInputElement>) => {
+    setSignUpInfo({ ...signUpInfo, email: e.target.value });
+    return regexEmail.test(e.target.value)
+      ? setisidValid(true)
+      : setisidValid(false);
+  };
+  // 비밀번호 정규식 최소 8글자 문자1개 숫자1개
+  const handlePasswordValue = (e: ChangeEvent<HTMLInputElement>) => {
+    setSignUpInfo({ ...signUpInfo, password: e.target.value });
+    return regexPassword.test(e.target.value)
+      ? setisPasswordValid(true)
+      : setisPasswordValid(false);
+  };
+
   return (
     <div>
       <Form>
         <label htmlFor="name">Display name</label>
-        <Input id="name" type="text"></Input>
+        <Input id="name" type="text" onChange={handleNameValue}></Input>
         <label htmlFor="id">email</label>
-        <Input id="email" type="email"></Input>
+        <Input id="email" type="email" onChange={handleEmailValue}></Input>
         <label htmlFor="password">password</label>
-        <input type="text" id="password"></input>
+        <input type="text" id="password" onChange={handlePasswordValue}></input>
         <Button customStyle="mt-5 h-[40px]">sign up</Button>
 
         <div className="text-[13px] text-gray-400 mt-10">
