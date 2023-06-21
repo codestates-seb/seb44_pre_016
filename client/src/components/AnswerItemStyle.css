@@ -1,0 +1,6 @@
+pre.ql-syntax {
+  background-color: var(--gray-nav-active);
+  padding: 30px;
+  margin: 20px;
+  border-radius: 5px;
+}

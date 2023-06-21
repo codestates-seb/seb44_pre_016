@@ -5,6 +5,7 @@ flex
 flex-col
 items-start
 p-5
+max-w-[850px]
 `
 
 export const TitleContainer = tw.div`
@@ -32,9 +33,14 @@ items-center
 w-full
 `
 
+export const UserName = tw.div`
+text-[#39739D]
+hover:text-blue
+`
+
 export const Line = tw.hr`
 w-full
-mt-5
+mt-3
 mb-10
 `
 
@@ -47,4 +53,3 @@ w-full
 export const Blank = tw.div`
 grow
 `
-

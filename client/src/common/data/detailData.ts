@@ -19,7 +19,7 @@ export interface DummyData {
 export const detailData: DummyData[] = [
   {
     "questionId": 50,
-    "title": "질문 제목입니다.",
+    "title": "How to design a good JWT authentication filter",
     "votes": 49,
     "content": "질문 내용입니다~~ 모르겠어잉",
     "answerList": [
@@ -36,20 +36,20 @@ export const detailData: DummyData[] = [
   },
   {
     "questionId": 49,
-    "title": "또 다른 질문 제목입니다.",
+    "title": "merge sort program in java",
     "votes": 30,
-    "content": "또 질문질문합니다~~ 또 모르겠어잉",
+    "content": "I do not know everything",
     "answerList": [
       {
         "nickName": "kimcoding",
         "profileImage": "/images/profile.jpg",
-        "content": "또 이렇게 해보세요~!",
+        "content": "i don't know too.<p></p><pre class='ql-syntax' spellcheck='false'>let num = 10;</pre>",
         "createdAt": "2023-06-15 16:18:14"
       },
       {
         "nickName": "kimcoding",
         "profileImage": "/images/profile.jpg",
-        "content": "아니면 또 이렇게 해보시는거 어때요~!",
+        "content": "hello my name is <h1>hyesoo</h1>",
         "createdAt": "2023-06-15 16:18:14"
       }
     ],

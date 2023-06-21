@@ -5,17 +5,28 @@ import Button from '../../components/button/Button';
 import AnswerItem from '../../components/AnswerItem';
 import Editor from '../../components/editor/Editor'
 
+import "highlight.js/styles/github.css";
+
 import {
   AllContainer,
   TitleContainer,
   Title,
   ContentContainer,
   UserBox,
+  UserName,
   Line,
   AllAnswer,
   Blank
 } from "./QuestionDetail.styled";
 
+const SLICE_DATE_NUMBER = -2;
+
+export interface AnswerListItem {
+  nickName: string;
+  profileImage:string;
+  content: string;
+  createdAt: string;
+}
 
 interface QuestionDetailProps {
   questionId: number;
@@ -24,12 +35,14 @@ interface QuestionDetailProps {
 const QuestionDetail = ({ questionId }: QuestionDetailProps) => {
   const [data, setData] = useState<DummyData | null>(null);
   const [answerContent, setAnswerContent] = useState('');
+  const [newAnswerList, setNewAnswerList] = useState(data ? data.answerList : [])
 
   useEffect(() => {
     const selectedData = detailData.find(item => item.questionId === questionId);
 
     if (selectedData) {
       setData(selectedData);
+      setNewAnswerList(selectedData.answerList);
     }
   }, [questionId]);
 
@@ -38,7 +51,24 @@ const QuestionDetail = ({ questionId }: QuestionDetailProps) => {
   };
 
   const postAnswer = () => {
-    console.log(answerContent)
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (`0${  today.getMonth() + 1}`).slice(SLICE_DATE_NUMBER);
+    const day = (`0${  today.getDate() + 1}`).slice(SLICE_DATE_NUMBER);
+    const hours = (`0${  today.getHours()}`).slice(SLICE_DATE_NUMBER); 
+    const minutes = (`0${  today.getMinutes()}`).slice(SLICE_DATE_NUMBER);
+    const seconds = (`0${  today.getSeconds()}`).slice(SLICE_DATE_NUMBER);
+
+    const date = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
+
+    const newAnswer: AnswerListItem = {
+      "nickName": "kimcoding",
+      "profileImage": "/images/profile.jpg",
+      "content": answerContent,
+      "createdAt": date,
+    }
+    
+    setNewAnswerList(prevAnswerList => [...prevAnswerList, newAnswer]);
   }
 
   return (
@@ -48,7 +78,7 @@ const QuestionDetail = ({ questionId }: QuestionDetailProps) => {
           <div className='flex w-full'>
             <TitleContainer>
               <Title>{data.title}</Title>
-              {data.createdAt}
+              <p className='text-sm'>{data.createdAt}</p>
             </TitleContainer>
             <Button variant="default" size="sm" className='h-10 grow-0'>
               ask question
@@ -66,16 +96,16 @@ const QuestionDetail = ({ questionId }: QuestionDetailProps) => {
                     src={data.profileImage}
                     alt="프로필 사진"
                   />
-                  {data.nickName}
+                  <UserName>{data.nickName}</UserName>
                 </div>
               </UserBox>
             </div>
           </ContentContainer>
-          {data.answerList.length !== 0 ? (
+          {(newAnswerList.length !== 0) && (newAnswerList) ? (
             <AllAnswer>
-              <div className='font-medium text-xl mb-10'>{data.answerList.length}{ data.answerList.length === 1 ? ` Answer` : ` Answers` }</div>
-              <div>
-                {data.answerList.map((answer,index) => (
+              <div className='font-medium text-xl mb-10'>{newAnswerList.length}{ newAnswerList.length === 1 ? ` Answer` : ` Answers` }</div>
+              <div >
+                {newAnswerList.map((answer,index) => (
                   <AnswerItem key={index} answer={answer} />
                 ))}
               </div>
