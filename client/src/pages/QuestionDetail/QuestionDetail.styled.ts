@@ -25,6 +25,7 @@ export const ContentContainer = tw.div`
 flex
 flex-col
 w-full
+grow-1
 `
 export const UserBox = tw.div`
 flex
