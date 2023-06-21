@@ -15,7 +15,6 @@ function Button({ children, customStyle, ...attributes }: ButtonProps) {
   border-[#4393F7]
  text-[13px]
   p-[7px]
-
   hover:bg-[#0064C2]
   active:bg-[#2960B7]
   ${customStyle}`; // 커스텀 스타일을 포함한 클래스
