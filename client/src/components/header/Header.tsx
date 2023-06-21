@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -6,11 +6,29 @@ import Button from '../button/Button';
 import Dropdown from './Dropdown';
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>('');
   const inputRef = useRef(null);
 
   const dropdownHandler = (): void => {
     setIsOpen(!isOpen);
+  };
+
+  const handleEnter = e => {
+    if (e.key === 'Enter') {
+      const tagRegex = /\[+([^\]]+)\]+$/;
+
+      const tagMatch = tagRegex.exec(inputValue);
+
+      if (tagMatch && tagMatch[1]) {
+        const tagName = `[${tagMatch[1].trim()}]`.replace(/\s+/g, '');
+        console.log(`${tagName} tag`);
+        setInputValue(tagName);
+      } else {
+        console.log(`${inputValue} keyword`);
+        setInputValue(inputValue);
+      }
+    }
   };
   return (
     <header className="sticky top-0 bg-white flex justify-center items-center w-full h-[50px] border-solid border-t-2 border-b border-t-orange-500 border-b-gray-300">
@@ -29,7 +47,10 @@ const Header = () => {
           type="search"
           placeholder="Search..."
           ref={inputRef}
+          value={inputValue}
           onClick={dropdownHandler}
+          onChange={e => setInputValue(e.target.value)}
+          onKeyUp={handleEnter}
         ></input>
         <span className="absolute left-2 top-1.5 text-gray-500">
           <FontAwesomeIcon icon={faMagnifyingGlass} />
