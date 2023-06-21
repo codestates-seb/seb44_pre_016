@@ -5,11 +5,11 @@ import {
   ONE_HOUR_MILLISECOND,
   ONE_MINUTE_MILLISECOND,
   ONE_SECOND_MILLISECOND,
-} from '../common/data/ConstantValue';
+} from '../../common/data/ConstantValue';
 import {
   TopQuestionItemData,
   AllQuestionItemData,
-} from '../common/interface/QuestionList.interface';
+} from '../../common/interface/QuestionList.interface';
 
 import {
   QuestionItemContainer,
@@ -24,7 +24,7 @@ import {
   QuestionUserProfile,
   QuestionUserName,
   QuestionAnswer,
-} from '../style/QuestionItem.styled';
+} from './QuestionItem.styled';
 
 type QuestionItemProps =
   | {

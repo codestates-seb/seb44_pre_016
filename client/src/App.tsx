@@ -9,6 +9,7 @@ import Questions from './pages/Questions';
 import Login from './components/login/Login';
 import SignUp from './components/signUp/SignUp';
 import QuestionDetail from './pages/QuestionDetail/QuestionDetail';
+import NavBar from './components/navbar/NavBar';
 import Footer from './components/footer/Footer';
 
 function App() {
@@ -17,30 +18,18 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div className="w-[1000px] border-red border-[3px] mx-auto flex row-auto">
+      <div className="flex max-w-[1264px] mx-auto w-full">
+        <NavBar />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Nav />
-                <Main />
-              </>
-            }
-          />
-          <Route
-            path="/:questions"
-            element={
-              <>
-                <Nav />
-                <Questions />
-              </>
-            }
-          />
-          <Route path="/login" element={<Login />} />
-          <Route path="/member/signup" element={<SignUp />} />
+          <Route path="/" element={<Main />} />
+          <Route path="/:questions" element={<Questions />} />
         </Routes>
       </div>
+      <Routes>
+        {/* routes 에 직접 스타일을 줄 수 있을까? */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/member/signup" element={<SignUp />} />
+      </Routes>
       <QuestionDetail questionId={questionId} />
       <Footer />
     </div>

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import QuestionItem from '../QuestionItem';
-import { QuestionContainer } from '../../style/QuestionList.styled';
+import QuestionItem from '../questionItem/QuestionItem';
+import { QuestionContainer } from './QuestionList.styled';
 import getPaginatedData from '../../common/data/test';
 import { totalPageCntSet } from '../../redux/paginationReducer';
-import Pagination from '../Pagination';
-import SizePagination from '../SizePagination';
+import Pagination from '../pagination/Pagination';
+import SizePagination from '../pagination/SizePagination';
 
 function AllQuestionList() {
   const dispatch = useDispatch();
