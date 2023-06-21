@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />햣
+      <Header />
       <div className="flex max-w-[1264px] mx-auto w-full">
         <NavBar />
         <Routes>

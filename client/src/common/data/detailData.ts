@@ -1,6 +1,8 @@
 export interface AnswerListItem {
-  nickname: string;
+  nickName: string;
+  profileImage:string;
   content: string;
+  createdAt: string;
 }
 
 export interface DummyData {
@@ -8,7 +10,6 @@ export interface DummyData {
   title: string;
   votes: number;
   content: string;
-  answer: number;
   answerList: AnswerListItem[];
   profileImage:string;
   nickName: string;
@@ -18,14 +19,15 @@ export interface DummyData {
 export const detailData: DummyData[] = [
   {
     "questionId": 50,
-    "title": "질문 제목입니다.",
+    "title": "How to design a good JWT authentication filter",
     "votes": 49,
     "content": "질문 내용입니다~~ 모르겠어잉",
-    "answer": 1,
     "answerList": [
       {
-        "nickname": "kimcoding",
-        "content": "이렇게 해보세요~!"
+        "nickName": "kimcoding",
+        "profileImage": "/images/profile.jpg",
+        "content": "이렇게 해보세요~!",
+        "createdAt": "2023-06-15 16:18:14"
       }
     ],
     "profileImage": "/images/profile.jpg",
@@ -34,20 +36,33 @@ export const detailData: DummyData[] = [
   },
   {
     "questionId": 49,
-    "title": "또 다른 질문 제목입니다.",
+    "title": "merge sort program in java",
     "votes": 30,
-    "content": "또 질문질문합니다~~ 또 모르겠어잉",
-    "answer": 2,
+    "content": "I do not know everything",
     "answerList": [
       {
-        "nickname": "kimcoding",
-        "content": "또 이렇게 해보세요~!"
+        "nickName": "kimcoding",
+        "profileImage": "/images/profile.jpg",
+        "content": "i don't know too.<p></p><pre class='ql-syntax' spellcheck='false'>let num = 10;</pre>",
+        "createdAt": "2023-06-15 16:18:14"
       },
       {
-        "nickname": "kimcoding",
-        "content": "아니면 또 이렇게 해보시는거 어때요~!"
+        "nickName": "kimcoding",
+        "profileImage": "/images/profile.jpg",
+        "content": "hello my name is <h1>hyesoo</h1>",
+        "createdAt": "2023-06-15 16:18:14"
       }
     ],
+    "profileImage": "/images/profile.jpg",
+    "nickName": "dumbpotato24",
+    "createdAt": "2023-06-16 12:18:00"
+  },
+  {
+    "questionId": 48,
+    "title": "배고파요.",
+    "votes": 30,
+    "content": "배고픈데 저메추해주세요",
+    "answerList": [],
     "profileImage": "/images/profile.jpg",
     "nickName": "dumbpotato24",
     "createdAt": "2023-06-16 12:18:00"
