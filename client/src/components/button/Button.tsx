@@ -5,7 +5,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   customStyle?: string;
 }
 
-const Button = ({ children, customStyle, ...attributes }: ButtonProps) => {
+function Button({ children, customStyle, ...attributes }: ButtonProps) {
   const buttonStyles = `
   text-[white] bg-[#4393F7] rounded-[6px]
   inline-flex 
@@ -25,6 +25,6 @@ const Button = ({ children, customStyle, ...attributes }: ButtonProps) => {
       {children}
     </button>
   );
-};
+}
 
 export default Button;

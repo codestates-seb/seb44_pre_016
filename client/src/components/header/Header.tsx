@@ -5,7 +5,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import Button from '../button/Button';
 import Dropdown from './Dropdown';
 
-const Header = () => {
+function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>('');
   const inputRef = useRef(null);
@@ -70,6 +70,6 @@ const Header = () => {
       {/* </div> */}
     </header>
   );
-};
+}
 
 export default Header;
