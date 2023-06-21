@@ -3,10 +3,12 @@ package com.bluelight.question.controller;
 import com.bluelight.dto.MultiResponseDto;
 import com.bluelight.dto.SingleResponseDto;
 import com.bluelight.question.dto.AskQuestionDto;
+import com.bluelight.question.dto.AskQuestionDto.Response;
 import com.bluelight.question.entity.Question;
 import com.bluelight.question.mapper.QuestionMapper;
 import com.bluelight.question.service.QuestionService;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +16,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,25 +40,48 @@ public class QuestionController {
         this.mapper = mapper;
     }
 
+    // controller 위에 RequestMapping ("/questions")
     @PostMapping("/ask")
     public ResponseEntity postAskQuestion(
         @Valid @RequestBody AskQuestionDto.Post requestBody) {
-        Question question = mapper.askquestionPostToQuestion(requestBody);
-        Question createQuestion = questionService.createQuestion(question);
+
+        Response response = new Response(questionService.createQuestion(requestBody));
 
         return new ResponseEntity<>(
-            createQuestion, HttpStatus.CREATED);
+            response, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{question-id}")
+
+//    @GetMapping("/top")
+//    public ResponseEntity topQuestions(@Positive @RequestParam(defaultValue = "50") int size) {
+//        List<Question> questions = questionService.topQuestions(size);
+//        return new ResponseEntity<>(questions.stream().map().collect(Collectors.toList()), HttpStatus.OK);
+//    }
+
+    @GetMapping("/questions/{question-id}")
     public ResponseEntity getQuestionDetail(@Positive @PathVariable("question-id") long questionId) {
         Question question = questionService.findQuestionDetail(questionId);
 
-        return new ResponseEntity<>(mapper.questionToQuestionDetail(question),
+        return new ResponseEntity<>(mapper.questionToResponse(question),
+            HttpStatus.OK);
+    }
+    @GetMapping
+    public ResponseEntity allQuestions(@Positive @RequestParam int page,
+                                    @Positive @RequestParam int size) {
+        Page<Question> pageQuestions = questionService.findQuestions(page - 1, size);
+        List<Question> questions = pageQuestions.getContent();
+
+        return new ResponseEntity<>(
+            new MultiResponseDto<>(mapper.questionsToResponse(questions),
+                pageQuestions),
             HttpStatus.OK);
     }
 
-
+    @DeleteMapping("/{question-id}")
+    public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId) {
+        questionService.deleteQuestion(questionId);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
 
     /*
     @GetMapping

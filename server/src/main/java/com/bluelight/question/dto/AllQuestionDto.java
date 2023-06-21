@@ -13,12 +13,12 @@ public class AllQuestionDto {
         private long questionId;
         private String questionTitle;
         private String questionContent;
-        private int questionVoteCount;
+//        private int questionVoteCount;
         private int answerCount;
         private List<Tag> questionTag;
         private long memberId;
         private String profileImage;
         private String nickName;
-        private Timestamp createdAt;
+        private String createdAt;
     }
 }

@@ -18,7 +18,7 @@ public class QuestionDetailDto {
         private long memberId;
         private String profileImage;
         private String nickName;
-        private Timestamp createdAt;
+        private String createdAt;
 
     }
 
