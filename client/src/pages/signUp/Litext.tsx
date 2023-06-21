@@ -2,8 +2,8 @@ import React from 'react';
 
 function Litext() {
   return (
-    <li className="flex  ">
-      <div className="flex-item fc-blue-500 mr8">
+    <li className="flex mt-4 items-center  ">
+      <div className="flex-item fc-blue-500 mr-2 ">
         <svg width="26" height="26" className="svg-icon mtn2">
           <path
             opacity=".5"

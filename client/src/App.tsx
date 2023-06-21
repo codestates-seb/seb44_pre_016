@@ -18,7 +18,6 @@ function App() {
     <div className="App">
       <Header />
       <div className="flex max-w-[1264px] mx-auto  w-full">
-        {/*  */}
         {!(
           location.pathname.includes('/login') ||
           location.pathname.includes('/member/signup')
