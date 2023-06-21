@@ -1,8 +1,10 @@
-package com.bluelight.stackoverflow;
+package com.bluelight;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+@EnableJpaAuditing
 @SpringBootApplication
 public class StackoverflowApplication {
 
