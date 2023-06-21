@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import { displayName } from 'react-quill';
+import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
@@ -49,7 +50,7 @@ function SignupForm() {
   // const isLogin = useSelector((state: RootState) => state.userInfos); //
   const dispatch = useDispatch();
   const [signUpInfo, setSignUpInfo] = useState({
-    displayName: '',
+    nickname: '',
     email: '',
     password: '',
   });
@@ -60,7 +61,7 @@ function SignupForm() {
 
   // 네임 input 작성할때마다 signUpInfo 안에 네임 값을 넣는 함수
   const handleNameValue = (e: ChangeEvent<HTMLInputElement>) => {
-    setSignUpInfo({ ...signUpInfo, displayName: e.target.value });
+    setSignUpInfo({ ...signUpInfo, nickname: e.target.value });
   };
 
   // email 정규식과 패스워드 정규식
@@ -81,7 +82,20 @@ function SignupForm() {
       ? setisPasswordValid(true)
       : setisPasswordValid(false);
   };
+  const handleSignUp = e => {
+    e.preventDefault();
+    console.log('작동해!!');
 
+    // command . 자동가져오기
+    // await axios.post('/users/signup', signUpInfo).then(() => {});
+
+    fetch('/users/signup', {
+      method: 'POST',
+      body: JSON.stringify(signUpInfo),
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
+  };
   return (
     <div>
       <Form>
@@ -91,7 +105,10 @@ function SignupForm() {
         <Input id="email" type="email" onChange={handleEmailValue}></Input>
         <label htmlFor="password">password</label>
         <input type="text" id="password" onChange={handlePasswordValue}></input>
-        <Button customStyle="mt-5 h-[40px]">sign up</Button>
+        <Button customStyle="mt-5 h-[40px]" onClick={handleSignUp}>
+          {/* */}
+          sign up
+        </Button>
 
         <div className="text-[13px] text-gray-400 mt-10">
           By clicking “Sign up”, you agree to our
