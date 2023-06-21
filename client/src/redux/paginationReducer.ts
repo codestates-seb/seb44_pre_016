@@ -1,21 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 type State = {
-  totalPageCnt: number;
+  totalQuestionCnt: number;
 };
 
 const PaginationReducer = createSlice({
   name: 'PaginationReducer',
   initialState: {
-    totalPageCnt: 0,
+    totalQuestionCnt: 0,
   },
   reducers: {
-    totalPageCntSet(state: State, action) {
-      return { ...state, totalPageCnt: action.payload };
+    totalQuestionCntSet(state: State, action) {
+      return { ...state, totalQuestionCnt: action.payload };
     },
   },
 });
 
-export const { totalPageCntSet } = PaginationReducer.actions;
+export const { totalQuestionCntSet } = PaginationReducer.actions;
 
 export default PaginationReducer.reducer;

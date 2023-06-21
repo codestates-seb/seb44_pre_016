@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   ONE_DAY_MILLISECOND,
@@ -8,7 +7,7 @@ import {
 } from '../../common/data/ConstantValue';
 import {
   TopQuestionItemData,
-  AllQuestionItemData,
+  AllSearchQuestionItemData,
 } from '../../common/interface/QuestionList.interface';
 
 import {
@@ -31,7 +30,7 @@ type QuestionItemProps =
       pageType: 'Top';
       questionProps: TopQuestionItemData;
     }
-  | { pageType: 'All'; questionProps: AllQuestionItemData };
+  | { pageType: 'All_Search'; questionProps: AllSearchQuestionItemData };
 
 function QuestionItem({ pageType, questionProps }: QuestionItemProps) {
   const {
@@ -84,7 +83,7 @@ function QuestionItem({ pageType, questionProps }: QuestionItemProps) {
       <QuestionDataContainer>
         <QuestionItemTitle>{questionTitle}</QuestionItemTitle>
         <div className="text-[13px] mb-2 text-[#3B4045]">
-          {pageType === 'All' && questionProps.questionContent}
+          {pageType === 'All_Search' && questionProps.questionContent}
         </div>
         <QuestionBodyContainer>
           <ul>
