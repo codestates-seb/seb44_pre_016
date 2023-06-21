@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.springframework.data.domain.Page;
 
 @Getter
+
 public class MultiResponseDto<T> {
     private List<T> data;
     private PageInfo pageInfo;
