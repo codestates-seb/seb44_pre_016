@@ -3,4 +3,6 @@ pre.ql-syntax {
   padding: 30px;
   margin: 20px;
   border-radius: 5px;
+  min-width: 500px;
+  max-width: 800px;
 }
