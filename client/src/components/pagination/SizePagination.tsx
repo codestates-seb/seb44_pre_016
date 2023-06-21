@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import {
-  PaginationButton,
-  PaginationContainer,
-} from '../style/Pagination.styled';
-import { SizePaginationProps } from '../common/interface/Pagination.interface';
+import { PaginationButton, PaginationContainer } from './Pagination.styled';
+import { SizePaginationProps } from '../../common/interface/Pagination.interface';
 
 function SizePagination({ setPageSize }: SizePaginationProps) {
   const SIZE_ARRAY = [15, 30, 50];

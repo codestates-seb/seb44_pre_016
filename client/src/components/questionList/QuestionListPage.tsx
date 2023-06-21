@@ -8,7 +8,7 @@ import {
   ContentHeader,
   ContentButtonContainer,
   BlueLinkText,
-} from '../../style/QuestionList.styled';
+} from './QuestionList.styled';
 import { QUESTION_PAGE_TITLE } from '../../common/data/ConstantValue';
 import AllQuestionList from './AllQuestionList';
 import { RootState } from '../../redux/store';
