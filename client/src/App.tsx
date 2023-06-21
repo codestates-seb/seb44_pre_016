@@ -9,6 +9,7 @@ import SignUp from './components/signUp/SignUp';
 import QuestionDetail from './pages/QuestionDetail/QuestionDetail';
 import NavBar from './components/navbar/NavBar';
 import Footer from './components/footer/Footer';
+import Search from './pages/Search';
 
 function App() {
   const questionId = 50;
@@ -25,6 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/questions" element={<Questions />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/login" element={<Login />} />
           <Route path="/member/signup" element={<SignUp />} />
         </Routes>

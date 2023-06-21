@@ -1,14 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch } from 'react-redux';
 import Button from '../button/Button';
 import Dropdown from './Dropdown';
+import { searchSet } from '../../redux/searchReducer';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>('');
+  const navigate = useNavigate();
   const inputRef = useRef(null);
+  const dispatch = useDispatch();
 
   const dropdownHandler = (): void => {
     setIsOpen(!isOpen);
@@ -22,14 +26,16 @@ const Header = () => {
 
       if (tagMatch && tagMatch[1]) {
         const tagName = `[${tagMatch[1].trim()}]`.replace(/\s+/g, '');
-        console.log(`${tagName} tag`);
+        dispatch(searchSet({ keyword: tagMatch[1], types: 'tagged' }));
         setInputValue(tagName);
       } else {
-        console.log(`${inputValue} keyword`);
+        dispatch(searchSet({ keyword: inputValue, types: 'title' }));
         setInputValue(inputValue);
       }
+      navigate('/search');
     }
   };
+
   return (
     <header className="sticky top-0 bg-white flex justify-center items-center w-full h-[50px] border-solid border-t-2 border-b border-t-orange-500 border-b-gray-300">
       <Link to="/" className=" h-full hover:bg-gray-300 mr-4">
