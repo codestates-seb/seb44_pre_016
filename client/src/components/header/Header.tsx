@@ -31,7 +31,7 @@ function Header() {
     }
   };
   return (
-    <header className="sticky top-0 bg-white flex justify-center items-center w-full h-[50px] border-solid border-t-2 border-b border-t-orange-500 border-b-gray-300">
+    <header className="sticky top-0 z-10 bg-white flex justify-center items-center w-full h-[50px] border-solid border-t-2 border-b border-t-orange-500 border-b-gray-300">
       <Link to="/" className=" h-full hover:bg-gray-300 mr-4">
         <div className="flex  h-full w-[120px] ">
           <img src={'/images/stack_Overflow_logo.svg'} alt="로고이미지" />
@@ -41,7 +41,7 @@ function Header() {
         Products
       </span>
 
-      <div className="w-[650px] mr-4 relative ">
+      <div className="w-[900px] mr-4 relative ">
         <input
           className="border-2 w-[100%] h-7 pl-8 text-sm"
           type="search"
