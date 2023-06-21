@@ -1,13 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
+  content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
   theme: {
     extend: {
       minHeight: {
-        "6.875": "6.875rem",
+        6.875: '6.875rem',
       },
       borderRadius: {
-        'm': '3px',
+        m: '3px',
       },
       colors: {
         'blue-text': "var(--blue-text)",
@@ -21,5 +21,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
-
+};

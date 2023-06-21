@@ -4,8 +4,8 @@ import {
   PaginationButton,
   PaginationContainer,
   PaginationExtension,
-} from '../style/Pagination.styled';
-import { PaginationProps } from '../common/interface/Pagination.interface';
+} from './Pagination.styled';
+import { PaginationProps } from '../../common/interface/Pagination.interface';
 
 const CHANGE_PAGE_LIST_CNT = 4;
 const PAGE_BLOCK_SIZE = 5;

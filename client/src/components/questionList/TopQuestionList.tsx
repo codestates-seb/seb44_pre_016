@@ -1,7 +1,7 @@
 import React from 'react';
-import QuestionItem from '../QuestionItem';
+import QuestionItem from '../questionItem/QuestionItem';
 import TopQuestionData from '../../common/data/data.json';
-import { QuestionContainer } from '../../style/QuestionList.styled';
+import { QuestionContainer } from './QuestionList.styled';
 
 function TopQuestionList() {
   return (

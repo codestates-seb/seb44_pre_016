@@ -80,7 +80,7 @@ const QuestionDetail = ({ questionId }: QuestionDetailProps) => {
               <Title>{data.title}</Title>
               <p className='text-sm'>{data.createdAt}</p>
             </TitleContainer>
-            <Button variant="default" size="sm" className='h-10 grow-0'>
+            <Button customStyle='h-5 w-36 p-[1px]'>
               ask question
             </Button>
           </div>
@@ -116,9 +116,7 @@ const QuestionDetail = ({ questionId }: QuestionDetailProps) => {
           <div className='font-medium text-xl mb-5'>Your Answer</div>
           <Editor value={answerContent}onChange={handleContentChange}/>
           <Button 
-            variant="default" 
-            size="sm" 
-            className='h-10 mt-5' 
+            customStyle='h-10 mt-5' 
             onClick={postAnswer}>
               Post Your Answer
           </Button>

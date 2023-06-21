@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle`
   --blue: #0A95FF;
   --blue-hover: #0064C2;
   --lightblue: #B3D3EA;
-  --lightblue-hover: #2774AA;
+  --lightblue-hover: #B9D2E8;
   --gray-nav-active: #F1F2F3;
   --green: #2F6F44;
   --black-nav-active: #0C0D0E;
