@@ -5,34 +5,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/button/Button';
 
-const Container = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  > div {
-    width: 288px;
-  }
-`;
-const Form = styled.form`
-  width: 100%;
-  /* border:1px solid red; */
-  display: flex;
-  flex-direction: column;
-  padding: 24px;
-  box-shadow: 0 10px 24px hsla(0, 0%, 0%, 0.05),
-    0 20px 48px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.1);
-  > input {
-    margin: 2px 0;
-    padding: 7px 9px;
-    border: 1px solid rgb(186, 191, 196);
-    border-radius: 3px;
-  }
-  > label {
-    text-transform: capitalize;
-    font-weight: bold;
-  }
-`;
 const commonInput = css`
   width: 100%;
   margin-top: 5px;
@@ -101,7 +73,7 @@ function Login() {
     ) {
       try {
         const response = await axios.post(
-          'https://polls.api-blueprint.org/member/login',
+          'https://95a4-124-50-73-190.ngrok-free.app/bluelight/member/login',
           {
             username: email,
             password,
@@ -126,28 +98,50 @@ function Login() {
       }
     }
   };
+  const Form = styled.form`
+    width: 100%;
+    /* border:1px solid red; */
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    box-shadow: 0 10px 24px hsla(0, 0%, 0%, 0.05),
+      0 20px 48px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.1);
+    > input {
+      margin: 2px 0;
+      padding: 7px 9px;
+      border: 1px solid rgb(186, 191, 196);
+      border-radius: 3px;
+    }
+    > label {
+      text-transform: capitalize;
+      font-weight: bold;
+    }
+  `;
+
   return (
-    <Container>
-      <div>
-        <Form>
+    <div className="w-[100%] flex justify-center items-center">
+      <div className="w-[288px]">
+        <form className="w-[100%] flex flex-col p-[24px] shadow shadow-md shadow-lg shadow-sm border border-solid border-gray-200  ">
           <label htmlFor="id">email</label>
-          <Input
+          <input
+            className="my-2 py-2 border border-solid border-gray-200 rounded-md"
             id="email"
             type="email"
             value={loginInfo.email}
             onChange={event =>
               loginInfoSet({ ...loginInfo, email: event.target.value })
             }
-            border-color={emptyEmail || loginFailed ? '#d0390e' : null}
-            // focusBorder={emptyEmail || loginFailed ? '#d0390e' : null}
-            // shadow={emptyEmail || loginFailed ? 'rgb(246,224,224)' : null}
-          ></Input>
+          ></input>
           <label htmlFor="password">password</label>
-          <input type="text" id="password"></input>
+          <input
+            type="text"
+            id="password"
+            className="my-2 py-2 border border-solid border-gray-200 rounded-md"
+          ></input>
           <Button>log in</Button>
-        </Form>
+        </form>
       </div>
-    </Container>
+    </div>
   );
 }
 
