@@ -63,6 +63,31 @@ function SignUpPage() {
           Sign up with Google{' '}
         </button>
         <SignupForm />
+        {/* 한줄 */}
+        <div className="mx-auto mt-9 text-[10px] flex flex-col items-center ">
+          {/* 한줄 */}
+          <div>
+            Don’t have an account?{' '}
+            <a
+              href="/users/signup?ssrc=head&amp;returnurl=https%3a%2f%2fstackoverflow.com%2f"
+              className="text-blue"
+            >
+              Sign up
+            </a>
+          </div>
+          {/* 한줄 */}
+          <div className="flex mt-3">
+            <div className="mt12">
+              Are you an employer?{' '}
+              <a
+                href="https://careers.stackoverflow.com/employer/login"
+                className="text-blue"
+              >
+                Sign up on Talent{' '}
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

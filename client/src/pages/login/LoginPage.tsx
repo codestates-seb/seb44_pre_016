@@ -132,7 +132,7 @@ function Login() {
           </svg>
           Login in with Google{' '}
         </button>
-
+        {/* 폼 */}
         <form className="w-[100%]  flex flex-col p-[24px] shadow shadow-md shadow-lg shadow-lg border border-solid border-gray-200  ">
           {/* 이메일 인풋 */}
           <label htmlFor="email" className="capitalize font-bold text-[13px]">
