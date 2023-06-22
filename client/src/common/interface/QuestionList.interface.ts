@@ -18,7 +18,7 @@ export interface TopQuestionItemData {
   createdAt: string;
 }
 
-export interface AllQuestionItemData {
+export interface AllSearchQuestionItemData {
   questionId: number;
   questionTitle: string;
   questionContent: string;

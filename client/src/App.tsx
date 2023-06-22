@@ -9,6 +9,7 @@ import SignUpPage from './pages/signUp/SignUpPage';
 import QuestionDetail from './pages/QuestionDetail/QuestionDetail';
 import NavBar from './components/navbar/NavBar';
 import Footer from './components/footer/Footer';
+import Search from './pages/Search';
 
 function App() {
   const questionId = 50;
@@ -27,6 +28,7 @@ function App() {
           <Route path="/questions" element={<Questions />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/member/signup" element={<SignUpPage />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </div>
       <QuestionDetail questionId={questionId} />
