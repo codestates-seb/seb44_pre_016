@@ -10,11 +10,13 @@ import com.bluelight.question.dto.AskQuestionDto;
 import com.bluelight.question.dto.AskQuestionDto.TagDto;
 import com.bluelight.question.dto.QuestionDetailDto;
 import com.bluelight.question.dto.QuestionMemberProfileDto;
+import com.bluelight.question.dto.TopQuestionDto;
 import com.bluelight.question.entity.Question;
 import com.bluelight.question.mapper.QuestionMapper;
 import com.bluelight.question.repository.QuestionRepository;
 import com.bluelight.tag.entity.Tag;
 import com.bluelight.tag.repository.TagRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -93,7 +95,8 @@ public class QuestionService {
         Profile findProfile = profileService.findProfile(findMember);
         List<Tag> findTagList = questionTagService.getTagsByQuestionId(questionId);
 
-        return mapper.questionToResponse(new QuestionMemberProfileDto(findQuestion,findMember,findProfile,findTagList));
+        return mapper.questionToResponse(
+            new QuestionMemberProfileDto(findQuestion, findMember, findProfile, findTagList));
     }
 
     public Page<Question> findQuestions(int page, int size) {
@@ -119,11 +122,24 @@ public class QuestionService {
 
     //readOnly: true -> get, gets
     //readOnly: false -> post, put, patch, delete
-//    @Transactional(readOnly = true)
-//    public List<Question> topQuestions(int size) {
-//        // 쿼리로 createdAt 최신순(내림차순)으로 size(50)개 가져온 후 리턴
-//        return questionRepository.findByCreatedAtOrderByDesc();
-//    }
+    @Transactional(readOnly = true)
+    public List<TopQuestionDto.Response> topQuestions(int size) {
+        // 쿼리로 createdAt 최신순(내림차순)으로 size(50)개 가져온 후 리턴
+        List<Question> questions = questionRepository.findAll(Sort.by("questionId").descending());
+        List<TopQuestionDto.Response> topQuestions = new ArrayList<>();
+
+        questions.stream()
+            .limit(size)
+            .forEach(question -> {
+                Member findMember = question.getMember();
+                Profile findProfile = findMember.getProfile();
+                List<Tag> findTagList = questionTagService.getTagsByQuestionId(question.getQuestionId());
+                topQuestions.add(mapper.questionToTopQuestion(
+                    new QuestionMemberProfileDto(question, findMember, findProfile, findTagList)));
+            });
+
+        return topQuestions;
+    }
 
     @Transactional(readOnly = true)
     public Question findQuestion(long questionId) {
@@ -140,9 +156,7 @@ public class QuestionService {
     }
 }
 
-
-
-        // questions.stream().map((question) -> new Dto(question))
+// questions.stream().map((question) -> new Dto(question))
 //        Member member = ;
 //        question.getMember().getProfile().getProfileImage()
 //        question.getMember().getProfile().getNickName()

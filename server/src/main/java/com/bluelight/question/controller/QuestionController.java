@@ -6,6 +6,7 @@ import com.bluelight.question.dto.AskQuestionDto;
 import com.bluelight.question.dto.AskQuestionDto.Response;
 import com.bluelight.question.dto.QuestionDetailDto;
 import com.bluelight.question.dto.ResponseDto;
+import com.bluelight.question.dto.TopQuestionDto;
 import com.bluelight.question.entity.Question;
 import com.bluelight.question.entity.QuestionTag;
 import com.bluelight.question.mapper.QuestionMapper;
@@ -22,6 +23,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -33,9 +35,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/questions")
+@RequestMapping
 @Validated
 @Slf4j
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class QuestionController {
 
     private final QuestionService questionService;
@@ -51,7 +54,7 @@ public class QuestionController {
     }
 
     // controller 위에 RequestMapping ("/questions")
-    @PostMapping("/ask")
+    @PostMapping("/questions/ask")
     public ResponseEntity postAskQuestion(
         @Valid @RequestBody AskQuestionDto.Post requestBody) {
 
@@ -60,21 +63,22 @@ public class QuestionController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @GetMapping
+    public ResponseEntity topQuestions(@Positive @RequestParam(defaultValue = "50") int size) {
+        List<TopQuestionDto.Response> topQuestions = questionService.topQuestions(size);
+        return new ResponseEntity<>(topQuestions, HttpStatus.OK);
+    }
 
-//    @GetMapping("/top")
-//    public ResponseEntity topQuestions(@Positive @RequestParam(defaultValue = "50") int size) {
-//        List<Question> questions = questionService.topQuestions(size);
-//        return new ResponseEntity<>(questions.stream().map().collect(Collectors.toList()), HttpStatus.OK);
-//    }
-
-    @GetMapping("/{question-id}")
-    public ResponseEntity getQuestionDetail(@Positive @PathVariable("question-id") long questionId) {
+    @GetMapping("/questions/{question-id}")
+    public ResponseEntity getQuestionDetail(
+        @Positive @PathVariable("question-id") long questionId) {
         QuestionDetailDto questionDetailDto = questionService.findQuestionDetail(questionId);
         return new ResponseEntity<>(questionDetailDto, HttpStatus.OK);
     }
-    @GetMapping
+
+    @GetMapping("/questions")
     public ResponseEntity allQuestions(@Positive @RequestParam int page,
-                                    @Positive @RequestParam int size) {
+        @Positive @RequestParam int size) {
         Page<Question> pageQuestions = questionService.findQuestions(page - 1, size);
         List<Question> questions = pageQuestions.getContent();
 
@@ -84,7 +88,7 @@ public class QuestionController {
             HttpStatus.OK);
     }
 
-    @DeleteMapping("/{question-id}")
+    @DeleteMapping("/questions/{question-id}")
     public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId) {
         questionService.deleteQuestion(questionId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);

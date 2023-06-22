@@ -1,5 +1,6 @@
 package com.bluelight.question.entity;
 
+import com.bluelight.answer.entity.Answer;
 import com.bluelight.audit.Auditable;
 import com.bluelight.member.entity.Member;
 import com.bluelight.tag.entity.Tag;
@@ -47,6 +48,10 @@ public class Question extends Auditable {
     @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
     @JsonIgnore
     private List<QuestionTag> questionTags = new ArrayList<>();
+
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @JsonIgnore
+    private List<Answer> answers = new ArrayList<>();
 
 //    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 //    private List<QuestionVote> questionVotes = new ArrayList<>();

@@ -17,6 +17,6 @@ public class QuestionDetailDto {
     private List<Tag> questionTag;
     private String profileImage;
     private String displayName;
-//    private String createdAt;
+    private String createdAt;
 
 }

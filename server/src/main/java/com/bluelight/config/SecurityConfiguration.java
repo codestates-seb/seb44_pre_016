@@ -27,6 +27,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 public class SecurityConfiguration {
+
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtils authorityUtils;
 
@@ -53,13 +54,15 @@ public class SecurityConfiguration {
             .apply(new CustomFilterConfigurer())
             .and()
             .authorizeHttpRequests(authorize -> authorize
-                .antMatchers(HttpMethod.POST, "/members").permitAll()
-//                .antMatchers(HttpMethod.PATCH, "/members/**").hasRole("USER")
-//                .antMatchers(HttpMethod.GET, "/members/edit/**").hasRole("USER")
-//                .antMatchers(HttpMethod.GET, "/members/**").hasRole("USER")
-//                .antMatchers(HttpMethod.GET, "/members").hasRole("ADMIN")
+//                .antMatchers(HttpMethod.GET, "/").permitAll()
+//                .antMatchers(HttpMethod.POST, "/questions/**").hasRole("USER")
+//                .antMatchers(HttpMethod.GET, "/questions/**").permitAll()
+//                .antMatchers(HttpMethod.DELETE, "/questions/**").hasRole("USER")
+//                .antMatchers(HttpMethod.POST, "/members/**").permitAll()
 //                .antMatchers(HttpMethod.GET, "/members/**").hasAnyRole("USER", "ADMIN")
+//                .antMatchers(HttpMethod.PATCH, "/members/**").hasRole("USER")
 //                .antMatchers(HttpMethod.DELETE, "/members/**").hasRole("USER")
+                .anyRequest().permitAll()
             );
         return http.build();
     }
@@ -73,7 +76,9 @@ public class SecurityConfiguration {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setExposedHeaders(Arrays.asList("*"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
@@ -82,16 +87,22 @@ public class SecurityConfiguration {
 
     public class CustomFilterConfigurer extends
         AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
+
         @Override
         public void configure(HttpSecurity builder) throws Exception {
-            AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
+            AuthenticationManager authenticationManager = builder.getSharedObject(
+                AuthenticationManager.class);
 
-            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);
+            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(
+                authenticationManager, jwtTokenizer);
             jwtAuthenticationFilter.setFilterProcessesUrl("/members/login");
-            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler());
-            jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());
+            jwtAuthenticationFilter.setAuthenticationSuccessHandler(
+                new MemberAuthenticationSuccessHandler());
+            jwtAuthenticationFilter.setAuthenticationFailureHandler(
+                new MemberAuthenticationFailureHandler());
 
-            JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils);
+            JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer,
+                authorityUtils);
 
             builder
                 .addFilter(jwtAuthenticationFilter)

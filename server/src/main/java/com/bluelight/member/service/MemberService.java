@@ -59,4 +59,9 @@ public class MemberService {
             throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
         }
     }
+
+    public void deleteMember(long memberId) {
+        Member findMember = findMember(memberId);
+        memberRepository.delete(findMember);
+    }
 }

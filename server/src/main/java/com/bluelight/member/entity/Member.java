@@ -3,6 +3,7 @@ package com.bluelight.member.entity;
 import com.bluelight.answer.entity.Answer;
 import com.bluelight.audit.Auditable;
 import com.bluelight.question.entity.Question;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -53,12 +54,18 @@ public class Member extends Auditable {
     @OneToOne(mappedBy = "member", cascade = {CascadeType.ALL})
     private Profile profile;
 
-    @OneToMany(mappedBy = "member", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JsonIgnore
     private List<Question> questions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member", cascade = {CascadeType.ALL})
-    private List<Answer> answers = new ArrayList<>();;
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JsonIgnore
+    private List<Answer> answers = new ArrayList<>();
+    ;
 
+
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JsonIgnore
     @PostPersist
     public void createProfile() {
         Profile profile = new Profile();

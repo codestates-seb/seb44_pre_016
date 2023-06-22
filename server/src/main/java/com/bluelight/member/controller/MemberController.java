@@ -92,6 +92,7 @@ public class MemberController {
 
     @DeleteMapping("/edit/{member-id}")
     public ResponseEntity deleteMember(@PathVariable("member-id") @Positive long memberId) {
+        memberService.deleteMember(memberId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
