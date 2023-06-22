@@ -10,7 +10,10 @@ import QuestionDetail from './pages/QuestionDetail/QuestionDetail';
 import NavBar from './components/navbar/NavBar';
 import Footer from './components/footer/Footer';
 import Search from './pages/Search';
+
 import ErrorPage from './pages/error/ErrorPage';
+
+import AskQuestion from './pages/AskQuestion/AskQuestion';
 
 function App() {
   const questionId = 50;
@@ -34,6 +37,7 @@ function App() {
         </Routes>
       </div>
       <QuestionDetail questionId={questionId} />
+      <AskQuestion />
       <Footer />
     </div>
   );

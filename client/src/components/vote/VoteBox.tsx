@@ -51,14 +51,14 @@ function VoteBox({count}:VoteBoxProps) {
 
   return(
     <Container>
-      <RoundBtn>
-      <FontAwesomeIcon icon={faCaretUp} onClick={incrementCount}/>
+      <RoundBtn onClick={incrementCount}>
+      <FontAwesomeIcon icon={faCaretUp} />
       </RoundBtn>
       <Count>
         {vote}
       </Count>
-      <RoundBtn>
-        <FontAwesomeIcon icon={faCaretDown} onClick={decrementCount} />
+      <RoundBtn onClick={decrementCount} >
+        <FontAwesomeIcon icon={faCaretDown} />
       </RoundBtn>
     </Container>
   )

@@ -34,7 +34,7 @@ const formats = [
   'clean',
 ];
 
-const Editor: React.FC<EditorProps> = ({ value, onChange }) => {
+const Editor = ({ value, onChange }:EditorProps) => {
 
   return (
     <div>
