@@ -71,7 +71,8 @@ public class MemberController {
         Member member = memberService.findMember(memberId);
         Profile profile = profileService.findProfile(member);
         MemberProfileDto memberProfileDto = new MemberProfileDto(member, profile);
-        return new ResponseEntity<>(editMapper.memberProflieToEditResponse(memberProfileDto), HttpStatus.OK);
+        return new ResponseEntity<>(editMapper.memberProflieToEditResponse(memberProfileDto),
+            HttpStatus.OK);
     }
 
     @PatchMapping("/edit/{member-id}")
@@ -79,11 +80,14 @@ public class MemberController {
         @PathVariable("member-id") @Positive long memberId,
         @Valid @RequestBody EditDto.Patch requestBody) {
         Member member = memberService.findMember(memberId);
-        Profile profile = profileMapper.profilePatchToProfile(requestBody);
 
-        MemberProfileDto memberProfileDto = new MemberProfileDto(member, profile);
+        MemberProfileDto memberProfileDto =
+            new MemberProfileDto(member, profileMapper.profilePatchToProfile(requestBody));
 
-        return new ResponseEntity<>(editMapper.memberProflieToEditResponse(memberProfileDto), HttpStatus.OK);
+        Profile profile =
+            profileService.updateMemberProfile(memberProfileDto);
+
+        return new ResponseEntity<>(profileMapper.profileToProfileResponse(profile), HttpStatus.OK);
     }
 
     @DeleteMapping("/edit/{member-id}")

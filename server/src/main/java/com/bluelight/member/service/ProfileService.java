@@ -47,6 +47,9 @@ public class ProfileService {
             .ofNullable(memberProfileDto.getProfile().getDisplayName())
             .ifPresent(displayName -> findProfile.setDisplayName(displayName));
         Optional
+            .ofNullable(memberProfileDto.getProfile().getLocation())
+            .ifPresent(location -> findProfile.setLocation(location));
+        Optional
             .ofNullable(memberProfileDto.getProfile().getProfileTitle())
             .ifPresent(profileTitle -> findProfile.setProfileTitle(profileTitle));
         Optional

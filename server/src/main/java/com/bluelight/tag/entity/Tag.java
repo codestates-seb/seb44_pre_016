@@ -1,10 +1,13 @@
 package com.bluelight.tag.entity;
 
 import com.bluelight.question.entity.QuestionTag;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +32,8 @@ public class Tag {
     @Column(nullable = false)
     private String tagContent;
 
-    @OneToMany(mappedBy = "tag")
+    @OneToMany(mappedBy = "tag", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @JsonIgnore
     private List<QuestionTag> questionTags = new ArrayList<>();
 
     public Tag(String tagName, String tagContent) {

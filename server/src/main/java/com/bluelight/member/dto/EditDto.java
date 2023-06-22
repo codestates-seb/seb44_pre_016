@@ -27,6 +27,5 @@ public class EditDto {
         private String location;
         private String profileTitle;
         private String profileContent;
-
     }
 }

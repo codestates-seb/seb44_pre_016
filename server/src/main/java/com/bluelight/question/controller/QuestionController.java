@@ -4,10 +4,16 @@ import com.bluelight.dto.MultiResponseDto;
 import com.bluelight.dto.SingleResponseDto;
 import com.bluelight.question.dto.AskQuestionDto;
 import com.bluelight.question.dto.AskQuestionDto.Response;
+import com.bluelight.question.dto.QuestionDetailDto;
+import com.bluelight.question.dto.ResponseDto;
 import com.bluelight.question.entity.Question;
+import com.bluelight.question.entity.QuestionTag;
 import com.bluelight.question.mapper.QuestionMapper;
 import com.bluelight.question.service.QuestionService;
+import com.bluelight.question.service.QuestionTagService;
+import com.bluelight.tag.entity.Tag;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
@@ -35,9 +41,13 @@ public class QuestionController {
     private final QuestionService questionService;
     private final QuestionMapper mapper;
 
-    public QuestionController(QuestionService questionService, QuestionMapper mapper) {
+    private final QuestionTagService questionTagService;
+
+    public QuestionController(QuestionService questionService, QuestionMapper mapper,
+        QuestionTagService questionTagService) {
         this.questionService = questionService;
         this.mapper = mapper;
+        this.questionTagService = questionTagService;
     }
 
     // controller 위에 RequestMapping ("/questions")
@@ -57,16 +67,11 @@ public class QuestionController {
 //        return new ResponseEntity<>(questions.stream().map().collect(Collectors.toList()), HttpStatus.OK);
 //    }
 
-//    @GetMapping("/questions/{question-id}")
-//    public ResponseEntity getQuestionDetail(@Positive @PathVariable("question-id") long questionId) {
-//        Question question = questionService.findQuestionDetail(questionId);
-//
-//
-//
-//
-//        return new ResponseEntity<>(mapper.questionToResponse(question),
-//            HttpStatus.OK);
-//    }
+    @GetMapping("/{question-id}")
+    public ResponseEntity getQuestionDetail(@Positive @PathVariable("question-id") long questionId) {
+        QuestionDetailDto questionDetailDto = questionService.findQuestionDetail(questionId);
+        return new ResponseEntity<>(questionDetailDto, HttpStatus.OK);
+    }
     @GetMapping
     public ResponseEntity allQuestions(@Positive @RequestParam int page,
                                     @Positive @RequestParam int size) {

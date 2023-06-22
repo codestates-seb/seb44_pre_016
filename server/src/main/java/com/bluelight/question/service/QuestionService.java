@@ -3,9 +3,13 @@ package com.bluelight.question.service;
 import com.bluelight.exception.BusinessLogicException;
 import com.bluelight.exception.ExceptionCode;
 import com.bluelight.member.entity.Member;
+import com.bluelight.member.entity.Profile;
 import com.bluelight.member.service.MemberService;
+import com.bluelight.member.service.ProfileService;
 import com.bluelight.question.dto.AskQuestionDto;
 import com.bluelight.question.dto.AskQuestionDto.TagDto;
+import com.bluelight.question.dto.QuestionDetailDto;
+import com.bluelight.question.dto.QuestionMemberProfileDto;
 import com.bluelight.question.entity.Question;
 import com.bluelight.question.mapper.QuestionMapper;
 import com.bluelight.question.repository.QuestionRepository;
@@ -33,13 +37,19 @@ public class QuestionService {
 
     private final MemberService memberService;
 
+    private final ProfileService profileService;
+
+    private final QuestionTagService questionTagService;
 
     public QuestionService(QuestionRepository questionRepository, TagRepository tagRepository,
-        QuestionMapper mapper, MemberService memberService) {
+        QuestionMapper mapper, MemberService memberService, ProfileService profileService,
+        QuestionTagService questionTagService) {
         this.questionRepository = questionRepository;
         this.tagRepository = tagRepository;
         this.mapper = mapper;
         this.memberService = memberService;
+        this.profileService = profileService;
+        this.questionTagService = questionTagService;
     }
 
     @Transactional
@@ -77,9 +87,13 @@ public class QuestionService {
     }
 
     @Transactional(readOnly = true)
-    public Question findQuestionDetail(long questionId) {
+    public QuestionDetailDto findQuestionDetail(long questionId) {
         Question findQuestion = findVerifiedQuestionByQuery(questionId);
-        return findQuestion;
+        Member findMember = memberService.findMember(findQuestion.getMember().getMemberId());
+        Profile findProfile = profileService.findProfile(findMember);
+        List<Tag> findTagList = questionTagService.getTagsByQuestionId(questionId);
+
+        return mapper.questionToResponse(new QuestionMemberProfileDto(findQuestion,findMember,findProfile,findTagList));
     }
 
     public Page<Question> findQuestions(int page, int size) {
@@ -110,6 +124,20 @@ public class QuestionService {
 //        // 쿼리로 createdAt 최신순(내림차순)으로 size(50)개 가져온 후 리턴
 //        return questionRepository.findByCreatedAtOrderByDesc();
 //    }
+
+    @Transactional(readOnly = true)
+    public Question findQuestion(long questionId) {
+        return findVerifiedQuestion(questionId);
+    }
+
+    @Transactional(readOnly = true)
+    public Question findVerifiedQuestion(long questionId) {
+        Optional<Question> optionalQuestion = questionRepository.findById(questionId);
+        Question findQuestion = optionalQuestion.orElseThrow(
+            () -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        return findQuestion;
+    }
 }
 
 
