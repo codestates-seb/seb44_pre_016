@@ -83,9 +83,7 @@ function QuestionDetail({ questionId }: QuestionDetailProps) {
               <Title>{data.title}</Title>
               <p className='text-sm'>{data.createdAt}</p>
             </TitleContainer>
-            <Button customStyle='h-5 w-36 p-[1px]'>
-              ask question
-            </Button>
+            <Button customStyle='w-min h-8'>ask&nbsp;question</Button>
           </div>
           <Line />
           <div className='flex w-full mb-10'>
@@ -123,9 +121,9 @@ function QuestionDetail({ questionId }: QuestionDetailProps) {
           <div className='font-medium text-xl mb-5'>Your Answer</div>
           <Editor value={answerContent}onChange={handleContentChange}/>
           <Button 
-            customStyle='h-10 mt-5' 
+            customStyle='w-min h-8 mt-5' 
             onClick={postAnswer}>
-              Post Your Answer
+              Post&nbsp;Your&nbsp;Answer
           </Button>
         </>
       ) : (

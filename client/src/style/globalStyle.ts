@@ -83,4 +83,7 @@ html, body, div, span, applet, object, iframe,
     align-items: center;
     cursor: pointer;
   }
+  input{
+    outline: none;
+  }
 `;
