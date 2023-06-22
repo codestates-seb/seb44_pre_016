@@ -14,6 +14,7 @@ import Search from './pages/Search';
 import ErrorPage from './pages/error/ErrorPage';
 
 import AskQuestion from './pages/AskQuestion/AskQuestion';
+import Mypage from './pages/mypage/Mypage';
 
 function App() {
   const questionId = 50;
@@ -34,6 +35,7 @@ function App() {
           <Route path="/member/signup" element={<SignUpPage />} />
           <Route path="/search" element={<Search />} />
           <Route path="/error" element={<ErrorPage />} />
+          <Route path="/mypage" element={<Mypage />} />
         </Routes>
       </div>
       <QuestionDetail questionId={questionId} />

@@ -81,26 +81,6 @@ function SignupForm() {
       });
   };
   return (
-    //   const Form = styled.form`
-    //   width: 100%;
-    //   display: flex;
-    //   flex-direction: column;
-    //   padding: 24px;
-    //   box-shadow: 0 10px 24px hsla(0, 0%, 0%, 0.05),
-    //     0 20px 48px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.1);
-    //   > input {
-    //     margin: 2px 0;
-    //     padding: 7px 9px;
-    //     border: 1px solid rgb(186, 191, 196);
-    //     border-radius: 3px;
-    //   }
-    //   > label {
-    //     text-transform: capitalize;
-    //     font-weight: bold;
-    //     margin-bottom: 5px;
-    //   }
-    // `;
-
     <div>
       <form className="w-[100%] flex flex-col p-[24px] shadow shadow-md shadow-lg shadow-lg">
         {/* 닉네임인풋 */}
