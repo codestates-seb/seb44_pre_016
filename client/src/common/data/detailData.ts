@@ -6,11 +6,18 @@ export interface AnswerListItem {
   createdAt: string;
 }
 
+export interface Tag {
+  tagId: number;
+  tagName: string;
+  tagContent: string;
+}
+
 export interface DummyData {
   questionId: number;
   title: string;
   questionVoteCount: number;
   content: string;
+  tags: Tag[];
   answerList: AnswerListItem[];
   profileImage:string;
   nickName: string;
@@ -23,6 +30,20 @@ export const detailData: DummyData[] = [
     "title": "How to design a good JWT authentication filter",
     "questionVoteCount": 9,
     "content": "질문 내용입니다~~ 모르겠어잉",
+    "tags": [
+      {
+          "tagId": 1,
+          "tagName": "java",
+          "tagContent": "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers."
+
+      },
+      {
+          "tagId":3,
+          "tagName": "spring",
+          "tagContent": "spring blah blah"
+          
+      }
+    ],
     "answerList": [
       {
         "nickName": "kimcoding",
@@ -41,6 +62,20 @@ export const detailData: DummyData[] = [
     "title": "merge sort program in java",
     "questionVoteCount": 30,
     "content": "I do not know everything",
+    "tags": [
+      {
+          "tagId": 1,
+          "tagName": "java",
+          "tagContent": "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers."
+
+      },
+      {
+          "tagId":3,
+          "tagName": "spring",
+          "tagContent": "spring blah blah"
+          
+      }
+    ],
     "answerList": [
       {
         "nickName": "kimcoding",
@@ -66,6 +101,14 @@ export const detailData: DummyData[] = [
     "title": "배고파요.",
     "questionVoteCount": 30,
     "content": "배고픈데 저메추해주세요",
+    "tags": [
+      {
+          "tagId": 1,
+          "tagName": "java",
+          "tagContent": "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers."
+
+      }
+    ],
     "answerList": [],
     "profileImage": "/images/profile.jpg",
     "nickName": "dumbpotato24",

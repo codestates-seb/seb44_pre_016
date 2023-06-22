@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -56,8 +57,6 @@ function AskQuestion() {
     }
   ];
 
-  const allTagNameList = allTagList.map((tag) => tag.tagName)
-
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
@@ -78,7 +77,6 @@ function AskQuestion() {
         );
       setSimilarTags(foundTags);
     }
-    console.log(similarTags);
   }
 
   const handleTagKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
