@@ -99,7 +99,7 @@ function SignupForm() {
     // },
 
     fetch(
-      'https://175f-124-50-73-190.jp.ngrok.io/stackoverflow/members/signup',
+      'https://95a4-124-50-73-190.ngrok-free.app/bluelight/members/signup',
       {
         method: 'POST',
         headers: {
