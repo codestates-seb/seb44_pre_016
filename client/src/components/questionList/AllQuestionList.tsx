@@ -14,6 +14,7 @@ function AllQuestionList() {
   const paginationedData = getPaginatedData(currentPage, pageSize);
 
   useEffect(() => {
+    setCurrentPage(1);
     dispatch(totalQuestionCntSet(paginationedData.pageInfo.totalElements));
   }, [pageSize]);
 

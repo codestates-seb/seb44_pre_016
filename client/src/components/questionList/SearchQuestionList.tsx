@@ -22,7 +22,7 @@ function SearchQuestionList() {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchData]);
+  }, [searchData, pageSize]);
 
   useEffect(() => {
     dispatch(totalQuestionCntSet(paginationedData.pageInfo.totalElements));
