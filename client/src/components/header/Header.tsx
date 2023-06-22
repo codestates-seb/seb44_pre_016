@@ -14,7 +14,7 @@ function Header() {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
 
-  const dropdownHandler = (): void => {
+  const Handledropdown = (): void => {
     setIsOpen(!isOpen);
   };
 
@@ -54,7 +54,7 @@ function Header() {
           placeholder="Search..."
           ref={inputRef}
           value={inputValue}
-          onClick={dropdownHandler}
+          onClick={Handledropdown}
           onChange={e => setInputValue(e.target.value)}
           onKeyUp={handleEnter}
         ></input>
@@ -62,7 +62,7 @@ function Header() {
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </span>
         {isOpen ? (
-          <Dropdown dropdownHandler={dropdownHandler} inputRef={inputRef} />
+          <Dropdown Handledropdown={Handledropdown} inputRef={inputRef} />
         ) : null}
       </div>
       <Link to="/login" className="flex align-middle ">

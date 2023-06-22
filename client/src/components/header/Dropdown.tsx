@@ -48,27 +48,27 @@ const DropUl = styled.ul`
   }
 `;
 interface DropdownProps {
-  dropdownHandler: () => void;
+  Handledropdown: () => void;
   inputRef: React.RefObject<HTMLInputElement>;
 }
 
-function Dropdown({ dropdownHandler, inputRef }: DropdownProps) {
+function Dropdown({ Handledropdown, inputRef }: DropdownProps) {
   const modalRef = useRef(null);
 
   useEffect(() => {
-    const handler = e => {
+    const handledrop = e => {
       if (
         !modalRef.current.contains(e.target) &&
         !inputRef.current.contains(e.target)
       ) {
-        dropdownHandler();
+        Handledropdown();
       }
     };
 
-    document.addEventListener('mousedown', handler);
+    document.addEventListener('mousedown', handledrop);
 
     return () => {
-      document.removeEventListener('mousedown', handler);
+      document.removeEventListener('mousedown', handledrop);
     };
   });
   return (
