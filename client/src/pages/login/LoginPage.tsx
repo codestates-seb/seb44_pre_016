@@ -79,7 +79,7 @@ function Login() {
   };
 
   return (
-    <div className="w-[100%] h-[800px] flex justify-center items-center  ">
+    <div className="w-[100%] h-[800px] flex justify-center items-center bg-[#f1f2f3] ">
       <div className="w-[250px]  ">
         {/* 아이콘 */}
         <div className="ta-center fs-title mx-auto m-4 flex justify-center">
@@ -133,7 +133,7 @@ function Login() {
           Login in with Google{' '}
         </button>
         {/* 폼 */}
-        <form className="w-[100%]  flex flex-col p-[24px] shadow shadow-md shadow-lg shadow-lg border border-solid border-gray-200  ">
+        <form className="w-[100%]  flex flex-col p-[24px] bg-white shadow shadow-md shadow-lg shadow-lg border border-solid border-gray-200  ">
           {/* 이메일 인풋 */}
           <label htmlFor="email" className="capitalize font-bold text-[13px]">
             email

@@ -4,7 +4,7 @@ import SignupForm from './SignupForm';
 
 function SignUpPage() {
   return (
-    <div className="w-[100%] h-[800px] flex items-center justify-center gap-10">
+    <div className="w-[100%] h-[800px] flex items-center justify-center gap-10 bg-[#f1f2f3]">
       <div className="w-[420px] ">
         <h2 className="text-[27px] mb-5">Join the Stack Overflow community</h2>
         <ul>

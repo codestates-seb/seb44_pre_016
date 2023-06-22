@@ -82,7 +82,7 @@ function SignupForm() {
   };
   return (
     <div>
-      <form className="w-[100%] flex flex-col p-[24px] shadow shadow-md shadow-lg shadow-lg">
+      <form className="w-[100%] flex flex-col p-[24px] shadow shadow-md shadow-lg shadow-lg bg-white">
         {/* 닉네임인풋 */}
         <label htmlFor="name" className="capitalize font-bold text-[13px]">
           Display name
