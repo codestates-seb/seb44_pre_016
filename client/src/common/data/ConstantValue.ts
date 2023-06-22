@@ -5,4 +5,5 @@ export const ONE_DAY_MILLISECOND = 86400000;
 export const QUESTION_PAGE_TITLE = {
   Main: 'Top Questions',
   Questions: 'All Questions',
+  Search: 'Search Results',
 };

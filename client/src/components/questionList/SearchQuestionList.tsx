@@ -1,24 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import QuestionItem from '../questionItem/QuestionItem';
 import { QuestionContainer } from './QuestionList.styled';
-import { getPaginatedData } from '../../common/data/test';
+import { getSearchPaginatedData } from '../../common/data/test';
 import { totalQuestionCntSet } from '../../redux/paginationReducer';
 import Pagination from '../pagination/Pagination';
 import SizePagination from '../pagination/SizePagination';
+import { RootState } from '../../redux/store';
 
-function AllQuestionList() {
+function SearchQuestionList() {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(15);
-  const paginationedData = getPaginatedData(currentPage, pageSize);
+  const searchData = useSelector((state: RootState) => state.SearchReducer);
+  const paginationedData = getSearchPaginatedData(
+    currentPage,
+    pageSize,
+    searchData.types,
+    searchData.keyword,
+  );
 
   useEffect(() => {
     setCurrentPage(1);
-    dispatch(totalQuestionCntSet(paginationedData.pageInfo.totalElements));
-  }, [pageSize]);
+  }, [searchData, pageSize]);
 
-  useEffect(() => window.scroll(0, 0));
+  useEffect(() => {
+    dispatch(totalQuestionCntSet(paginationedData.pageInfo.totalElements));
+  }, [pageSize, searchData]);
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  });
 
   return (
     <>
@@ -36,9 +48,11 @@ function AllQuestionList() {
         setCurrentPage={setCurrentPage}
         pageInfo={paginationedData.pageInfo}
       />
-      <SizePagination setPageSize={setPageSize} />
+      {paginationedData.pageInfo.totalElements > 15 && (
+        <SizePagination setPageSize={setPageSize} />
+      )}
     </>
   );
 }
 
-export default AllQuestionList;
+export default SearchQuestionList;

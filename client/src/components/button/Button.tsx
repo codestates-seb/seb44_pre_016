@@ -5,7 +5,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   customStyle?: string;
 }
 
-const Button = ({ children, customStyle, ...attributes }: ButtonProps) => {
+function Button({ children, customStyle, ...attributes }: ButtonProps) {
   const buttonStyles = `
   text-[white] bg-[#4393F7] rounded-[6px]
   inline-flex 
@@ -15,7 +15,6 @@ const Button = ({ children, customStyle, ...attributes }: ButtonProps) => {
   border-[#4393F7]
  text-[13px]
   p-[7px]
-
   hover:bg-[#0064C2]
   active:bg-[#2960B7]
   ${customStyle}`; // 커스텀 스타일을 포함한 클래스
@@ -25,6 +24,6 @@ const Button = ({ children, customStyle, ...attributes }: ButtonProps) => {
       {children}
     </button>
   );
-};
+}
 
 export default Button;

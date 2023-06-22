@@ -3,7 +3,7 @@ import tw from 'tailwind-styled-components';
 import styled, { css } from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Button from '../button/Button';
+import Button from '../../components/button/Button';
 
 const Container = styled.div`
   width: 100%;
@@ -53,7 +53,7 @@ const Input = styled.input`
   ${commonInput}
 `;
 
-const Login = () => {
+function Login() {
   const initialInfo: {
     email: string;
     password: string;
@@ -149,6 +149,6 @@ const Login = () => {
       </div>
     </Container>
   );
-};
+}
 
 export default Login;

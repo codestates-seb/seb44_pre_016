@@ -13,6 +13,8 @@ const ACTIVE_TW_CLASS = 'bg-[#F1F2F3] border-r-[3px] border-orange-point';
 function NavBar() {
   const matchHome = useMatch('/');
   const matchQuestions = useMatch('/questions');
+  const matchSearch = useMatch('/search');
+  const questionsOrSearch = matchQuestions || matchSearch;
 
   const renderNavItem = (
     match: ReturnType<typeof useMatch>,
@@ -40,10 +42,10 @@ function NavBar() {
             <ul>
               <GrayConstText>PUBLIC</GrayConstText>
               {renderNavItem(
-                matchQuestions,
+                questionsOrSearch,
                 <GrayLinkText
                   className={`leading-5 flex -mt-1 p-2 pr-1.5 ${
-                    matchQuestions && 'font-bold text-[#0C0D0E]'
+                    questionsOrSearch && 'font-bold text-[#0C0D0E]'
                   }`}
                   to="/questions"
                 >
