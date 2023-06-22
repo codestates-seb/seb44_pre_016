@@ -52,7 +52,7 @@ interface DropdownProps {
   inputRef: React.RefObject<HTMLInputElement>;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ dropdownHandler, inputRef }) => {
+function Dropdown({ dropdownHandler, inputRef }: DropdownProps) {
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -84,6 +84,6 @@ const Dropdown: React.FC<DropdownProps> = ({ dropdownHandler, inputRef }) => {
       </DropUl>
     </Container>
   );
-};
+}
 
 export default Dropdown;
