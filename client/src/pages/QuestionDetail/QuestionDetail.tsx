@@ -8,6 +8,8 @@ import VoteBox from '../../components/vote/VoteBox';
 
 import "highlight.js/styles/github.css";
 
+import { QuestionTagList, QuestionTagName } from '../../components/questionItem/QuestionItem.styled'
+
 import {
   AllContainer,
   TitleContainer,
@@ -90,6 +92,13 @@ function QuestionDetail({ questionId }: QuestionDetailProps) {
             <VoteBox count={data.questionVoteCount}/>
             <ContentContainer>
               <div className='flex items-start min-h-[150px]'>{data.content}</div>
+              <ul>
+                {data.tags.map(tag => (
+                  <QuestionTagList key={tag.tagId}>
+                    <QuestionTagName>{tag.tagName}</QuestionTagName>
+                  </QuestionTagList>
+                ))}
+              </ul>
               <Foot>
                 <TextBtn>delete</TextBtn>
                 <UserBox>
