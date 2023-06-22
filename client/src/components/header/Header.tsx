@@ -14,8 +14,7 @@ function Header() {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
 
-  const token = true;
-  // = localStorage.getItem('accessToken');
+  const token = localStorage.getItem('accessToken');
   const memberId = localStorage.getItem('memberId');
   const displayname = '혜수님짱멋있어';
   // localStorage.getItem('displayName');
