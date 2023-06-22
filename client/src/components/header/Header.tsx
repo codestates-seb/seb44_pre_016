@@ -66,7 +66,7 @@ function Header() {
         ) : null}
       </div>
       <Link to="/login" className="flex align-middle ">
-        <Button customStyle="bg-[#d8deff] border-[#83A6C4] text-[#234669] hover:bg-[#B9D2E8] active:bg-[#A6C4DF] mr-2 ">
+        <Button customStyle="bg-[#d8e5ff] border-[#83A6C4] text-[#2e5c8a] hover:bg-[#B9D2E8] active:bg-[#A6C4DF] mr-2 ">
           log in
         </Button>
       </Link>
