@@ -6,7 +6,6 @@ import Button from '../../components/button/Button';
 
 const Form = styled.form`
   width: 100%;
-  /* border:1px solid red; */
   display: flex;
   flex-direction: column;
   padding: 24px;
@@ -37,7 +36,6 @@ const Input = styled.input`
   border-radius: 3px;
   outline: none;
   &:focus {
-    box-shadow: 0px 0px 0px 4px black;
     border-color: blue;
   }
 `;
@@ -53,6 +51,7 @@ function SignupForm() {
   });
   const [isidValid, setisidValid] = useState(false); // 아이디 유효한지
   const [ispasswordValid, setisPasswordValid] = useState(false); // 패스워드 유효한지
+  const [signupMSG, setSignupMSG] = useState('');
   const [emailMSG, setEmailMSG] = useState(''); // 이메일 주소값
   const [passwordMSG, setPasswordMSG] = useState(''); // 패스워드 값
 
@@ -79,7 +78,13 @@ function SignupForm() {
       ? setisPasswordValid(true)
       : setisPasswordValid(false);
   };
-  const handleSignUp = e => {
+  const handleSignUp: React.MouseEventHandler = async (e: React.MouseEvent) => {
+    // 요청보내기 전에 유효성검사
+    if (!isidValid || !ispasswordValid) {
+      setSignupMSG('이메일또는 패스워드가 유효하지 않습니다.');
+      console.log(signupMSG);
+      return;
+    }
     e.preventDefault();
 
     fetch(
@@ -109,9 +114,13 @@ function SignupForm() {
         <label htmlFor="name">Display name</label>
         <Input id="name" type="text" onChange={handleNameValue}></Input>
         <label htmlFor="id">email</label>
-        <Input id="email" type="email" onChange={handleEmailValue}></Input>
+        <input id="email" type="email" onChange={handleEmailValue}></input>
         <label htmlFor="password">password</label>
-        <input type="text" id="password" onChange={handlePasswordValue}></input>
+        <input
+          type="password"
+          id="password"
+          onChange={handlePasswordValue}
+        ></input>
         <Button customStyle="mt-5 h-[40px]" onClick={handleSignUp}>
           {/* */}
           sign up
