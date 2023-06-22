@@ -50,7 +50,7 @@ function SignupForm() {
   // const isLogin = useSelector((state: RootState) => state.userInfos); //
   const dispatch = useDispatch();
   const [signUpInfo, setSignUpInfo] = useState({
-    nickname: '',
+    name: '',
     email: '',
     password: '',
   });
@@ -61,7 +61,7 @@ function SignupForm() {
 
   // 네임 input 작성할때마다 signUpInfo 안에 네임 값을 넣는 함수
   const handleNameValue = (e: ChangeEvent<HTMLInputElement>) => {
-    setSignUpInfo({ ...signUpInfo, nickname: e.target.value });
+    setSignUpInfo({ ...signUpInfo, name: e.target.value });
   };
 
   // email 정규식과 패스워드 정규식
@@ -88,13 +88,30 @@ function SignupForm() {
 
     // command . 자동가져오기
     // await axios.post('/users/signup', signUpInfo).then(() => {});
+    // ,
+    //     headers:{
+    //       key : ngrok-skip-browser-warning
+    //       value : true
+    //     } { Authorization: null },
+    // {
+    //   'Content-Type': 'application/json',
+    //   'ngrok-skip-browser-warning': 'true',     Authorization: null,
+    // },
 
-    fetch('/users/signup', {
-      method: 'POST',
-      body: JSON.stringify(signUpInfo),
-    })
+    fetch(
+      'https://175f-124-50-73-190.jp.ngrok.io/stackoverflow/members/signup',
+      {
+        method: 'POST',
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+          'Content-Type': 'application/json', // json fetch시
+        },
+        body: JSON.stringify(signUpInfo),
+      },
+    )
       .then(res => res.json())
-      .then(data => console.log(data));
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
   };
   return (
     <div>

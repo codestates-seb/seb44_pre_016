@@ -6,11 +6,11 @@ import { Provider } from 'react-redux';
 import App from './App';
 import { GlobalStyle } from './style/globalStyle';
 import store from './redux/store';
-import worker from './mocks/worker';
+// import worker from './mocks/worker';
 
-if (process.env.NODE_ENV === 'development') {
-  worker.start();
-}
+// if (process.env.NODE_ENV === 'development') {
+//   worker.start();
+// }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

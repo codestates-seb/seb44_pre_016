@@ -17,7 +17,7 @@ type DahamType = typeof typeProvider;
 const dahamHandlers: DahamType = [];
 
 const giljongHandlers: DahamType = [
-  rest.post('/users/signup', async (req, res, ctx) => {
+  rest.post('/member/signup', async (req, res, ctx) => {
     const newUser = await req.json();
     const validation = users.findIndex(user => user.email === newUser.email);
 
