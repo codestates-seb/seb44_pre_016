@@ -21,10 +21,16 @@ function SearchQuestionList() {
   );
 
   useEffect(() => {
+    setCurrentPage(1);
+  }, [searchData]);
+
+  useEffect(() => {
     dispatch(totalQuestionCntSet(paginationedData.pageInfo.totalElements));
   }, [pageSize, searchData]);
 
-  useEffect(() => window.scroll(0, 0));
+  useEffect(() => {
+    window.scroll(0, 0);
+  });
 
   return (
     <>
@@ -42,7 +48,9 @@ function SearchQuestionList() {
         setCurrentPage={setCurrentPage}
         pageInfo={paginationedData.pageInfo}
       />
-      <SizePagination setPageSize={setPageSize} />
+      {paginationedData.pageInfo.totalElements > 15 && (
+        <SizePagination setPageSize={setPageSize} />
+      )}
     </>
   );
 }
