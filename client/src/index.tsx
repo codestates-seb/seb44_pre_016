@@ -6,17 +6,20 @@ import { Provider } from 'react-redux';
 import App from './App';
 import { GlobalStyle } from './style/globalStyle';
 import store from './redux/store';
+// import worker from './mocks/worker';
+
+// if (process.env.NODE_ENV === 'development') {
+//   worker.start();
+// }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
   <BrowserRouter>
     <Provider store={store}>
       <GlobalStyle />
       <App />
     </Provider>
   </BrowserRouter>,
-
 );
 
 // If you want to start measuring performance in your app, pass a function

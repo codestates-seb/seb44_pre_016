@@ -4,8 +4,8 @@ import { Routes, Route, useLocation } from 'react-router';
 import Header from './components/header/Header';
 import Main from './pages/Main';
 import Questions from './pages/Questions';
-import Login from './components/login/Login';
-import SignUp from './components/signUp/SignUp';
+import LoginPage from './pages/login/LoginPage';
+import SignUpPage from './pages/signUp/SignUpPage';
 import QuestionDetail from './pages/QuestionDetail/QuestionDetail';
 import NavBar from './components/navbar/NavBar';
 import Footer from './components/footer/Footer';
@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div className="flex max-w-[1264px] mx-auto w-full">
+      <div className="flex max-w-[1264px] mx-auto  w-full">
         {!(
           location.pathname.includes('/login') ||
           location.pathname.includes('/member/signup')
@@ -26,9 +26,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/questions" element={<Questions />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/member/signup" element={<SignUpPage />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/member/signup" element={<SignUp />} />
         </Routes>
       </div>
       <QuestionDetail questionId={questionId} />

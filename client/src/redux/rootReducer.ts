@@ -1,9 +1,12 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import PaginationReducer from './paginationReducer';
+
+import userInfoReducer from './userInfoReducer';
 import SearchReducer from './searchReducer';
 
 const reducer = combineReducers({
   PaginationReducer,
+  userInfoReducer,
   SearchReducer,
 });
 
