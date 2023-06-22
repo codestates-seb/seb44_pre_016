@@ -1,29 +1,8 @@
 import React, { useState } from 'react';
 import tw from 'tailwind-styled-components';
-import styled, { css } from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/button/Button';
-
-const commonInput = css`
-  width: 100%;
-  margin-top: 5px;
-  padding: 8px 9px;
-  background-color: #fff;
-  color: hsl(210, 8%, 5%);
-  font-size: 13px;
-  border: 1px solid black;
-  border-radius: 3px;
-  outline: none;
-  &:focus {
-    box-shadow: 0px 0px 0px 4px black;
-    border-color: blue;
-  }
-`;
-
-const Input = styled.input`
-  ${commonInput}
-`;
 
 function Login() {
   const initialInfo: {
@@ -98,31 +77,14 @@ function Login() {
       }
     }
   };
-  const Form = styled.form`
-    width: 100%;
-    /* border:1px solid red; */
-    display: flex;
-    flex-direction: column;
-    padding: 24px;
-    box-shadow: 0 10px 24px hsla(0, 0%, 0%, 0.05),
-      0 20px 48px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.1);
-    > input {
-      margin: 2px 0;
-      padding: 7px 9px;
-      border: 1px solid rgb(186, 191, 196);
-      border-radius: 3px;
-    }
-    > label {
-      text-transform: capitalize;
-      font-weight: bold;
-    }
-  `;
 
   return (
     <div className="w-[100%] flex justify-center items-center">
       <div className="w-[288px]">
         <form className="w-[100%] flex flex-col p-[24px] shadow shadow-md shadow-lg shadow-sm border border-solid border-gray-200  ">
-          <label htmlFor="id">email</label>
+          <label htmlFor="id" className="capitalize font-bold ">
+            email
+          </label>
           <input
             className="my-2 py-2 border border-solid border-gray-200 rounded-md"
             id="email"
@@ -132,7 +94,9 @@ function Login() {
               loginInfoSet({ ...loginInfo, email: event.target.value })
             }
           ></input>
-          <label htmlFor="password">password</label>
+          <label htmlFor="password" className="capitalize font-bold ">
+            password
+          </label>
           <input
             type="text"
             id="password"

@@ -73,7 +73,6 @@ function Header() {
       <Link to="/member/signup">
         <Button>sign up</Button>
       </Link>
-      {/* </div> */}
     </header>
   );
 }
