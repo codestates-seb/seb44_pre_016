@@ -10,6 +10,7 @@ import QuestionDetail from './pages/QuestionDetail/QuestionDetail';
 import NavBar from './components/navbar/NavBar';
 import Footer from './components/footer/Footer';
 import Search from './pages/Search';
+import ErrorPage from './pages/error/ErrorPage';
 
 function App() {
   const questionId = 50;
@@ -29,6 +30,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/member/signup" element={<SignUpPage />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/error" element={<ErrorPage />} />
         </Routes>
       </div>
       <QuestionDetail questionId={questionId} />

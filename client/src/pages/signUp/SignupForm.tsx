@@ -1,11 +1,8 @@
 import React, { ChangeEvent, useState } from 'react';
-import { displayName } from 'react-quill';
-import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import Button from '../../components/button/Button';
-import { RootState } from '../../redux/store';
 
 const Form = styled.form`
   width: 100%;
@@ -84,19 +81,6 @@ function SignupForm() {
   };
   const handleSignUp = e => {
     e.preventDefault();
-    console.log('작동해!!');
-
-    // command . 자동가져오기
-    // await axios.post('/users/signup', signUpInfo).then(() => {});
-    // ,
-    //     headers:{
-    //       key : ngrok-skip-browser-warning
-    //       value : true
-    //     } { Authorization: null },
-    // {
-    //   'Content-Type': 'application/json',
-    //   'ngrok-skip-browser-warning': 'true',     Authorization: null,
-    // },
 
     fetch(
       'https://95a4-124-50-73-190.ngrok-free.app/bluelight/members/signup',
@@ -110,8 +94,14 @@ function SignupForm() {
       },
     )
       .then(res => res.json())
-      .then(data => console.log(data))
-      .catch(err => console.log(err));
+      .then(data => {
+        console.log(data);
+        navigation('/login');
+      })
+      .catch(err => {
+        console.log(err);
+        navigation('/error');
+      });
   };
   return (
     <div>
