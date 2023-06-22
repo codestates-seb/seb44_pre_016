@@ -100,11 +100,20 @@ function SignupForm() {
     )
       .then(res => res.json())
       .then(data => {
-        console.log(data);
-        navigation('/login');
+        if (data.ok) {
+          // 응답이 성공적인 경우
+          console.log('요청이 성공했습니다.');
+          console.log(data);
+          navigation('/login');
+          // 여기에서 추가적인 처리를 수행할 수 있습니다.
+        } else {
+          // 응답이 실패한 경우
+          console.log('요청이 실패했습니다.');
+          // 실패에 대한 처리를 수행할 수 있습니다.
+        }
       })
-      .catch(err => {
-        console.log(err);
+      .catch(error => {
+        console.log('에러', error);
         navigation('/error');
       });
   };
