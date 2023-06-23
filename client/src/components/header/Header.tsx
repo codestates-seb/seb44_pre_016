@@ -68,9 +68,11 @@ function Header() {
       navigate('/search');
     }
   };
-  // const handlemypage = e => {
-  //   navigate('/mypage');
-  // };
+  const handlemypage = (event: React.MouseEvent<HTMLButtonElement>) => {
+    navigate('/mypage', {
+      state: 1,
+    });
+  };
 
   return (
     <header className="sticky top-0 z-10 bg-white flex justify-center items-center w-full h-[50px] border-solid border-t-2 border-b border-t-orange-500 border-b-gray-300">
@@ -103,14 +105,17 @@ function Header() {
       </div>
       {token ? (
         <div className=" flex flex-row items-center">
-          <div className=" flex flex-row items-center hover:bg-gray-300">
+          <button
+            onClick={handlemypage}
+            className=" flex flex-row items-center hover:bg-gray-300"
+          >
             <img
               src="/images/profile.jpg"
               alt="프로필"
               className="w-[20px] h-[20px] rounded-lg m-2"
             />
             <p className="text-[10px]">{displayname}</p>
-          </div>
+          </button>
           <Link to="/logout">
             <img
               src="/images/mypageicon.png"
