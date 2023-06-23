@@ -14,7 +14,12 @@ function Header() {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
 
-  const dropdownHandler = (): void => {
+  const token = localStorage.getItem('accessToken');
+  const memberId = localStorage.getItem('memberId');
+  const displayname = '혜수님짱멋있어';
+  // localStorage.getItem('displayName');
+
+  const Handledropdown = (): void => {
     setIsOpen(!isOpen);
   };
 
@@ -54,7 +59,7 @@ function Header() {
           placeholder="Search..."
           ref={inputRef}
           value={inputValue}
-          onClick={dropdownHandler}
+          onClick={Handledropdown}
           onChange={e => setInputValue(e.target.value)}
           onKeyUp={handleEnter}
         ></input>
@@ -62,18 +67,37 @@ function Header() {
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </span>
         {isOpen ? (
-          <Dropdown dropdownHandler={dropdownHandler} inputRef={inputRef} />
+          <Dropdown Handledropdown={Handledropdown} inputRef={inputRef} />
         ) : null}
       </div>
-      <Link to="/login" className="flex align-middle ">
-        <Button customStyle="bg-[#d8deff] border-[#83A6C4] text-[#162d44] hover:bg-[#B9D2E8] active:bg-[#A6C4DF] mr-2 ">
-          log in
-        </Button>
-      </Link>
-      <Link to="/member/signup">
-        <Button>sign up</Button>
-      </Link>
-      {/* </div> */}
+      {token ? (
+        <div className=" flex flex-row items-center">
+          <img
+            src="/images/profile.jpg"
+            alt="프로필"
+            className="w-[20px] h-[20px] rounded-lg m-2"
+          />
+          <p className="text-[10px]">{displayname}</p>
+          <Link to="/mypage">
+            <img
+              src="/images/mypageicon.png"
+              alt="마이페이지아이콘"
+              className="w-[40px] h-[40px]"
+            />
+          </Link>
+        </div>
+      ) : (
+        <>
+          <Link to="/login" className="flex align-middle ">
+            <Button customStyle="bg-[#d8e5ff] border-[#83A6C4] text-[#2e5c8a] hover:bg-[#B9D2E8] active:bg-[#A6C4DF] mr-2 ">
+              log in
+            </Button>
+          </Link>
+          <Link to="/member/signup">
+            <Button>sign up</Button>
+          </Link>
+        </>
+      )}
     </header>
   );
 }
