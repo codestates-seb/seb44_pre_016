@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Routes, Route, useLocation } from 'react-router';
+import { useSelector } from 'react-redux';
 import Header from './components/header/Header';
 import Main from './pages/Main';
 import Questions from './pages/Questions';
@@ -10,11 +11,11 @@ import QuestionDetail from './pages/QuestionDetail/QuestionDetail';
 import NavBar from './components/navbar/NavBar';
 import Footer from './components/footer/Footer';
 import Search from './pages/Search';
-
 import ErrorPage from './pages/error/ErrorPage';
 
 import AskQuestion from './pages/AskQuestion/AskQuestion';
 import Mypage from './pages/mypage/Mypage';
+import { RootState } from './redux/store';
 
 function App() {
   const location = useLocation();
@@ -34,7 +35,7 @@ function App() {
           <Route path="/member/signup" element={<SignUpPage />} />
           <Route path="/search" element={<Search />} />
           <Route path="/error" element={<ErrorPage />} />
-          <Route path="/mypage/:memberId" element={<Mypage />} />
+          <Route path={`/mypage/`} element={<Mypage />} />
 
           <Route path="/questions/:questionId" element={<QuestionDetail />} />
           <Route path="/questions/ask" element={<AskQuestion />} />
