@@ -36,7 +36,10 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/error" element={<ErrorPage />} />
           <Route path="/mypage" element={<Mypage />} />
-          <Route path="/question" element={<QuestionDetail questionId={questionId}/>} />
+          <Route
+            path="/question"
+            element={<QuestionDetail questionId={questionId} />}
+          />
           <Route path="/questions/ask" element={<AskQuestion />} />
         </Routes>
       </div>

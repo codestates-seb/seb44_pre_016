@@ -3,6 +3,9 @@ import tw from 'tailwind-styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/button/Button';
+// 로그인가능한 아이디
+// sss@gmail.com
+// asdasd72
 
 const initialInfo: {
   email: string;
@@ -50,17 +53,14 @@ function Login() {
       console.log(loginMSG);
       return;
     }
-    fetch(
-      ' https://f122-124-50-73-190.ngrok-free.app/bluelight/members/login',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': 'true',
-        },
-        body: JSON.stringify(loginInfo),
+    fetch('https://2a37-124-50-73-190.ngrok-free.app/bluelight/members/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
       },
-    )
+      body: JSON.stringify(loginInfo),
+    })
       .then(data => {
         if (data.status === 201 || data.status === 200) {
           const memberId = data.headers.get('memberid');

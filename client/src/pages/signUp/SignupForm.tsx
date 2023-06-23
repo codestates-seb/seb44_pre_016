@@ -51,7 +51,7 @@ function SignupForm() {
     }
 
     fetch(
-      'https://f122-124-50-73-190.ngrok-free.app/bluelight/members/signup',
+      'https://2a37-124-50-73-190.ngrok-free.app/bluelight/members/signup',
       {
         method: 'POST',
         headers: {
