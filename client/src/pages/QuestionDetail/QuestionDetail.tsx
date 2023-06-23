@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
-import { DummyData, detailData } from "../../common/data/detailData"
+import { DummyData, detailData, AnswerListItem } from "../../common/data/detailData"
 import Button from '../../components/button/Button';
 import AnswerItem, {TextBtn, Foot} from '../../components/AnswerItem';
 import Editor from '../../components/editor/Editor'
@@ -24,30 +26,44 @@ import {
 
 const SLICE_DATE_NUMBER = -2;
 
-export interface AnswerListItem {
-  nickName: string;
-  answerVoteCount: number;
-  profileImage:string;
-  content: string;
-  createdAt: string;
+interface AnswerPostItem {
+  memberId: number;
+  answerId: number;
+  answerContent: string;
 }
 
-interface QuestionDetailProps {
-  questionId: number;
-};
-
-function QuestionDetail({ questionId }: QuestionDetailProps) {
+function QuestionDetail() {
+  const { questionId } = useParams();
+  
   const [data, setData] = useState<DummyData | null>(null);
   const [answerContent, setAnswerContent] = useState('');
   const [newAnswerList, setNewAnswerList] = useState(data ? data.answerList : [])
 
   useEffect(() => {
-    const selectedData = detailData.find(item => item.questionId === questionId);
+    // const selectedData = detailData.find(item => item.questionId === questionId);
 
-    if (selectedData) {
-      setData(selectedData);
-      setNewAnswerList(selectedData.answerList);
-    }
+    // if (selectedData) {
+    //   setData(selectedData);
+    //   setNewAnswerList(selectedData.answerList);
+    // }
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`https://2a37-124-50-73-190.ngrok-free.app/bluelight/questions/${questionId}`,
+        {
+          headers: {
+            'ngrok-skip-browser-warning': 'true',
+          },
+        });
+        const serverData = response.data;
+        setData(serverData);
+        setNewAnswerList(serverData.answerList);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, [questionId]);
 
   const handleContentChange = (value: string) => {
@@ -65,15 +81,13 @@ function QuestionDetail({ questionId }: QuestionDetailProps) {
 
     const date = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
 
-    const newAnswer: AnswerListItem = {
-      "nickName": "kimcoding",
-      "answerVoteCount": 10,
-      "profileImage": "/images/profile.jpg",
-      "content": answerContent,
-      "createdAt": date,
-    }
+    // const newAnswer: AnswerPostItem = {
+    //   "memberId": 1,
+    //   "answerId": 1,
+    //   "answerContent": answerContent,
+    // }
     
-    setNewAnswerList(prevAnswerList => [...prevAnswerList, newAnswer]);
+    // setNewAnswerList(prevAnswerList => [...prevAnswerList, newAnswer]);
   }
 
   return (
@@ -82,18 +96,18 @@ function QuestionDetail({ questionId }: QuestionDetailProps) {
         <>
           <div className='flex w-full'>
             <TitleContainer>
-              <Title>{data.title}</Title>
+              <Title>{data.questionTitle}</Title>
               <p className='text-sm'>{data.createdAt}</p>
             </TitleContainer>
             <Button customStyle='w-min h-8'>ask&nbsp;question</Button>
           </div>
           <Line />
           <div className='flex w-full mb-10'>
-            <VoteBox count={data.questionVoteCount}/>
+            <VoteBox count={0}/>
             <ContentContainer>
-              <div className='flex items-start min-h-[150px]'>{data.content}</div>
+              <div className='flex items-start min-h-[150px]'>{data.questionContent}</div>
               <ul>
-                {data.tags.map(tag => (
+                {data.questionTag.map(tag => (
                   <QuestionTagList key={tag.tagId}>
                     <QuestionTagName>{tag.tagName}</QuestionTagName>
                   </QuestionTagList>
@@ -109,7 +123,7 @@ function QuestionDetail({ questionId }: QuestionDetailProps) {
                       src={data.profileImage}
                       alt="프로필 사진"
                     />
-                    <UserName>{data.nickName}</UserName>
+                    <UserName>{data.displayName}</UserName>
                   </div>
                 </UserBox>
               </Foot>

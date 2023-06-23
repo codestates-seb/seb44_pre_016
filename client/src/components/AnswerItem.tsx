@@ -34,16 +34,16 @@ function AnswerItem({answer}: {answer:AnswerListItem}) {
         hljs.highlightElement(block);
       });
     }
-  }, [contentRef, answer.content]);
+  }, [contentRef, answer.answerContent]);
   
   return (
     <div className='flex w-full mb-5'>
-      <VoteBox count={answer.answerVoteCount}/>
+      <VoteBox count={0}/>
       <Container>
         <div 
           className='mb-5 min-h-[150px]'
           ref={contentRef}
-          dangerouslySetInnerHTML={{ __html: answer.content }}
+          dangerouslySetInnerHTML={{ __html: answer.answerContent }}
         />
         <Foot>
           <TextBtn>delete</TextBtn>
@@ -55,7 +55,7 @@ function AnswerItem({answer}: {answer:AnswerListItem}) {
                 src={answer.profileImage}
                 alt="프로필 사진"
               />
-              <UserName>{answer.nickName}</UserName>
+              <UserName>{answer.displayName}</UserName>
             </div>
           </UserBox>
         </Foot>

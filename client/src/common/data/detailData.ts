@@ -1,8 +1,9 @@
 export interface AnswerListItem {
-  nickName: string;
-  answerVoteCount: number;
-  profileImage:string;
-  content: string;
+  memberId: number;
+  answerId: number;
+  answerContent: string;
+  profileImage: string;
+  displayName: string;
   createdAt: string;
 }
 
@@ -14,23 +15,22 @@ export interface Tag {
 
 export interface DummyData {
   questionId: number;
-  title: string;
-  questionVoteCount: number;
-  content: string;
-  tags: Tag[];
-  answerList: AnswerListItem[];
+  questionTitle: string;
+  questionContent: string;
+  questionTag: Tag[];
+  memberId: number;
   profileImage:string;
-  nickName: string;
+  displayName: string;
+  answerList: AnswerListItem[];
   createdAt: string;
 }
 
 export const detailData: DummyData[] = [
   {
     "questionId": 50,
-    "title": "How to design a good JWT authentication filter",
-    "questionVoteCount": 9,
-    "content": "질문 내용입니다~~ 모르겠어잉",
-    "tags": [
+    "questionTitle": "How to design a good JWT authentication filter",
+    "questionContent": "질문 내용입니다~~ 모르겠어잉",
+    "questionTag": [
       {
           "tagId": 1,
           "tagName": "java",
@@ -44,25 +44,26 @@ export const detailData: DummyData[] = [
           
       }
     ],
+    "memberId": 1,
+    "profileImage": "/images/profile.jpg",
+      "displayName": "dumbpotato24",
     "answerList": [
       {
-        "nickName": "kimcoding",
-        "answerVoteCount": 10,
+        "memberId": 1,
+        "answerId": 1,
+        "displayName": "kimcoding",
         "profileImage": "/images/profile.jpg",
-        "content": "이렇게 해보세요~!",
+        "answerContent": "이렇게 해보세요~!",
         "createdAt": "2023-06-15 16:18:14"
       }
     ],
-    "profileImage": "/images/profile.jpg",
-    "nickName": "dumbpotato24",
     "createdAt": "2023-06-15 16:18:14"
   },
   {
     "questionId": 49,
-    "title": "merge sort program in java",
-    "questionVoteCount": 30,
-    "content": "I do not know everything",
-    "tags": [
+    "questionTitle": "merge sort program in java",
+    "questionContent": "I do not know everything",
+    "questionTag": [
       {
           "tagId": 1,
           "tagName": "java",
@@ -76,42 +77,27 @@ export const detailData: DummyData[] = [
           
       }
     ],
+    "memberId": 1,
+    "profileImage": "/images/profile.jpg",
+      "displayName": "dumbpotato24",
     "answerList": [
       {
-        "nickName": "kimcoding",
-        "answerVoteCount": 5,
+        "memberId": 1,
+        "answerId": 2,
+        "displayName": "kimcoding",
         "profileImage": "/images/profile.jpg",
-        "content": "i don't know too.<p></p><pre class='ql-syntax' spellcheck='false'>let num = 10;</pre>",
+        "answerContent": "i don't know too.<p></p><pre class='ql-syntax' spellcheck='false'>let num = 10;</pre>",
         "createdAt": "2023-06-15 16:18:14"
       },
       {
-        "nickName": "kimcoding",
-        "answerVoteCount": 7,
+        "memberId": 1,
+        "answerId": 3,
+        "displayName": "kimcoding",
         "profileImage": "/images/profile.jpg",
-        "content": "hello my name is <h1>hyesoo</h1>",
+        "answerContent": "hello my name is <h1>hyesoo</h1>",
         "createdAt": "2023-06-15 16:18:14"
       }
     ],
-    "profileImage": "/images/profile.jpg",
-    "nickName": "dumbpotato24",
-    "createdAt": "2023-06-16 12:18:00"
-  },
-  {
-    "questionId": 48,
-    "title": "배고파요.",
-    "questionVoteCount": 30,
-    "content": "배고픈데 저메추해주세요",
-    "tags": [
-      {
-          "tagId": 1,
-          "tagName": "java",
-          "tagContent": "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers."
-
-      }
-    ],
-    "answerList": [],
-    "profileImage": "/images/profile.jpg",
-    "nickName": "dumbpotato24",
     "createdAt": "2023-06-16 12:18:00"
   }
 ];

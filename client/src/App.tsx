@@ -17,7 +17,6 @@ import AskQuestion from './pages/AskQuestion/AskQuestion';
 import Mypage from './pages/mypage/Mypage';
 
 function App() {
-  const questionId = 50;
   const location = useLocation();
 
   return (
@@ -35,11 +34,9 @@ function App() {
           <Route path="/member/signup" element={<SignUpPage />} />
           <Route path="/search" element={<Search />} />
           <Route path="/error" element={<ErrorPage />} />
-          <Route path="/mypage" element={<Mypage />} />
-          <Route
-            path="/question"
-            element={<QuestionDetail questionId={questionId} />}
-          />
+          <Route path="/mypage/:memberId" element={<Mypage />} />
+
+          <Route path="/questions/:questionId" element={<QuestionDetail />} />
           <Route path="/questions/ask" element={<AskQuestion />} />
         </Routes>
       </div>
