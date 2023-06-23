@@ -18,59 +18,65 @@ function Login() {
 
   // email,password 유효성 검사 정규식
   const regexEmail = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/;
-  const regexPassword = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
+  const regexPassword = /^[a-zA-Z0-9]{7,}$/;
 
   // 이메일 input 작성할때마다 정규식
 
-  const handleEmailValue = (e: any) => {
+  const handleEmailValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setloginInfo({ ...loginInfo, email: e.target.value });
-    if (regexEmail.test(e.target.value) || e.target.value === '') {
+
+    if (regexEmail.test(e.target.value)) {
       setIsinvalidEmail(true);
     } else {
       setIsinvalidEmail(false);
     }
   };
   /** password 값 설정 및 유효성검사 */
-  const handlePasswordValue = (e: any) => {
+  const handlePasswordValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setloginInfo({ ...loginInfo, password: e.target.value });
-    if (regexPassword.test(e.target.value) || e.target.value === '') {
+    if (regexPassword.test(e.target.value)) {
       setisinvalidPassword(true);
     } else {
       setisinvalidPassword(false);
     }
   };
 
-  const handlelogin = async (e: any) => {
+  const handlelogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(loginInfo);
     // 요청보내기 전에 유효성검사
     if (!isinvalidEmail || !isinvalidPassword) {
       setloginMSG('이메일또는 패스워드가 유효하지 않습니다.');
       console.log(loginMSG);
       return;
     }
-    e.preventDefault();
-
-    console.log('동작하니?');
-    fetch('https://95a4-124-50-73-190.ngrok-free.app/bluelight/members/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'ngrok-skip-browser-warning': 'true',
+    fetch(
+      ' https://f122-124-50-73-190.ngrok-free.app/bluelight/members/login',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'true',
+        },
+        body: JSON.stringify(loginInfo),
       },
-      body: JSON.stringify(loginInfo),
-    })
-      .then(res => res.json())
+    )
       .then(data => {
-        console.log(data);
-        const memberId = data.headers.memberid;
-        const { displayName } = data.headers;
-        const accessToken = data.headers.authorization;
+        if (data.status === 201 || data.status === 200) {
+          const memberId = data.headers.get('memberid');
+          const displayName = data.headers.get('displayName');
+          const accessToken = data.headers.get('accessToken');
 
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('memberId', memberId);
-        localStorage.setItem('displayName', displayName);
-        console.log('굿');
-        // window.location.reload();
-        navigation('/');
+          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem('memberId', memberId);
+          localStorage.setItem('displayName', displayName);
+          localStorage.setItem('accessToken', accessToken);
+
+          console.log('굿');
+          navigation('/');
+        } else {
+          console.log('요청이 실패했습니다.');
+        }
       })
       .catch(err => {
         console.log(err);
@@ -133,7 +139,10 @@ function Login() {
           Login in with Google{' '}
         </button>
         {/* 폼 */}
-        <form className="w-[100%]  flex flex-col p-[24px] bg-white shadow shadow-md shadow-lg shadow-lg border border-solid border-gray-200  ">
+        <form
+          onSubmit={handlelogin}
+          className="w-[100%]  flex flex-col p-[24px] bg-white shadow shadow-md shadow-lg shadow-lg border border-solid border-gray-200  "
+        >
           {/* 이메일 인풋 */}
           <label htmlFor="email" className="capitalize font-bold text-[13px]">
             email
@@ -142,7 +151,7 @@ function Login() {
             className="my-2 py-1 border border-solid border-gray-200 rounded-md"
             id="email"
             type="email"
-            onChange={e => handleEmailValue}
+            onChange={handleEmailValue}
           ></input>
           {/* 패스워드 */}
           <label
@@ -161,9 +170,7 @@ function Login() {
             onChange={handlePasswordValue}
           ></input>
           {/* 전송버튼 */}
-          <Button onSubmit={handlelogin} customStyle="h-[40px] mt-2">
-            log in
-          </Button>
+          <Button customStyle="h-[40px] mt-2">log in</Button>
         </form>
         {/* 하단 글 */}
         <div className="mx-auto mt-6 text-[10px] flex flex-col items-center ">

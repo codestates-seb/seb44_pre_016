@@ -25,33 +25,33 @@ function SignupForm() {
 
   // email 정규식과 패스워드 정규식
   const regexEmail = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/;
-  const regexPassword = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
+  const regexPassword = /^[a-zA-Z0-9]{7,}$/;
 
   // 이메일 input 작성할때마다 정규식
-  const handleEmailValue = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleEmailValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSignUpInfo({ ...signUpInfo, email: e.target.value });
     return regexEmail.test(e.target.value)
       ? setisidValid(true)
       : setisidValid(false);
   };
   // 비밀번호 정규식 최소 8글자 문자1개 숫자1개
-  const handlePasswordValue = (e: ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSignUpInfo({ ...signUpInfo, password: e.target.value });
     return regexPassword.test(e.target.value)
       ? setisPasswordValid(true)
       : setisPasswordValid(false);
   };
-  const handleSignUp: React.MouseEventHandler = async (e: React.MouseEvent) => {
+  const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     // 요청보내기 전에 유효성검사
     if (!isidValid || !ispasswordValid) {
       setSignupMSG('이메일또는 패스워드가 유효하지 않습니다.');
       console.log(signupMSG);
       return;
     }
-    e.preventDefault();
 
     fetch(
-      'https://95a4-124-50-73-190.ngrok-free.app/bluelight/members/signup',
+      'https://f122-124-50-73-190.ngrok-free.app/bluelight/members/signup',
       {
         method: 'POST',
         headers: {
@@ -61,9 +61,8 @@ function SignupForm() {
         body: JSON.stringify(signUpInfo),
       },
     )
-      .then(res => res.json())
       .then(data => {
-        if (data.ok) {
+        if (data.status === 201) {
           // 응답이 성공적인 경우
           console.log('요청이 성공했습니다.');
           console.log(data);
@@ -82,7 +81,10 @@ function SignupForm() {
   };
   return (
     <div>
-      <form className="w-[100%] flex flex-col p-[24px] shadow shadow-md shadow-lg shadow-lg bg-white">
+      <form
+        onSubmit={handleSignUp}
+        className="w-[100%] flex flex-col p-[24px] shadow shadow-md shadow-lg shadow-lg bg-white"
+      >
         {/* 닉네임인풋 */}
         <label htmlFor="name" className="capitalize font-bold text-[13px]">
           Display name
@@ -113,7 +115,7 @@ function SignupForm() {
           onChange={handlePasswordValue}
           className="my-2 py-2 rounded-sm  border border-solid border-gray-200 "
         ></input>
-        <Button customStyle="mt-5 h-[40px]" onClick={handleSignUp}>
+        <Button customStyle="mt-5 h-[40px]">
           {/* */}
           sign up
         </Button>
