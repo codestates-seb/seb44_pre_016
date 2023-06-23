@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import {
   ONE_DAY_MILLISECOND,
   ONE_HOUR_MILLISECOND,
@@ -43,6 +44,8 @@ function QuestionItem({ pageType, questionProps }: QuestionItemProps) {
     createdAt,
   } = questionProps;
 
+  const navigate = useNavigate();
+
   const changeDate = (date: string) => {
     const nowDate = Date.now();
     const oldDate = Date.parse(date);
@@ -81,7 +84,7 @@ function QuestionItem({ pageType, questionProps }: QuestionItemProps) {
         </QuestionAnswer>
       </QuestionItemActive>
       <QuestionDataContainer>
-        <QuestionItemTitle>{questionTitle}</QuestionItemTitle>
+        <QuestionItemTitle onClick={()=>navigate("questions/1")}>{questionTitle}</QuestionItemTitle>
         <div className="text-[13px] mb-2 text-[#3B4045]">
           {pageType === 'All_Search' && questionProps.questionContent}
         </div>
