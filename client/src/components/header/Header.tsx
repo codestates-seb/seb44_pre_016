@@ -44,6 +44,7 @@ function Header() {
   // const displayname = useSelector(
   //   (state: RootState) => state.userInfoReducer.displayname,
   // );
+
   const displayname = 'hi';
 
   const Handledropdown = (): void => {
@@ -67,6 +68,9 @@ function Header() {
       navigate('/search');
     }
   };
+  // const handlemypage = e => {
+  //   navigate('/mypage');
+  // };
 
   return (
     <header className="sticky top-0 z-10 bg-white flex justify-center items-center w-full h-[50px] border-solid border-t-2 border-b border-t-orange-500 border-b-gray-300">
@@ -99,16 +103,18 @@ function Header() {
       </div>
       {token ? (
         <div className=" flex flex-row items-center">
-          <img
-            src="/images/profile.jpg"
-            alt="프로필"
-            className="w-[20px] h-[20px] rounded-lg m-2"
-          />
-          <p className="text-[10px]">{displayname}</p>
-          <Link to="/mypage">
+          <div className=" flex flex-row items-center hover:bg-gray-300">
+            <img
+              src="/images/profile.jpg"
+              alt="프로필"
+              className="w-[20px] h-[20px] rounded-lg m-2"
+            />
+            <p className="text-[10px]">{displayname}</p>
+          </div>
+          <Link to="/logout">
             <img
               src="/images/mypageicon.png"
-              alt="마이페이지아이콘"
+              alt="로그아웃아이콘"
               className="w-[40px] h-[40px]"
             />
           </Link>
