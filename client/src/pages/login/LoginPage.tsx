@@ -2,6 +2,7 @@ import React, { ChangeEventHandler, useState } from 'react';
 import tw from 'tailwind-styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { configureStore } from '@reduxjs/toolkit';
 import Button from '../../components/button/Button';
 // 로그인가능한 아이디
 // sss@gmail.com
@@ -63,16 +64,16 @@ function Login() {
     })
       .then(data => {
         if (data.status === 201 || data.status === 200) {
-          const memberId = data.headers.get('memberid');
-          const displayName = data.headers.get('displayName');
-          const accessToken = data.headers.get('accessToken');
+          console.log(data);
 
-          localStorage.setItem('accessToken', accessToken);
-          localStorage.setItem('memberId', memberId);
-          localStorage.setItem('displayName', displayName);
-          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem(
+            'accessToken',
+            data.headers.get('Authorization'),
+          );
+          localStorage.setItem('memberId', data.headers.get('memberId'));
+          localStorage.setItem('displayName', data.headers.get('displayName'));
 
-          console.log('굿');
+          // console.log('굿');
           navigation('/');
         } else {
           console.log('요청이 실패했습니다.');
