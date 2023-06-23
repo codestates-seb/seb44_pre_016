@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import tw from 'tailwind-styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Button from '../../components/button/Button';
+import { userinfoUPDATE } from '../../redux/userInfoReducer';
+
 // 로그인가능한 아이디
 // sss@gmail.com
 // asdasd72
@@ -19,7 +22,7 @@ function Login() {
   const [isinvalidEmail, setIsinvalidEmail] = useState(false);
   const [isinvalidPassword, setisinvalidPassword] = useState(false);
   const [loginMSG, setloginMSG] = useState('');
-
+  const dispatch = useDispatch();
   // email,password 유효성 검사 정규식
   const regexEmail = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/;
   const regexPassword = /^[a-zA-Z0-9]{7,}$/;
@@ -76,7 +79,12 @@ function Login() {
           // localStorage.setItem('accessToken', JSON.stringify('fdfdfdfdfdf'));
           // localStorage.setItem('memberId', JSON.stringify('4'));
           // localStorage.setItem('displayName', JSON.stringify('hihi'));
-          // console.log('굿');
+          dispatch(
+            userinfoUPDATE({
+              memberId: data.headers.get('memberId'),
+              accessToken: data.headers.get('Authorization'),
+            }),
+          );
           navigation('/');
         } else {
           console.log('요청이 실패했습니다.');

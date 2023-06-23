@@ -24,7 +24,7 @@ const userInfoSlice = createSlice({
   name: 'changeInfo',
   initialState,
   reducers: {
-    UPDATE: (state: UserInfo, action) => {
+    userinfoUPDATE: (state: UserInfo, action) => {
       return {
         ...state,
         memberId: action.payload.memberId,
@@ -34,5 +34,5 @@ const userInfoSlice = createSlice({
   },
 });
 
-export const { UPDATE } = userInfoSlice.actions;
+export const { userinfoUPDATE } = userInfoSlice.actions;
 export default userInfoSlice.reducer;

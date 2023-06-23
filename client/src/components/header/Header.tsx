@@ -2,10 +2,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../button/Button';
 import Dropdown from './Dropdown';
 import { searchSet } from '../../redux/searchReducer';
+// import { userinfoUPDATE } from '../../redux/userInfoReducer';
+import { RootState } from '../../redux/store';
 
 function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -18,17 +20,31 @@ function Header() {
   // localStorage.setItem('accessToken', JSON.stringify('fdfdfdfdfdf'));
   // localStorage.setItem('memberId', JSON.stringify('4'));
   // localStorage.setItem('displayName', JSON.stringify('hihi'));
-
+  // dispatch(
+  //   userinfoUPDATE({
+  //     memberId: '4',
+  //     accessToken: 'dfdf',
+  //   }),
+  // );
   //   // Key - "accessToken" 제거하기
   // localStorage.removeItem('accessToken');
   // // 로컬 스토리지 초기화
   // localStorage.clear();
 
-  const token = localStorage.getItem('accessToken');
-  const memberId = localStorage.getItem('memberId');
-  const displayname = localStorage.getItem('displayName')
-    ? localStorage.getItem('displayName')
-    : '혜수님짱멋있어';
+  // const token = localStorage.getItem('accessToken');
+  // const memberId = localStorage.getItem('memberId');
+  // const displayname = localStorage.getItem('displayName')
+  //   ? localStorage.getItem('displayName')
+  //   : '혜수님짱멋있어';
+
+  const token = useSelector((state: RootState) => state.userInfoReducer.token);
+  const memberId = useSelector(
+    (state: RootState) => state.userInfoReducer.memberId,
+  );
+  // const displayname = useSelector(
+  //   (state: RootState) => state.userInfoReducer.displayname,
+  // );
+  const displayname = 'hi';
 
   const Handledropdown = (): void => {
     setIsOpen(!isOpen);
