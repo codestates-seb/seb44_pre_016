@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 interface UserInfo {
   memberId: string | null;
@@ -7,6 +7,7 @@ interface UserInfo {
   location: string | null;
   title: string | null;
   aboutme: string | null;
+  token: string | null;
 }
 
 const initialState = {
@@ -16,14 +17,19 @@ const initialState = {
   location: null,
   title: null,
   aboutme: null,
+  token: JSON.parse(localStorage.getItem('accessToken')!),
 };
 
 const userInfoSlice = createSlice({
   name: 'changeInfo',
   initialState,
   reducers: {
-    UPDATE: (state: UserInfo, action: any) => {
-      return action.payload;
+    UPDATE: (state: UserInfo, action) => {
+      return {
+        ...state,
+        memberId: action.payload.memberId,
+        token: action.payload.token,
+      };
     },
   },
 });

@@ -14,10 +14,21 @@ function Header() {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
 
+  // 임시저장
+  // localStorage.setItem('accessToken', JSON.stringify('fdfdfdfdfdf'));
+  // localStorage.setItem('memberId', JSON.stringify('4'));
+  // localStorage.setItem('displayName', JSON.stringify('hihi'));
+
+  //   // Key - "accessToken" 제거하기
+  // localStorage.removeItem('accessToken');
+  // // 로컬 스토리지 초기화
+  // localStorage.clear();
+
   const token = localStorage.getItem('accessToken');
   const memberId = localStorage.getItem('memberId');
-  const displayname = '혜수님짱멋있어';
-  // localStorage.getItem('displayName');
+  const displayname = localStorage.getItem('displayName')
+    ? localStorage.getItem('displayName')
+    : '혜수님짱멋있어';
 
   const Handledropdown = (): void => {
     setIsOpen(!isOpen);

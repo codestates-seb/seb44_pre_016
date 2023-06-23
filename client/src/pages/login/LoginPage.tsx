@@ -1,12 +1,12 @@
-import React, { ChangeEventHandler, useState } from 'react';
+import React, { useState } from 'react';
 import tw from 'tailwind-styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { configureStore } from '@reduxjs/toolkit';
 import Button from '../../components/button/Button';
 // 로그인가능한 아이디
 // sss@gmail.com
 // asdasd72
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const initialInfo: {
   email: string;
@@ -73,6 +73,9 @@ function Login() {
           localStorage.setItem('memberId', data.headers.get('memberId'));
           localStorage.setItem('displayName', data.headers.get('displayName'));
 
+          // localStorage.setItem('accessToken', JSON.stringify('fdfdfdfdfdf'));
+          // localStorage.setItem('memberId', JSON.stringify('4'));
+          // localStorage.setItem('displayName', JSON.stringify('hihi'));
           // console.log('굿');
           navigation('/');
         } else {

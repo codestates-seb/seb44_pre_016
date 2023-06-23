@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import Button from '../../components/button/Button';
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 function SignupForm() {
   const navigation = useNavigate(); // ?
   // const isLogin = useSelector((state: RootState) => state.userInfos); //
