@@ -10,7 +10,11 @@ import QuestionDetail from './pages/QuestionDetail/QuestionDetail';
 import NavBar from './components/navbar/NavBar';
 import Footer from './components/footer/Footer';
 import Search from './pages/Search';
-import AskQuestion from './pages/AskQuestion/AskQuestion'
+
+import ErrorPage from './pages/error/ErrorPage';
+
+import AskQuestion from './pages/AskQuestion/AskQuestion';
+import Mypage from './pages/mypage/Mypage';
 
 function App() {
   const questionId = 50;
@@ -19,7 +23,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div className="flex max-w-[1264px] mx-auto  w-full">
+      <div className="flex max-w-[1264px] mx-auto  w-full ">
         {!(
           location.pathname.includes('/login') ||
           location.pathname.includes('/member/signup')
@@ -30,6 +34,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/member/signup" element={<SignUpPage />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/error" element={<ErrorPage />} />
+          <Route path="/mypage" element={<Mypage />} />
         </Routes>
       </div>
       <QuestionDetail questionId={questionId} />
