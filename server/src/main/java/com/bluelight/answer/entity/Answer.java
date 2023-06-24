@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,4 +35,5 @@ public class Answer extends Auditable {
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
+
 }

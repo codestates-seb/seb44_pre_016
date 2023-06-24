@@ -21,12 +21,10 @@ public class TopQuestionDto {
     @AllArgsConstructor
     public static class Response {
 
-//        private long questionId;
+        private long questionId;
         private String questionTitle;
-//        private int questionVoteCount;
         private int answerCount;
         private List<Tag> questionTag;
-//        private long memberId;
         private String profileImage;
         private String displayName;
         private String createdAt;

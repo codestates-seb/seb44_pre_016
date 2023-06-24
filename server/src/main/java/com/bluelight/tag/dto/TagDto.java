@@ -2,10 +2,11 @@ package com.bluelight.tag.dto;
 
 import com.bluelight.tag.entity.Tag;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-public class CreateTagDto {
+public class TagDto {
 
     @Getter
     @NoArgsConstructor
@@ -19,5 +20,13 @@ public class CreateTagDto {
         public Tag toEntity() {
             return new Tag(this.tagName, this.tagContent);
         }
+    }
+    @AllArgsConstructor
+    @Getter
+    public static class Response {
+
+        private long tagId;
+        private String tagName;
+        private String tagContent;
     }
 }

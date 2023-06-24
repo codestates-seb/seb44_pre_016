@@ -1,5 +1,6 @@
 package com.bluelight.question.entity;
 
+import com.bluelight.audit.Auditable;
 import com.bluelight.tag.entity.Tag;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -20,7 +21,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class QuestionTag {
+public class QuestionTag extends Auditable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionTagId;
@@ -42,7 +44,7 @@ public class QuestionTag {
         this.question = question;
     }
 
-    public void addTag(Tag tag){
+    public void addTag(Tag tag) {
         this.tag = tag;
     }
 }

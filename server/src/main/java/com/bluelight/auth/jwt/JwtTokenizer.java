@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JwtTokenizer {
+
     @Getter
     @Value("${jwt.key}")
     private String secretKey;
@@ -48,7 +49,8 @@ public class JwtTokenizer {
             .compact();
     }
 
-    public String generateRefreshToken(String subject, Date expiration, String base64EncodedSecretKey) {
+    public String generateRefreshToken(String subject, Date expiration,
+        String base64EncodedSecretKey) {
         Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
 
         return Jwts.builder()

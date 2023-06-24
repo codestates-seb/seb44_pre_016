@@ -43,9 +43,6 @@ public class Member extends Auditable {
     @Column(name = "name", length = 32, nullable = false)
     private String name;
 
-    @Column(name = "member_type", nullable = false)
-    private String memberType;
-
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "member_roles", joinColumns = @JoinColumn(name = "member_id"))
     @Column(name = "role")
@@ -61,8 +58,6 @@ public class Member extends Auditable {
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JsonIgnore
     private List<Answer> answers = new ArrayList<>();
-    ;
-
 
     @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JsonIgnore
@@ -71,7 +66,7 @@ public class Member extends Auditable {
         Profile profile = new Profile();
         profile.setMember(this);
         profile.setDisplayName(this.name);
-        profile.setProfileImage("images/profile");
+        profile.setProfileImage("images/profile.jpg");
         this.setProfile(profile);
     }
 }

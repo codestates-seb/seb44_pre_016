@@ -16,10 +16,12 @@ import org.springframework.stereotype.Component;
 @Component
 public
 class MemberDetailsService implements UserDetailsService {
+
     private final MemberRepository memberRepository;
     private final CustomAuthorityUtils authorityUtils;
 
-    public MemberDetailsService(MemberRepository memberRepository, CustomAuthorityUtils authorityUtils) {
+    public MemberDetailsService(MemberRepository memberRepository,
+        CustomAuthorityUtils authorityUtils) {
         this.memberRepository = memberRepository;
         this.authorityUtils = authorityUtils;
     }
@@ -34,6 +36,7 @@ class MemberDetailsService implements UserDetailsService {
     }
 
     private final class MemberDetails extends Member implements UserDetails {
+
         MemberDetails(Member member) {
             setMemberId(member.getMemberId());
             setEmail(member.getEmail());

@@ -34,6 +34,7 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Question extends Auditable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "question_id")
@@ -45,26 +46,20 @@ public class Question extends Auditable {
     @Column(name = "question_content", nullable = false)
     private String questionContent;
 
-    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JsonIgnore
     private List<QuestionTag> questionTags = new ArrayList<>();
 
-    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JsonIgnore
     private List<Answer> answers = new ArrayList<>();
-
-//    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-//    private List<QuestionVote> questionVotes = new ArrayList<>();
-//
-//    @OneToOne(mappedBy = "question", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-//    private QuestionVoteCount questionVoteCount;
 
     public void addQuestionTags(List<Tag> tags) {
         List<QuestionTag> questionTags = tags.stream()
             .map((tag) -> new QuestionTag(this, tag))
             .collect(Collectors.toList());
 
-        for(QuestionTag questionTag : questionTags) {
+        for (QuestionTag questionTag : questionTags) {
             addQuestionTag(questionTag);
         }
 
@@ -81,4 +76,5 @@ public class Question extends Auditable {
     public void addMember(Member member) {
         this.member = member;
     }
+
 }

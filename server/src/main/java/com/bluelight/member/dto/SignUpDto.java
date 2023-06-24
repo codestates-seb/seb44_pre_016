@@ -6,6 +6,7 @@ import lombok.Getter;
 
 @Getter
 public class SignUpDto {
+
     @NotBlank
     @Email
     private String email;

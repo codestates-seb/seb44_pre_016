@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Slf4j
 public class QuestionTagService {
+
     private final QuestionTagRepository questionTagRepository;
 
     public QuestionTagService(QuestionTagRepository questionTagRepository) {
@@ -33,19 +34,5 @@ public class QuestionTagService {
     public List<Tag> getTagsByQuestionId(Long questionId) {
         return questionTagRepository.findTagsByQuestionId(questionId);
     }
-
-//    @Transactional(readOnly = true)
-//    public Profile findProfile(Member member) {
-//        return findVerifiedQuestion(member);
-//    }
-//
-//    @Transactional(readOnly = true)
-//    public Profile findVerifiedQuestion(Member member) {
-//        Optional<Profile> optionalProfile = profileRepository.findByMember(member);
-//        Profile findProfile = optionalProfile.orElseThrow(
-//            () -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-//
-//        return findProfile;
-//    }
 }
 

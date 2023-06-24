@@ -1,17 +1,8 @@
 package com.bluelight.member.controller;
 
-import com.bluelight.member.dto.EditDto;
-import com.bluelight.member.dto.MemberProfileDto;
+import com.bluelight.member.dto.ProfileDto;
 import com.bluelight.member.dto.SignUpDto;
-import com.bluelight.member.entity.Member;
-import com.bluelight.member.entity.Profile;
-import com.bluelight.member.mapper.EditMapper;
-import com.bluelight.member.mapper.MemberMapper;
-import com.bluelight.member.mapper.ProfileMapper;
 import com.bluelight.member.service.MemberService;
-import com.bluelight.member.service.ProfileService;
-import com.bluelight.utils.UriCreator;
-import java.net.URI;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import lombok.extern.slf4j.Slf4j;
@@ -35,64 +26,52 @@ public class MemberController {
 
     private final static String MEMBER_DEFAULT_URL = "/members";
     private final MemberService memberService;
-    private final MemberMapper memberMapper;
-    private final ProfileService profileService;
-    private final ProfileMapper profileMapper;
-    private final EditMapper editMapper;
 
-    public MemberController(MemberService memberService, MemberMapper memberMapper,
-        ProfileService profileService, ProfileMapper profileMapper, EditMapper editMapper) {
+    public MemberController(MemberService memberService) {
         this.memberService = memberService;
-        this.memberMapper = memberMapper;
-        this.profileService = profileService;
-        this.profileMapper = profileMapper;
-        this.editMapper = editMapper;
     }
 
     @PostMapping("/signup")
-    public ResponseEntity signUpMember(@Valid @RequestBody SignUpDto signUpDto) {
-        Member member = memberMapper.memberPostToMember(signUpDto);
-        member.setMemberType("local");
+    public ResponseEntity signUpMember(@Valid @RequestBody SignUpDto requestBody) {
 
-        Member createdMember = memberService.createMember(member);
-        URI location = UriCreator.createUri(MEMBER_DEFAULT_URL, createdMember.getMemberId());
-        return ResponseEntity.created(location).build();
+        memberService.createMember(requestBody);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/{member-id}")
-    public ResponseEntity getMemberProfile(@PathVariable("member-id") @Positive long memberId) {
-        Member member = memberService.findMember(memberId);
-        Profile profile = profileService.findProfile(member);
-        return new ResponseEntity<>(profileMapper.profileToProfileResponse(profile), HttpStatus.OK);
+    public ResponseEntity getProfile(@PathVariable("member-id") @Positive long memberId) {
+
+        ProfileDto.Response profileDto = memberService.getProfile(memberId);
+
+        return new ResponseEntity<>(profileDto, HttpStatus.OK);
     }
 
     @GetMapping("/edit/{member-id}")
-    public ResponseEntity getEditProfileForm(@PathVariable("member-id") @Positive long memberId) {
-        Member member = memberService.findMember(memberId);
-        Profile profile = profileService.findProfile(member);
-        MemberProfileDto memberProfileDto = new MemberProfileDto(member, profile);
-        return new ResponseEntity<>(editMapper.memberProflieToEditResponse(memberProfileDto),
-            HttpStatus.OK);
+    public ResponseEntity getProfileForm(@PathVariable("member-id") @Positive long memberId) {
+
+        ProfileDto.Response profileDto = memberService.getProfile(memberId);
+
+        return new ResponseEntity<>(profileDto, HttpStatus.OK);
     }
 
     @PatchMapping("/edit/{member-id}")
-    public ResponseEntity updateMemberProfile(
+    public ResponseEntity patchProfile(
         @PathVariable("member-id") @Positive long memberId,
-        @Valid @RequestBody EditDto.Patch requestBody) {
-        Member member = memberService.findMember(memberId);
+        @Valid @RequestBody ProfileDto.Patch requestBody) {
 
-        MemberProfileDto memberProfileDto =
-            new MemberProfileDto(member, profileMapper.profilePatchToProfile(requestBody));
+        requestBody.setMemberId(memberId);
 
-        Profile profile =
-            profileService.updateMemberProfile(memberProfileDto);
+        ProfileDto.Response profileDto = memberService.updateProfile(requestBody);
 
-        return new ResponseEntity<>(profileMapper.profileToProfileResponse(profile), HttpStatus.OK);
+        return new ResponseEntity<>(profileDto, HttpStatus.OK);
     }
 
     @DeleteMapping("/edit/{member-id}")
     public ResponseEntity deleteMember(@PathVariable("member-id") @Positive long memberId) {
+
         memberService.deleteMember(memberId);
+
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

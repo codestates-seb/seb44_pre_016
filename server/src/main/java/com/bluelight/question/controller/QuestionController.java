@@ -2,6 +2,8 @@ package com.bluelight.question.controller;
 
 import com.bluelight.dto.MultiResponseDto;
 import com.bluelight.dto.SingleResponseDto;
+import com.bluelight.question.dto.AllQuestionDto;
+import com.bluelight.question.dto.AllResponseDto;
 import com.bluelight.question.dto.AskQuestionDto;
 import com.bluelight.question.dto.AskQuestionDto.Response;
 import com.bluelight.question.dto.QuestionDetailDto;
@@ -13,6 +15,7 @@ import com.bluelight.question.mapper.QuestionMapper;
 import com.bluelight.question.service.QuestionService;
 import com.bluelight.question.service.QuestionTagService;
 import com.bluelight.tag.entity.Tag;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,24 +41,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 @Validated
 @Slf4j
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class QuestionController {
 
     private final QuestionService questionService;
-    private final QuestionMapper mapper;
-
+    private final QuestionMapper questionMapper;
     private final QuestionTagService questionTagService;
 
-    public QuestionController(QuestionService questionService, QuestionMapper mapper,
+    public QuestionController(QuestionService questionService, QuestionMapper questionMapper,
         QuestionTagService questionTagService) {
         this.questionService = questionService;
-        this.mapper = mapper;
+        this.questionMapper = questionMapper;
         this.questionTagService = questionTagService;
     }
 
-    // controller 위에 RequestMapping ("/questions")
     @PostMapping("/questions/ask")
-    public ResponseEntity postAskQuestion(
+    public ResponseEntity postQuestion(
         @Valid @RequestBody AskQuestionDto.Post requestBody) {
 
         questionService.createQuestion(requestBody);
@@ -69,57 +69,12 @@ public class QuestionController {
         return new ResponseEntity<>(topQuestions, HttpStatus.OK);
     }
 
-    @GetMapping("/questions/{question-id}")
-    public ResponseEntity getQuestionDetail(
-        @Positive @PathVariable("question-id") long questionId) {
-        QuestionDetailDto questionDetailDto = questionService.findQuestionDetail(questionId);
-        return new ResponseEntity<>(questionDetailDto, HttpStatus.OK);
-    }
-
     @GetMapping("/questions")
     public ResponseEntity allQuestions(@Positive @RequestParam int page,
         @Positive @RequestParam int size) {
-        Page<Question> pageQuestions = questionService.findQuestions(page - 1, size);
-        List<Question> questions = pageQuestions.getContent();
+        AllResponseDto pageQuestions = questionService.findAllQuestions(page - 1, size);
 
-        return new ResponseEntity<>(
-            new MultiResponseDto<>(mapper.questionsToResponse(questions),
-                pageQuestions),
-            HttpStatus.OK);
-    }
-
-    @DeleteMapping("/questions/{question-id}")
-    public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId) {
-        questionService.deleteQuestion(questionId);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
-
-    /*
-    @GetMapping
-    public ResponseEntity getTopQuestion() {
-        Page<Question> pageQuestions = questionService.findQuestions(0, 50);
-        List<Question> questions = pageQuestions.getContent();
-        return new ResponseEntity<>(
-            new MultiResponseDto<>(mapper.questionsToquestionsResponses(questions), pageQuestions),
-            HttpStatus.OK);
-    }
-
-    @GetMapping("/questions")
-    public ResponseEntity getAllQuestion(
-        @Positive @RequestParam(required = false) int page,
-        @Positive @RequestParam(required = false) int size,
-        @RequestParam(required = false) String filters) {
-        Page<Question> pageQuestions;
-        if(filters == null){
-            pageQuestions = questionService.findQuestions(page, size);
-        }else{
-            pageQuestions = questionService.findQuestions(page, size, filters);
-        }
-
-        List<Question> questions = pageQuestions.getContent();
-
-        return new ResponseEntity<>(
-            new MultiResponseDto<>(mapper.questionsToquestionsResponses(questions), pageQuestions), HttpStatus.OK);
+        return new ResponseEntity<>(pageQuestions, HttpStatus.OK);
     }
 
     @GetMapping("/search")
@@ -128,8 +83,29 @@ public class QuestionController {
         @Positive @RequestParam(required = false) int size,
         @RequestParam(required = false) String title,
         @RequestParam(required = false) String tag) {
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        if(title != null ){
+            AllResponseDto pagepageQuestions = questionService.findSearchQuestions(page - 1, size, title);
+            return new ResponseEntity<>(pagepageQuestions, HttpStatus.OK);
+        } else if(tag != null){
+            AllResponseDto pagepageQuestions = questionService.findSearchtagQuestions(page - 1, size, tag);
+            return new ResponseEntity<>(pagepageQuestions, HttpStatus.OK);
+        } else{
+            AllResponseDto pageQuestions = questionService.findAllQuestions(page - 1, size);
+            return new ResponseEntity<>(pageQuestions, HttpStatus.OK);
+        }
     }
-    */
+
+    @GetMapping("/questions/{question-id}")
+    public ResponseEntity getQuestionDetail(
+        @Positive @PathVariable("question-id") long questionId) {
+        QuestionDetailDto questionDetailDto = questionService.findQuestionDetail(questionId);
+        return new ResponseEntity<>(questionDetailDto, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/questions/{question-id}")
+    public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId) {
+        questionService.deleteQuestion(questionId);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
 }

@@ -13,7 +13,6 @@ import com.bluelight.auth.utils.CustomAuthorityUtils;
 import java.util.Arrays;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -62,7 +61,7 @@ public class SecurityConfiguration {
 //                .antMatchers(HttpMethod.GET, "/members/**").hasAnyRole("USER", "ADMIN")
 //                .antMatchers(HttpMethod.PATCH, "/members/**").hasRole("USER")
 //                .antMatchers(HttpMethod.DELETE, "/members/**").hasRole("USER")
-                .anyRequest().permitAll()
+                    .anyRequest().permitAll()
             );
         return http.build();
     }
@@ -76,7 +75,7 @@ public class SecurityConfiguration {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE", "OPTIONS"));
+        configuration.setAllowedMethods(Arrays.asList("*"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setExposedHeaders(Arrays.asList("*"));
 
