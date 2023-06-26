@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import hljs from 'highlight.js';
 import { useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import Button from '../../components/button/Button';
 import AnswerItem, {TextBtn, Foot} from '../../components/AnswerItem';
 import Editor from '../../components/editor/Editor'
 import VoteBox from '../../components/vote/VoteBox';
+import ConfirmModal from '../../components/ConfirmModal'
 
 import "highlight.js/styles/github.css";
 
@@ -36,15 +37,19 @@ interface AnswerPostItem {
 function QuestionDetail() {
   const { questionId } = useParams();
   const contentRef = useRef(null);
+  const navigate = useNavigate();
   
   const [data, setData] = useState(null);
   const [questionContent, setQuestionContent] = useState('');
   const [answerContent, setAnswerContent] = useState('');
   const [newAnswerList, setNewAnswerList] = useState(data ? data.answerList : [])
+  const [showModal, setShowModal] = useState(false);
 
   const memberId = useSelector(
     (state: RootState) => state.userInfoReducer.memberId,
   );
+  
+  const answerId = 0;
 
   useEffect(() => {
 
@@ -66,6 +71,8 @@ function QuestionDetail() {
         setData(serverData);
         setQuestionContent(content);
         setNewAnswerList(serverData.answerList);
+
+        console.log(serverData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -85,6 +92,26 @@ function QuestionDetail() {
   const handleContentChange = (value: string) => {
     setAnswerContent(value);
   };
+
+  const deleteQuestion = async () => {
+    try{
+      const res = await axios.delete(`${process.env.REACT_APP_BASE_URL}/questions/${questionId}`,
+      {
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+        },
+      });
+
+      navigate(`/questions`);
+    } catch (error) {
+      console.error("Error deleting the question:", error);
+      alert("Only writer can delete this question.");
+    }
+  }
+
+  const handleShowModal = () => {
+    setShowModal(true);
+  }
 
   const postAnswer = async() => {
 
@@ -113,6 +140,14 @@ function QuestionDetail() {
       {data ? (
         <>
           <div className='flex w-full'>
+          {
+            showModal && (
+              <ConfirmModal
+                isOpen={showModal}
+                onCancel={() => setShowModal(false)}
+                onConfirm={deleteQuestion}
+              />
+            )}
             <TitleContainer>
               <Title>{data.questionTitle}</Title>
               <p className='text-sm'>{data.createdAt}</p>
@@ -126,7 +161,7 @@ function QuestionDetail() {
             <VoteBox count={0}/>
             <ContentContainer>
               <div 
-              className='flex flex-col items-start min-h-[150px]'
+              className='flex flex-col items-start w-[700px] min-h-[150px] break-words'
               ref={contentRef}
               dangerouslySetInnerHTML={{ __html: questionContent }}
               />
@@ -138,7 +173,7 @@ function QuestionDetail() {
                 ))}
               </ul>
               <Foot>
-                <TextBtn>delete</TextBtn>
+                <TextBtn onClick={handleShowModal}>delete</TextBtn>
                 <UserBox>
                   <Blank />
                   <div className='flex grow-0 mr-10'>
