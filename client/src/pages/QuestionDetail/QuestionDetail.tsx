@@ -24,8 +24,6 @@ import {
   Blank
 } from "./QuestionDetail.styled";
 
-const SLICE_DATE_NUMBER = -2;
-
 interface AnswerPostItem {
   memberId: number;
   answerId: number;
@@ -56,6 +54,11 @@ function QuestionDetail() {
           },
         });
         const serverData = response.data;
+        serverData.questionContent
+        .replace(/\\\\/g, '\\')
+        .replace(/\\"/g, '"')
+        .replace(/\\n/g, '\n');
+
         setData(serverData);
         setNewAnswerList(serverData.answerList);
       } catch (error) {
@@ -71,7 +74,7 @@ function QuestionDetail() {
   };
 
   const postAnswer = async() => {
-    const memberId = 1;
+    const memberId = 7;
     // const newAnswer: AnswerPostItem = {
     //   "memberId": 1,
     //   "answerId": 1,
