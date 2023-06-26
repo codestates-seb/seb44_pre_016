@@ -1,32 +1,78 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../button/Button';
 import Dropdown from './Dropdown';
 import { searchSet } from '../../redux/searchReducer';
+import {
+  LOGOUT_ICON_POSITION,
+  LOGOUT_LINK_LIST,
+} from '../../common/data/ConstantValue';
+// import { userinfoUPDATE } from '../../redux/userInfoReducer';
+import { RootState } from '../../redux/store';
 
 function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>('');
+  const [isLogoutModal, setIsLogoutModal] = useState<boolean>(false);
   const navigate = useNavigate();
   const inputRef = useRef(null);
   const dispatch = useDispatch();
 
-  const token = localStorage.getItem('accessToken');
-  const memberId = localStorage.getItem('memberId');
-  const displayname = '혜수님짱멋있어';
-  // localStorage.getItem('displayName');
+  // 임시저장
+  // localStorage.setItem('accessToken', JSON.stringify('fdfdfdfdfdf'));
+  // localStorage.setItem('memberId', JSON.stringify('4'));
+  // localStorage.setItem('displayName', JSON.stringify('hihi'));
+  // dispatch(
+  //   userinfoUPDATE({
+  //     memberId: '4',
+  //     accessToken: 'dfdf',
+  //   }),
+  // );
+  //   // Key - "accessToken" 제거하기
+  // localStorage.removeItem('accessToken');
+  // // 로컬 스토리지 초기화
+  // localStorage.clear();
 
-  const Handledropdown = (): void => {
+  // const token = localStorage.getItem('accessToken');
+  // const memberId = localStorage.getItem('memberId');
+  // const displayname = localStorage.getItem('displayName')
+  //   ? localStorage.getItem('displayName')
+  //   : '혜수님짱멋있어';
+
+  const token = useSelector(
+    (state: RootState) => state.userInfoReducer.accessToken,
+  );
+  const memberId = useSelector(
+    (state: RootState) => state.userInfoReducer.memberId,
+  );
+
+  const displayname = useSelector(
+    (state: RootState) => state.userInfoReducer.displayName,
+  );
+
+  const handledropdown = (): void => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogOut = () => {
+    localStorage.clear();
+    setIsLogoutModal(false);
+    window.location.reload();
+    navigate('/');
+  };
+
+  const closeModal = e => {
+    if (e.target === e.currentTarget) {
+      setIsLogoutModal(false);
+    }
   };
 
   const handleEnter = e => {
     if (e.key === 'Enter') {
       const tagRegex = /\[+([^\]]+)\]+$/;
-
       const tagMatch = tagRegex.exec(inputValue);
 
       if (tagMatch && tagMatch[1]) {
@@ -39,6 +85,9 @@ function Header() {
       }
       navigate('/search');
     }
+  };
+  const handlemypage = () => {
+    navigate(`/mypage/`);
   };
 
   return (
@@ -59,7 +108,7 @@ function Header() {
           placeholder="Search..."
           ref={inputRef}
           value={inputValue}
-          onClick={Handledropdown}
+          onClick={handledropdown}
           onChange={e => setInputValue(e.target.value)}
           onKeyUp={handleEnter}
         ></input>
@@ -67,24 +116,31 @@ function Header() {
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </span>
         {isOpen ? (
-          <Dropdown Handledropdown={Handledropdown} inputRef={inputRef} />
+          <Dropdown Handledropdown={handledropdown} inputRef={inputRef} />
         ) : null}
       </div>
       {token ? (
         <div className=" flex flex-row items-center">
-          <img
-            src="/images/profile.jpg"
-            alt="프로필"
-            className="w-[20px] h-[20px] rounded-lg m-2"
-          />
-          <p className="text-[10px]">{displayname}</p>
-          <Link to="/mypage">
+          <button
+            onClick={() => {
+              handlemypage();
+            }}
+            className=" flex flex-row items-center hover:bg-gray-300"
+          >
             <img
-              src="/images/mypageicon.png"
-              alt="마이페이지아이콘"
+              src="/images/profile.jpg"
+              alt="프로필"
+              className="w-[20px] h-[20px] rounded-lg m-2"
+            />
+            <p className="text-[10px]">{displayname}</p>
+          </button>
+          <button onClick={() => setIsLogoutModal(true)}>
+            <img
+              src="/images/logout.png"
+              alt="로그아웃"
               className="w-[40px] h-[40px]"
             />
-          </Link>
+          </button>
         </div>
       ) : (
         <>
@@ -97,6 +153,46 @@ function Header() {
             <Button>sign up</Button>
           </Link>
         </>
+      )}
+      {isLogoutModal && (
+        <button
+          className="top-0 left-0 absolute w-screen h-screen bg-[#eeeeee] bg-opacity-50"
+          onClick={closeModal}
+        >
+          <div className="top-50% left-50% bg-white p-6 max-w-[268px] shadow-logout-Shadow cursor-default">
+            <ul className="flex flex-col text-left mb-4 pb-3 border-b text-[14px]">
+              {LOGOUT_LINK_LIST.map(link => (
+                <li className="flex group items-center" key={link}>
+                  <div
+                    className="m-1 w-4 h-4 bg-no-repeat bg-transparent bg-[length:16px] bg-icons"
+                    style={{
+                      backgroundPosition: LOGOUT_ICON_POSITION[link],
+                    }}
+                  ></div>
+                  <div className="m-1 text-[#0074CC] group-hover:text-[#0A95FF]">
+                    {link}
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <div className="flex mb-4 text-[12px]">Log out on all devices</div>
+            <div className="flex">
+              <Button onClick={handleLogOut} customStyle="m-0.5 p-2.5">
+                Log out
+              </Button>
+              <Button
+                onClick={() => setIsLogoutModal(false)}
+                customStyle="m-0.5 p-2.5 bg-transparent border-transparent text-blue hover:bg-[#F0F8FF] hover:text-[#0061BD] focus:bg-[#F0F8FF] focus:text-[#0061BD] focus:shadow-[0_0_0_4px_rgba(0,116,204,0.15)] active:bg-[#CDE9FE] active:text-[#0074CC]"
+              >
+                Cancel
+              </Button>
+            </div>
+            <div className="mt-8 text-[#6A737C] text-[12px] text-left">
+              If you’re on a shared computer, remember to log out of your Open
+              ID provider (Facebook, Google, Stack Exchange, etc.) as well.
+            </div>
+          </div>
+        </button>
       )}
     </header>
   );

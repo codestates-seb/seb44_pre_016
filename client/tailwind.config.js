@@ -18,6 +18,12 @@ module.exports = {
         'gray-text': "var(--gray-text)",
         'gray-nav-active': "var(--gray-nav-active)"
       },
+      boxShadow: {
+        'logout-Shadow': "0 10px 24px hsla(0,0%,0%,0.05), 0 20px 48px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.1)"
+      },
+      backgroundImage: {
+        'icons': "url('./common/images/faviconLink.png')"
+      }
     },
   },
   plugins: [],

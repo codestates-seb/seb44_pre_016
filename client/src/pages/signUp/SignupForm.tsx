@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import Button from '../../components/button/Button';
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 function SignupForm() {
   const navigation = useNavigate(); // ?
   // const isLogin = useSelector((state: RootState) => state.userInfos); //
@@ -50,17 +52,14 @@ function SignupForm() {
       return;
     }
 
-    fetch(
-      'https://f122-124-50-73-190.ngrok-free.app/bluelight/members/signup',
-      {
-        method: 'POST',
-        headers: {
-          'ngrok-skip-browser-warning': 'true',
-          'Content-Type': 'application/json', // json fetch시
-        },
-        body: JSON.stringify(signUpInfo),
+    fetch(`${BASE_URL}/members/signup`, {
+      method: 'POST',
+      headers: {
+        'ngrok-skip-browser-warning': 'true',
+        'Content-Type': 'application/json', // json fetch시
       },
-    )
+      body: JSON.stringify(signUpInfo),
+    })
       .then(data => {
         if (data.status === 201) {
           // 응답이 성공적인 경우
