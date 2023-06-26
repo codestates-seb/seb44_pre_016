@@ -84,7 +84,7 @@ function QuestionItem({ pageType, questionProps }: QuestionItemProps) {
         </QuestionAnswer>
       </QuestionItemActive>
       <QuestionDataContainer>
-        <QuestionItemTitle onClick={()=>navigate("questions/1")}>{questionTitle}</QuestionItemTitle>
+        <QuestionItemTitle onClick={()=>navigate("questions/3")}>{questionTitle}</QuestionItemTitle>
         <div className="text-[13px] mb-2 text-[#3B4045]">
           {pageType === 'All_Search' && questionProps.questionContent}
         </div>

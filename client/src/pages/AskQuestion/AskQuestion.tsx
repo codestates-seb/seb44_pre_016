@@ -1,5 +1,7 @@
 /* eslint-disable no-alert */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
+import { useNavigate } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -20,7 +22,15 @@ import {
   SuggestionTagItem,
 } from './AskQuestion.styled';
 
+interface Tag {
+  tagId: number;
+  tagName: string;
+  tagContent: string;
+}
+
 function AskQuestion() {
+  const memberId = 7;
+
   const [title, setTitle] = useState("");
   const [isContentEnabled, setIsContentEnabled] = useState(false);
   const [isTagEnabled, setIsTagEnabled] = useState(false);
@@ -28,34 +38,26 @@ function AskQuestion() {
   const [currentTag, setCurrentTag] = useState("")
   const [similarTags, setSimilarTags] = useState([]);
   const [tags, setTags] = useState([]);
+  const [allTags, setAllTags] = useState([]);
 
-  const allTagList=[
-    {
-      "tagId": 1,
-      "tagName": "java",
-      "tagContent": "Java is a high-level object-oriented programming language. Use this tag when you're having problems using or understanding the language itself. This tag is frequently used alongside other tags for libraries and/or frameworks used by Java developers."
-    },
-    {
-      "tagId": 2500574,
-      "tagName": "javascript",
-      "tagContent": "JavaScript (a dialect of ECMAScript) is a high-level, dynamic, multi-paradigm, object-oriented, prototype-based, weakly-typed, and interpreted language traditionally used for client-side scripting in web browsers. JavaScript can also be run outside the browser using a framework like Node.js, Nashorn, Wakanda, or Google Apps Script. Despite the name, it is unrelated to the Java programming language and shares only superficial similarities."
-    },
-    {
-      "tagId": 3,
-      "tagName": "java1",
-      "tagContent":"spring blah blah"
-    },
-    {
-      "tagId": 6,
-      "tagName": "java2",
-      "tagContent":"spring-boot blah blah"
-    },
-    {
-      "tagId": 13,
-      "tagName": "java3",
-      "tagContent":"jwt blah blah"
-    }
-  ];
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchTags = async () => {
+      try {
+        const response = await axios.get<Tag[]>(`${process.env.REACT_APP_BASE_URL}/tags`,
+        {
+          headers: {
+            'ngrok-skip-browser-warning': 'true',
+          },
+        });
+        setAllTags(response.data);
+      } catch (error) {
+        console.error("Error fetching tags: ", error);
+      }
+    };
+    fetchTags();
+  }, []);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -71,7 +73,7 @@ function AskQuestion() {
     if (e.target.value === '') {
       setSimilarTags([]);
     } else {
-      const foundTags = allTagList
+      const foundTags = allTags
         .filter((tag) =>
           tag.tagName.toLowerCase().includes(e.target.value.toLowerCase())
         );
@@ -83,7 +85,7 @@ function AskQuestion() {
     if(event.key === 'Enter'){
       event.preventDefault();
       const foundTagName = event.currentTarget.value.toLowerCase();
-      const foundTag = allTagList.find(
+      const foundTag = allTags.find(
         (tag) => tag.tagName.toLowerCase() === foundTagName
       );
 
@@ -105,10 +107,10 @@ function AskQuestion() {
   };
 
   const handleClickSuggestionTag = (id:number) => {
-    const foundTag = allTagList.find(
+    const foundTag = allTags.find(
       (tag) => tag.tagId === id
     );
-    if (foundTag && (allTagList.some((tag) => tag.tagId === id))) {
+    if (foundTag && (allTags.some((tag) => tag.tagId === id))) {
       setTags([...tags, foundTag]);
       setSimilarTags([]);
       setCurrentTag("");
@@ -142,13 +144,44 @@ function AskQuestion() {
     return text;
   };
 
-  const handlePostClick = () => {
-    // post 요청 보내기
+  const handlePostClick = async () => {
+    const unescapedContent = content 
+    .replace(/\\/g, '\\\\')
+    .replace(/"/g, '\\"')
+    .replace(/\n/g, '\\n');
+
+    const payload = {
+      questionTitle: title,
+      questionContent: unescapedContent,
+      questionTag: tags.map((tag: Tag) => tag),
+      memberId,
+    };
+
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/questions/ask`,
+        payload,
+        {
+          headers: {
+            'ngrok-skip-browser-warning': 'true',
+          },
+        }
+      );
+      const questionId = response.data;
+
+      console.log("payload:", payload)
+
+      // 생성된 질문의 상세 페이지로 이동합니다.
+      navigate(`/questions/${questionId}`);
+    } catch (error) {
+      console.log("payload:", payload)
+      console.error("Error posting the question:", error);
+    }
   }
 
   return (
     <div>
-      <div className='font-extrabold text-2xl ml-5 mb-10'>Ask a public question</div>
+      <div className='font-extrabold text-2xl ml-5 my-10'>Ask a public question</div>
       <AllContainer>
         <TitleContainer>
           <p className='font-bold mb-1'>Title</p>
