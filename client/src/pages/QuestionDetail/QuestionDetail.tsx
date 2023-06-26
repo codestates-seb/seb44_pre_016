@@ -49,7 +49,7 @@ function QuestionDetail() {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_URL}/questions/${questionId}`,
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/questions/${questionId}`,
         {
           headers: {
             'ngrok-skip-browser-warning': 'true',
@@ -87,7 +87,7 @@ function QuestionDetail() {
     };
 
     try{
-      const response = await axios.post(`${process.env.REACT_APP_URL}/questions/answer`, payload,
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/questions/answer`, payload,
       {
         headers: {
           'ngrok-skip-browser-warning': 'true',
