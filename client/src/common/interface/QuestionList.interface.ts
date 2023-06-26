@@ -11,8 +11,8 @@ export interface TopQuestionItemData {
   questionId: number;
   questionTitle: string;
   questionVoteCount: number;
-  answer: number;
-  tags: Tags[];
+  answerCount: number;
+  questionTag: Tags[];
   profileImage: string;
   nickName: string;
   createdAt: string;
@@ -23,8 +23,8 @@ export interface AllSearchQuestionItemData {
   questionTitle: string;
   questionContent: string;
   questionVoteCount: number;
-  answer: number;
-  tags: Tags[];
+  answerCount: number;
+  questionTag: Tags[];
   profileImage: string;
   nickName: string;
   createdAt: string;

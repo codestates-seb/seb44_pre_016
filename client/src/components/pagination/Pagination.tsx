@@ -19,6 +19,7 @@ function Pagination({
 }: PaginationProps) {
   const navigate = useNavigate();
   const [paginationList, setPaginationList] = useState<number[]>([]);
+
   const searchKeyword = useSelector(
     (state: RootState) => state.SearchReducer.keyword,
   );
@@ -51,7 +52,11 @@ function Pagination({
 
   useEffect(() => {
     setPaginationList(() => updatePaginationList());
-  }, [currentPage, pageInfo.size, searchKeyword]);
+  }, [currentPage, searchKeyword]);
+
+  useEffect(() => {
+    console.log(pageInfo);
+  });
 
   return (
     <>
