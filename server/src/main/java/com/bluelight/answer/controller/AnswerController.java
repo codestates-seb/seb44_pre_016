@@ -2,8 +2,6 @@ package com.bluelight.answer.controller;
 
 
 import com.bluelight.answer.dto.AnswerDto;
-import com.bluelight.answer.entity.Answer;
-import com.bluelight.answer.mapper.AnswerMapper;
 import com.bluelight.answer.service.AnswerService;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;

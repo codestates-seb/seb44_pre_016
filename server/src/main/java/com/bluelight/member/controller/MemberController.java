@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class MemberController {
 
-    private final static String MEMBER_DEFAULT_URL = "/members";
     private final MemberService memberService;
 
     public MemberController(MemberService memberService) {

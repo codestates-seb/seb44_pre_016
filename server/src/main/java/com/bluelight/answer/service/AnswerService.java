@@ -1,9 +1,7 @@
 package com.bluelight.answer.service;
 
 import com.bluelight.answer.dto.AnswerDto;
-import com.bluelight.answer.dto.CreateAnswerDto;
 import com.bluelight.answer.entity.Answer;
-import com.bluelight.answer.mapper.AnswerMapper;
 import com.bluelight.answer.repository.AnswerRepository;
 import com.bluelight.member.service.MemberService;
 import com.bluelight.question.service.QuestionService;
@@ -15,27 +13,23 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class AnswerService {
 
-    private final AnswerMapper answerMapper;
     private final AnswerRepository answerRepository;
     private final MemberService memberService;
     private final QuestionService questionService;
 
-    public AnswerService(AnswerMapper answerMapper, AnswerRepository answerRepository,
-        MemberService memberService, QuestionService questionService) {
-        this.answerMapper = answerMapper;
+    public AnswerService(AnswerRepository answerRepository, MemberService memberService,
+        QuestionService questionService) {
         this.answerRepository = answerRepository;
         this.memberService = memberService;
         this.questionService = questionService;
     }
 
     public void createAnswer(AnswerDto.Post requestBody) {
-        CreateAnswerDto createAnswerDto = new CreateAnswerDto();
 
-        createAnswerDto.setMember(memberService.findMember(requestBody.getMemberId()));
-        createAnswerDto.setQuestion(questionService.findQuestion(requestBody.getQuestionId()));
-        createAnswerDto.setAnswerContent(requestBody.getAnswerContent());
-
-        Answer answer = answerMapper.answerPostToAnswer(createAnswerDto);
+        Answer answer = new Answer();
+        answer.setMember(memberService.findMember(requestBody.getMemberId()));
+        answer.setQuestion(questionService.findQuestion(requestBody.getQuestionId()));
+        answer.setAnswerContent(requestBody.getAnswerContent());
 
         answerRepository.save(answer);
     }
