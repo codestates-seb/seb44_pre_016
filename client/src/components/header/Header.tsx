@@ -22,9 +22,9 @@ function Header() {
   const dispatch = useDispatch();
 
   // 임시저장
-  // localStorage.setItem('accessToken', JSON.stringify('fdfdfdfdfdf'));
-  // localStorage.setItem('memberId', JSON.stringify('4'));
-  // localStorage.setItem('displayName', JSON.stringify('hihi'));
+  localStorage.setItem('accessToken', JSON.stringify('fdfdfdfdfdf'));
+  localStorage.setItem('memberId', JSON.stringify('4'));
+  localStorage.setItem('displayName', JSON.stringify('레전드혜수님'));
   // dispatch(
   //   userinfoUPDATE({
   //     memberId: '4',
