@@ -53,11 +53,7 @@ function AllQuestionList() {
     <>
       <QuestionContainer>
         {allQuestionData.map(question => (
-          <QuestionItem
-            pageType="All_Search"
-            questionProps={question}
-            key={question.questionId}
-          />
+          <QuestionItem questionProps={question} key={question.questionId} />
         ))}
       </QuestionContainer>
       {obj && (

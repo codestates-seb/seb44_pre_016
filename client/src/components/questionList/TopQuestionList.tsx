@@ -32,11 +32,7 @@ function TopQuestionList() {
     <QuestionContainer>
       {topQuestionData &&
         topQuestionData.map(question => (
-          <QuestionItem
-            pageType="Top"
-            questionProps={question}
-            key={question.questionId}
-          />
+          <QuestionItem questionProps={question} key={question.questionId} />
         ))}
     </QuestionContainer>
   );
