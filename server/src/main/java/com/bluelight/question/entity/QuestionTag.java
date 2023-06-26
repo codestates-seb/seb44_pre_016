@@ -1,7 +1,7 @@
 package com.bluelight.question.entity;
 
+import com.bluelight.audit.Auditable;
 import com.bluelight.tag.entity.Tag;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,16 +9,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
-public class QuestionTag {
+public class QuestionTag extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "question_tag_id")
     private Long questionTagId;
 
     @ManyToOne
