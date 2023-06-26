@@ -1,8 +1,15 @@
-import React, { ChangeEventHandler, useState } from 'react';
+import React, { useState } from 'react';
 import tw from 'tailwind-styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Button from '../../components/button/Button';
+import { userinfoLogin, userinfoGet } from '../../redux/userInfoReducer';
+
+// 로그인가능한 아이디
+// sss@gmail.com
+// asdasd72
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const initialInfo: {
   email: string;
@@ -15,7 +22,7 @@ function Login() {
   const [isinvalidEmail, setIsinvalidEmail] = useState(false);
   const [isinvalidPassword, setisinvalidPassword] = useState(false);
   const [loginMSG, setloginMSG] = useState('');
-
+  const dispatch = useDispatch();
   // email,password 유효성 검사 정규식
   const regexEmail = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/;
   const regexPassword = /^[a-zA-Z0-9]{7,}$/;
@@ -41,16 +48,40 @@ function Login() {
     }
   };
 
+  const handleUserInfo = async (memberId: string) => {
+    fetch(`${BASE_URL}/members/${memberId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
+      },
+    })
+      .then(data => data.json())
+      .then(data => {
+        console.log(data);
+        dispatch(
+          userinfoGet({
+            displayName: data.displayName,
+            location: data.location,
+            profileContent: data.profileContent,
+            profileImage: data.profileImage,
+            profileTitle: data.profileTitle,
+          }),
+        );
+      })
+      .catch(err => {
+        console.log(err);
+        navigation('/error');
+      });
+  };
   const handlelogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(loginInfo);
-    // 요청보내기 전에 유효성검사
     if (!isinvalidEmail || !isinvalidPassword) {
       setloginMSG('이메일또는 패스워드가 유효하지 않습니다.');
       console.log(loginMSG);
       return;
     }
-    fetch('https://424b-124-50-73-190.ngrok-free.app/bluelight/members/login', {
+    fetch(`${BASE_URL}/members/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -60,16 +91,21 @@ function Login() {
     })
       .then(data => {
         if (data.status === 201 || data.status === 200) {
-          const memberId = data.headers.get('memberid');
-          const displayName = data.headers.get('displayName');
-          const accessToken = data.headers.get('accessToken');
+          localStorage.setItem(
+            'accessToken',
+            data.headers.get('Authorization'),
+          );
+          localStorage.setItem('memberId', data.headers.get('memberId'));
 
-          localStorage.setItem('accessToken', accessToken);
-          localStorage.setItem('memberId', memberId);
-          localStorage.setItem('displayName', displayName);
-          localStorage.setItem('accessToken', accessToken);
+          dispatch(
+            userinfoLogin({
+              memberId: data.headers.get('memberId'),
+              accessToken: data.headers.get('Authorization'),
+            }),
+          );
 
-          console.log('굿');
+          handleUserInfo(data.headers.get('memberId'));
+
           navigation('/');
         } else {
           console.log('요청이 실패했습니다.');
