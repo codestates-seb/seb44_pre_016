@@ -28,7 +28,7 @@ const giljongHandlers: DahamType = [
     users.push(newUser);
     return res(ctx.status(201), ctx.json('signup successful'));
   }),
-  rest.post('/users/login', async (req, res, ctx) => {
+  rest.post('/members/login', async (req, res, ctx) => {
     const accessToken = 'dummy-access-token';
 
     const loginUser = await req.json();
