@@ -22,7 +22,9 @@ public class ErrorResponse {
     }
 
     private ErrorResponse(final List<FieldError> fieldErrors,
+
         final List<ConstraintViolationError> violationErrors) {
+
         this.fieldErrors = fieldErrors;
         this.violationErrors = violationErrors;
     }

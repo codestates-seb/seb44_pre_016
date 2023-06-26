@@ -5,14 +5,8 @@ import com.bluelight.audit.Auditable;
 import com.bluelight.member.entity.Member;
 import com.bluelight.tag.entity.Tag;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,10 +18,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @NoArgsConstructor
 @Getter
@@ -62,7 +56,6 @@ public class Question extends Auditable {
         for (QuestionTag questionTag : questionTags) {
             addQuestionTag(questionTag);
         }
-
     }
 
     public void addQuestionTag(QuestionTag questionTag) {

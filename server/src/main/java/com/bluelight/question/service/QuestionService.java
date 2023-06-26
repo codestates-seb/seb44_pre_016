@@ -4,7 +4,6 @@ import com.bluelight.question.repository.QuestionTagRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 import com.bluelight.answer.entity.Answer;
-import com.bluelight.answer.service.AnswerService;
 import com.bluelight.exception.BusinessLogicException;
 import com.bluelight.exception.ExceptionCode;
 import com.bluelight.member.entity.Member;

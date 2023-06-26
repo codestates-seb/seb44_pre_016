@@ -1,35 +1,30 @@
 package com.bluelight.question.controller;
 
-import com.bluelight.dto.MultiResponseDto;
-import com.bluelight.dto.SingleResponseDto;
-import com.bluelight.question.dto.AllQuestionDto;
+
 import com.bluelight.question.dto.AllResponseDto;
 import com.bluelight.question.dto.AskQuestionDto;
-import com.bluelight.question.dto.AskQuestionDto.Response;
+
 import com.bluelight.question.dto.QuestionDetailDto;
-import com.bluelight.question.dto.ResponseDto;
+
 import com.bluelight.question.dto.TopQuestionDto;
-import com.bluelight.question.entity.Question;
-import com.bluelight.question.entity.QuestionTag;
+
 import com.bluelight.question.mapper.QuestionMapper;
 import com.bluelight.question.service.QuestionService;
 import com.bluelight.question.service.QuestionTagService;
-import com.bluelight.tag.entity.Tag;
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
