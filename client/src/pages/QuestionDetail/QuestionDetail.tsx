@@ -49,7 +49,7 @@ function QuestionDetail() {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://2a37-124-50-73-190.ngrok-free.app/bluelight/questions/${questionId}`,
+        const response = await axios.get(`${process.env.REACT_APP_URL}/questions/${questionId}`,
         {
           headers: {
             'ngrok-skip-browser-warning': 'true',
@@ -70,17 +70,8 @@ function QuestionDetail() {
     setAnswerContent(value);
   };
 
-  const postAnswer = () => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = (`0${  today.getMonth() + 1}`).slice(SLICE_DATE_NUMBER);
-    const day = (`0${  today.getDate() + 1}`).slice(SLICE_DATE_NUMBER);
-    const hours = (`0${  today.getHours()}`).slice(SLICE_DATE_NUMBER); 
-    const minutes = (`0${  today.getMinutes()}`).slice(SLICE_DATE_NUMBER);
-    const seconds = (`0${  today.getSeconds()}`).slice(SLICE_DATE_NUMBER);
-
-    const date = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
-
+  const postAnswer = async() => {
+    const memberId = 1;
     // const newAnswer: AnswerPostItem = {
     //   "memberId": 1,
     //   "answerId": 1,
@@ -88,7 +79,26 @@ function QuestionDetail() {
     // }
     
     // setNewAnswerList(prevAnswerList => [...prevAnswerList, newAnswer]);
-  }
+
+    const payload = {
+      memberId,
+      questionId: parseInt(questionId, 10),
+      answerContent,
+    };
+
+    try{
+      const response = await axios.post(`${process.env.REACT_APP_URL}/questions/answer`, payload,
+      {
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+        },
+      });
+
+      window.location.reload();
+    } catch (error) {
+      console.error("Error posting the answer:", error);
+    }
+  };
 
   return (
     <AllContainer>
