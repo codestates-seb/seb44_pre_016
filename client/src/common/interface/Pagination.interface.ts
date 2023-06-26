@@ -1,7 +1,5 @@
 export interface PageInfo {
-  page: number;
-  size: number;
-  totalElements: number;
+  totalCount: number;
   totalPages: number;
 }
 
