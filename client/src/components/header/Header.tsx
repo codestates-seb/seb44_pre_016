@@ -77,7 +77,7 @@ function Header() {
 
       if (tagMatch && tagMatch[1]) {
         const tagName = `[${tagMatch[1].trim()}]`.replace(/\s+/g, '');
-        dispatch(searchSet({ keyword: tagMatch[1], types: 'tagged' }));
+        dispatch(searchSet({ keyword: tagMatch[1], types: 'tag' }));
         setInputValue(tagName);
       } else {
         dispatch(searchSet({ keyword: inputValue, types: 'title' }));

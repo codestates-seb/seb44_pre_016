@@ -36,9 +36,9 @@ type QuestionItemProps =
 function QuestionItem({ pageType, questionProps }: QuestionItemProps) {
   const {
     questionVoteCount,
-    answer,
+    answerCount,
     questionTitle,
-    tags,
+    questionTag,
     profileImage,
     nickName,
     createdAt,
@@ -74,7 +74,7 @@ function QuestionItem({ pageType, questionProps }: QuestionItemProps) {
 
   // const validateNavigation = () => {
   //   const location = useLocation();
-    
+
   //   if (location.pathname === "/questions") {
   //     navigate(`${questionId}`);
   //   } else if (location.pathname === "/") {
@@ -88,28 +88,31 @@ function QuestionItem({ pageType, questionProps }: QuestionItemProps) {
         <QuestionVote>{questionVoteCount} votes</QuestionVote>
         <QuestionAnswer
           className={
-            answer ? `border-green border text-green` : `text-[#6A737C]`
+            answerCount ? `border-green border text-green` : `text-[#6A737C]`
           }
         >
-          {answer} answers
+          {answerCount} answers
         </QuestionAnswer>
       </QuestionItemActive>
       <QuestionDataContainer>
-        <QuestionItemTitle onClick={()=>navigate(`${questionId}`)}>{questionTitle}</QuestionItemTitle>
-        <div className="text-[13px] mb-2 text-[#3B4045]">
-          {pageType === 'All_Search' && questionProps.questionContent}
-        </div>
+        <QuestionItemTitle onClick={() => navigate(`${questionId}`)}>
+          {questionTitle}
+        </QuestionItemTitle>
         <QuestionBodyContainer>
           <ul>
-            {tags.map(tag => (
-              <QuestionTagList key={tag.tagId}>
-                <QuestionTagName>{tag.tagName}</QuestionTagName>
-              </QuestionTagList>
-            ))}
+            {questionTag &&
+              questionTag.map(tag => (
+                <QuestionTagList key={tag.tagId}>
+                  <QuestionTagName>{tag.tagName}</QuestionTagName>
+                </QuestionTagList>
+              ))}
           </ul>
           <QuestionUserContainer>
-            <QuestionUserProfile src={profileImage} alt="프로필 사진" />
-            <QuestionUserName>{nickName}</QuestionUserName>
+            <QuestionUserProfile
+              src={profileImage && profileImage}
+              alt="프로필 사진"
+            />
+            <QuestionUserName>{nickName && nickName}</QuestionUserName>
             <time className="text-[#6A737C]">{changeDate(createdAt)}</time>
           </QuestionUserContainer>
         </QuestionBodyContainer>

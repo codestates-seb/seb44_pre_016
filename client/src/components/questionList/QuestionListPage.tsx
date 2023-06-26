@@ -40,43 +40,6 @@ function QuestionListPage({ page }: QuestionListPageProps) {
     }
   }, [page]);
 
-  const handleFetch = () => {
-    // fetch(
-    //   'https://95a4-124-50-73-190.ngrok-free.app/bluelight/members/signup',
-    //   {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'ngrok-skip-browser-warning': 'true',
-    //     },
-    //     body: JSON.stringify({
-    //       email: 'test@naver.com',
-    //       name: 'kkk',
-    //       password: 'password',
-    //     }),
-    //   },
-    // ).then(res => res.json());
-    // fetch('https://95a4-124-50-73-190.ngrok-free.app/bluelight/members/1', {
-    //   method: 'GET',
-    //   headers: {
-    //     'ngrok-skip-browser-warning': 'true',
-    //   },
-    // })
-    //   .then(res => res.json())
-    //   .then(res => console.log(res));
-    fetch('https://95a4-124-50-73-190.ngrok-free.app/bluelight/members/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'ngrok-skip-browser-warning': 'true',
-      },
-      body: JSON.stringify({
-        email: 'test@naver.com',
-        password: 'password',
-      }),
-    });
-  };
-
   return (
     <MainContainer>
       <ContentContainer>
@@ -85,7 +48,7 @@ function QuestionListPage({ page }: QuestionListPageProps) {
             {QUESTION_PAGE_TITLE[page]}
           </h1>
           <ContentButtonContainer className="ml-3">
-            <Button onClick={handleFetch}>Ask Question</Button>
+            <Button>Ask Question</Button>
           </ContentButtonContainer>
         </ContentHeader>
         {page === 'Search' && (
