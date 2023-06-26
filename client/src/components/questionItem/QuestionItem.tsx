@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import {
   ONE_DAY_MILLISECOND,
   ONE_HOUR_MILLISECOND,
@@ -28,19 +28,18 @@ import {
 
 type QuestionItemProps =
   | {
-      pageType: 'Top';
       questionProps: TopQuestionItemData;
     }
-  | { pageType: 'All_Search'; questionProps: AllSearchQuestionItemData };
+  | { questionProps: AllSearchQuestionItemData };
 
-function QuestionItem({ pageType, questionProps }: QuestionItemProps) {
+function QuestionItem({ questionProps }: QuestionItemProps) {
   const {
     questionVoteCount,
     answerCount,
     questionTitle,
     questionTag,
     profileImage,
-    nickName,
+    displayName,
     createdAt,
     questionId,
   } = questionProps;
@@ -112,7 +111,7 @@ function QuestionItem({ pageType, questionProps }: QuestionItemProps) {
               src={profileImage && profileImage}
               alt="프로필 사진"
             />
-            <QuestionUserName>{nickName && nickName}</QuestionUserName>
+            <QuestionUserName>{displayName && displayName}</QuestionUserName>
             <time className="text-[#6A737C]">{changeDate(createdAt)}</time>
           </QuestionUserContainer>
         </QuestionBodyContainer>

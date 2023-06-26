@@ -14,7 +14,7 @@ export interface TopQuestionItemData {
   answerCount: number;
   questionTag: Tags[];
   profileImage: string;
-  nickName: string;
+  displayName: string;
   createdAt: string;
 }
 
@@ -26,6 +26,6 @@ export interface AllSearchQuestionItemData {
   answerCount: number;
   questionTag: Tags[];
   profileImage: string;
-  nickName: string;
+  displayName: string;
   createdAt: string;
 }
