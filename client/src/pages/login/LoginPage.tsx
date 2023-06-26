@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Button from '../../components/button/Button';
-import { userinfoUPDATE } from '../../redux/userInfoReducer';
+import { userinfoLogin, userinfoGet } from '../../redux/userInfoReducer';
 
 // 로그인가능한 아이디
 // sss@gmail.com
@@ -48,16 +48,40 @@ function Login() {
     }
   };
 
+  const handleUserInfo = async (memberId: string) => {
+    fetch(`${BASE_URL}/members/${memberId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
+      },
+    })
+      .then(data => data.json())
+      .then(data => {
+        console.log(data);
+        dispatch(
+          userinfoGet({
+            displayName: data.displayName,
+            location: data.location,
+            profileContent: data.profileContent,
+            profileImage: data.profileImage,
+            profileTitle: data.profileTitle,
+          }),
+        );
+      })
+      .catch(err => {
+        console.log(err);
+        navigation('/error');
+      });
+  };
   const handlelogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(loginInfo);
-    // 요청보내기 전에 유효성검사
     if (!isinvalidEmail || !isinvalidPassword) {
       setloginMSG('이메일또는 패스워드가 유효하지 않습니다.');
       console.log(loginMSG);
       return;
     }
-    fetch('https://2a37-124-50-73-190.ngrok-free.app/bluelight/members/login', {
+    fetch(`${BASE_URL}/members/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -67,24 +91,21 @@ function Login() {
     })
       .then(data => {
         if (data.status === 201 || data.status === 200) {
-          console.log(data);
-
           localStorage.setItem(
             'accessToken',
             data.headers.get('Authorization'),
           );
           localStorage.setItem('memberId', data.headers.get('memberId'));
-          localStorage.setItem('displayName', data.headers.get('displayName'));
 
-          // localStorage.setItem('accessToken', JSON.stringify('fdfdfdfdfdf'));
-          // localStorage.setItem('memberId', JSON.stringify('4'));
-          // localStorage.setItem('displayName', JSON.stringify('hihi'));
           dispatch(
-            userinfoUPDATE({
+            userinfoLogin({
               memberId: data.headers.get('memberId'),
               accessToken: data.headers.get('Authorization'),
             }),
           );
+
+          handleUserInfo(data.headers.get('memberId'));
+
           navigation('/');
         } else {
           console.log('요청이 실패했습니다.');

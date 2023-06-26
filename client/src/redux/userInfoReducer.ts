@@ -7,7 +7,10 @@ interface UserInfo {
   location: string | null;
   title: string | null;
   aboutme: string | null;
-  token: string | null;
+  accessToken: string | null;
+  profileContent: string | null;
+  profileImage: string | null;
+  profileTitle: string | null;
 }
 
 const initialState = {
@@ -17,22 +20,43 @@ const initialState = {
   location: null,
   title: null,
   aboutme: null,
-  token: JSON.parse(localStorage.getItem('accessToken')!),
+  accessToken: localStorage.getItem('accessToken'),
+  profileContent: null,
+  profileImage: null,
+  profileTitle: null,
 };
 
 const userInfoSlice = createSlice({
   name: 'changeInfo',
   initialState,
   reducers: {
-    userinfoUPDATE: (state: UserInfo, action) => {
+    userinfoLogin: (state: UserInfo, action) => {
       return {
         ...state,
         memberId: action.payload.memberId,
-        token: action.payload.token,
+        accessToken: action.payload.accessToken,
+      };
+    },
+    userinfoGet: (state: UserInfo, action) => {
+      return {
+        ...state,
+        displayName: action.payload.displayName,
+        location: action.payload.location,
+        profileContent: action.payload.profileContent,
+        profileImage: action.payload.profileImage,
+        profileTitle: action.payload.profileTitle,
+      };
+    },
+    userinfoDelete: (state: UserInfo, action) => {
+      return {
+        ...state,
+        memberId: action.payload.memberId,
+        accessToken: action.payload.accessToken,
       };
     },
   },
 });
 
-export const { userinfoUPDATE } = userInfoSlice.actions;
+export const { userinfoLogin } = userInfoSlice.actions;
+export const { userinfoGet } = userInfoSlice.actions;
 export default userInfoSlice.reducer;

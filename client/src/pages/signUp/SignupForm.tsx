@@ -52,17 +52,14 @@ function SignupForm() {
       return;
     }
 
-    fetch(
-      'https://2a37-124-50-73-190.ngrok-free.app/bluelight/members/signup',
-      {
-        method: 'POST',
-        headers: {
-          'ngrok-skip-browser-warning': 'true',
-          'Content-Type': 'application/json', // json fetch시
-        },
-        body: JSON.stringify(signUpInfo),
+    fetch(`${BASE_URL}/members/signup`, {
+      method: 'POST',
+      headers: {
+        'ngrok-skip-browser-warning': 'true',
+        'Content-Type': 'application/json', // json fetch시
       },
-    )
+      body: JSON.stringify(signUpInfo),
+    })
       .then(data => {
         if (data.status === 201) {
           // 응답이 성공적인 경우

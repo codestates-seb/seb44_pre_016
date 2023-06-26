@@ -37,15 +37,16 @@ function Header() {
   //   ? localStorage.getItem('displayName')
   //   : '혜수님짱멋있어';
 
-  const token = useSelector((state: RootState) => state.userInfoReducer.token);
+  const token = useSelector(
+    (state: RootState) => state.userInfoReducer.accessToken,
+  );
   const memberId = useSelector(
     (state: RootState) => state.userInfoReducer.memberId,
   );
-  // const displayname = useSelector(
-  //   (state: RootState) => state.userInfoReducer.displayname,
-  // );
 
-  const displayname = 'hi';
+  const displayname = useSelector(
+    (state: RootState) => state.userInfoReducer.displayName,
+  );
 
   const Handledropdown = (): void => {
     setIsOpen(!isOpen);
@@ -54,7 +55,6 @@ function Header() {
   const handleEnter = e => {
     if (e.key === 'Enter') {
       const tagRegex = /\[+([^\]]+)\]+$/;
-
       const tagMatch = tagRegex.exec(inputValue);
 
       if (tagMatch && tagMatch[1]) {
@@ -68,10 +68,8 @@ function Header() {
       navigate('/search');
     }
   };
-  const handlemypage = (event: React.MouseEvent<HTMLButtonElement>) => {
-    navigate('/mypage', {
-      state: 1,
-    });
+  const handlemypage = () => {
+    navigate(`/mypage/`);
   };
 
   return (
@@ -106,7 +104,9 @@ function Header() {
       {token ? (
         <div className=" flex flex-row items-center">
           <button
-            onClick={handlemypage}
+            onClick={() => {
+              handlemypage();
+            }}
             className=" flex flex-row items-center hover:bg-gray-300"
           >
             <img
