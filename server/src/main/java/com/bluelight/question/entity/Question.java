@@ -4,6 +4,7 @@ import com.bluelight.answer.entity.Answer;
 import com.bluelight.audit.Auditable;
 import com.bluelight.member.entity.Member;
 import com.bluelight.tag.entity.Tag;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,20 +41,12 @@ public class Question extends Auditable {
     private String questionContent;
 
     @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JsonIgnore
     private List<QuestionTag> questionTags = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
-
-    @OneToMany(mappedBy = "question", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JsonIgnore
     private List<Answer> answers = new ArrayList<>();
-
-//    @OneToMany(mappedBy = "Question", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-//    private List<QuestionVote> questionVotes = new ArrayList<>();
-//
-//    @OneToOne(mappedBy = "Question", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-//    private QuestionVoteCount questionVoteCount;
 
     public void addQuestionTags(List<Tag> tags) {
         List<QuestionTag> questionTags = tags.stream()
@@ -68,4 +61,13 @@ public class Question extends Auditable {
     public void addQuestionTag(QuestionTag questionTag) {
         questionTags.add(questionTag);
     }
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    public void addMember(Member member) {
+        this.member = member;
+    }
+
 }

@@ -22,7 +22,9 @@ public class ErrorResponse {
     }
 
     private ErrorResponse(final List<FieldError> fieldErrors,
-                          final List<ConstraintViolationError> violationErrors) {
+
+        final List<ConstraintViolationError> violationErrors) {
+
         this.fieldErrors = fieldErrors;
         this.violationErrors = violationErrors;
     }
@@ -61,14 +63,14 @@ public class ErrorResponse {
 
         public static List<FieldError> of(BindingResult bindingResult) {
             final List<org.springframework.validation.FieldError> fieldErrors =
-                                                        bindingResult.getFieldErrors();
+                bindingResult.getFieldErrors();
             return fieldErrors.stream()
-                    .map(error -> new FieldError(
-                            error.getField(),
-                            error.getRejectedValue() == null ?
-                                            "" : error.getRejectedValue().toString(),
-                            error.getDefaultMessage()))
-                    .collect(Collectors.toList());
+                .map(error -> new FieldError(
+                    error.getField(),
+                    error.getRejectedValue() == null ?
+                        "" : error.getRejectedValue().toString(),
+                    error.getDefaultMessage()))
+                .collect(Collectors.toList());
         }
     }
 
@@ -79,20 +81,21 @@ public class ErrorResponse {
         private String reason;
 
         private ConstraintViolationError(String propertyPath, Object rejectedValue,
-                                   String reason) {
+            String reason) {
             this.propertyPath = propertyPath;
             this.rejectedValue = rejectedValue;
             this.reason = reason;
         }
 
         public static List<ConstraintViolationError> of(
-                Set<ConstraintViolation<?>> constraintViolations) {
+            Set<ConstraintViolation<?>> constraintViolations) {
             return constraintViolations.stream()
-                    .map(constraintViolation -> new ConstraintViolationError(
-                            constraintViolation.getPropertyPath().toString(),
-                            constraintViolation.getInvalidValue().toString(),
-                            constraintViolation.getMessage()
-                    )).collect(Collectors.toList());
+                .map(constraintViolation -> new ConstraintViolationError(
+                    constraintViolation.getPropertyPath().toString(),
+                    constraintViolation.getInvalidValue().toString(),
+                    constraintViolation.getMessage()
+                )).collect(Collectors.toList());
         }
     }
+
 }
