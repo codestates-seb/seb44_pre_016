@@ -4,6 +4,8 @@ import axios from "axios";
 import { useNavigate } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 import Button from '../../components/button/Button';
 import Editor from '../../components/editor/Editor'
@@ -29,7 +31,9 @@ interface Tag {
 }
 
 function AskQuestion() {
-  const memberId = 7;
+  const memberId = useSelector(
+    (state: RootState) => state.userInfoReducer.memberId,
+  );
 
   const [title, setTitle] = useState("");
   const [isContentEnabled, setIsContentEnabled] = useState(false);

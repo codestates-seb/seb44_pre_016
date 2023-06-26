@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import hljs from 'highlight.js';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
-import { DummyData, detailData, AnswerListItem } from "../../common/data/detailData"
+
 import Button from '../../components/button/Button';
 import AnswerItem, {TextBtn, Foot} from '../../components/AnswerItem';
 import Editor from '../../components/editor/Editor'
@@ -32,18 +35,18 @@ interface AnswerPostItem {
 
 function QuestionDetail() {
   const { questionId } = useParams();
+  const contentRef = useRef(null);
   
-  const [data, setData] = useState<DummyData | null>(null);
+  const [data, setData] = useState(null);
+  const [questionContent, setQuestionContent] = useState('');
   const [answerContent, setAnswerContent] = useState('');
   const [newAnswerList, setNewAnswerList] = useState(data ? data.answerList : [])
 
-  useEffect(() => {
-    // const selectedData = detailData.find(item => item.questionId === questionId);
+  const memberId = useSelector(
+    (state: RootState) => state.userInfoReducer.memberId,
+  );
 
-    // if (selectedData) {
-    //   setData(selectedData);
-    //   setNewAnswerList(selectedData.answerList);
-    // }
+  useEffect(() => {
 
     const fetchData = async () => {
       try {
@@ -54,12 +57,14 @@ function QuestionDetail() {
           },
         });
         const serverData = response.data;
-        serverData.questionContent
+        
+        const content = serverData.questionContent
         .replace(/\\\\/g, '\\')
         .replace(/\\"/g, '"')
         .replace(/\\n/g, '\n');
 
         setData(serverData);
+        setQuestionContent(content);
         setNewAnswerList(serverData.answerList);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -69,19 +74,19 @@ function QuestionDetail() {
     fetchData();
   }, [questionId]);
 
+  useEffect(() => {
+    if (contentRef && contentRef.current) {
+      contentRef.current.querySelectorAll("pre").forEach((block) => {
+        hljs.highlightElement(block);
+      });
+    }
+  }, [contentRef, questionContent]);
+
   const handleContentChange = (value: string) => {
     setAnswerContent(value);
   };
 
   const postAnswer = async() => {
-    const memberId = 7;
-    // const newAnswer: AnswerPostItem = {
-    //   "memberId": 1,
-    //   "answerId": 1,
-    //   "answerContent": answerContent,
-    // }
-    
-    // setNewAnswerList(prevAnswerList => [...prevAnswerList, newAnswer]);
 
     const payload = {
       memberId,
@@ -112,13 +117,19 @@ function QuestionDetail() {
               <Title>{data.questionTitle}</Title>
               <p className='text-sm'>{data.createdAt}</p>
             </TitleContainer>
-            <Button customStyle='w-min h-8'>ask&nbsp;question</Button>
+            <Link to="/questions/ask">
+              <Button customStyle='w-min h-8'>ask&nbsp;question</Button>
+            </Link>
           </div>
           <Line />
           <div className='flex w-full mb-10'>
             <VoteBox count={0}/>
             <ContentContainer>
-              <div className='flex items-start min-h-[150px]'>{data.questionContent}</div>
+              <div 
+              className='flex flex-col items-start min-h-[150px]'
+              ref={contentRef}
+              dangerouslySetInnerHTML={{ __html: questionContent }}
+              />
               <ul>
                 {data.questionTag.map(tag => (
                   <QuestionTagList key={tag.tagId}>
