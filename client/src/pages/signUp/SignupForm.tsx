@@ -79,7 +79,7 @@ function SignupForm() {
       });
   };
   return (
-    <div>
+    <div className="">
       <form
         onSubmit={handleSignUp}
         className="w-[100%] flex flex-col p-[24px] shadow shadow-md shadow-lg shadow-lg bg-white"
