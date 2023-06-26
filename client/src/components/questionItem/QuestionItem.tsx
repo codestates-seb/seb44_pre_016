@@ -98,9 +98,6 @@ function QuestionItem({ pageType, questionProps }: QuestionItemProps) {
         <QuestionItemTitle onClick={() => navigate(`${questionId}`)}>
           {questionTitle}
         </QuestionItemTitle>
-        <div className="text-[13px] mb-2 text-[#3B4045]">
-          {pageType === 'All_Search' && questionProps.questionContent}
-        </div>
         <QuestionBodyContainer>
           <ul>
             {questionTag &&
