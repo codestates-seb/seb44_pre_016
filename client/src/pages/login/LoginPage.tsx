@@ -50,17 +50,14 @@ function Login() {
       console.log(loginMSG);
       return;
     }
-    fetch(
-      ' https://f122-124-50-73-190.ngrok-free.app/bluelight/members/login',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': 'true',
-        },
-        body: JSON.stringify(loginInfo),
+    fetch('https://424b-124-50-73-190.ngrok-free.app/bluelight/members/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
       },
-    )
+      body: JSON.stringify(loginInfo),
+    })
       .then(data => {
         if (data.status === 201 || data.status === 200) {
           const memberId = data.headers.get('memberid');
