@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router';
 import {
   ONE_DAY_MILLISECOND,
   ONE_HOUR_MILLISECOND,
@@ -42,6 +42,7 @@ function QuestionItem({ pageType, questionProps }: QuestionItemProps) {
     profileImage,
     nickName,
     createdAt,
+    questionId,
   } = questionProps;
 
   const navigate = useNavigate();
@@ -71,6 +72,16 @@ function QuestionItem({ pageType, questionProps }: QuestionItemProps) {
     return `${dateDiff} day ago`;
   };
 
+  // const validateNavigation = () => {
+  //   const location = useLocation();
+
+  //   if (location.pathname === "/questions") {
+  //     navigate(`${questionId}`);
+  //   } else if (location.pathname === "/") {
+  //     navigate(`/questions/${questionId}`);
+  //   }
+  // }
+
   return (
     <QuestionItemContainer>
       <QuestionItemActive>
@@ -84,9 +95,12 @@ function QuestionItem({ pageType, questionProps }: QuestionItemProps) {
         </QuestionAnswer>
       </QuestionItemActive>
       <QuestionDataContainer>
-        <QuestionItemTitle onClick={() => navigate('questions/3')}>
+        <QuestionItemTitle onClick={() => navigate(`${questionId}`)}>
           {questionTitle}
         </QuestionItemTitle>
+        <div className="text-[13px] mb-2 text-[#3B4045]">
+          {pageType === 'All_Search' && questionProps.questionContent}
+        </div>
         <QuestionBodyContainer>
           <ul>
             {questionTag &&
