@@ -8,6 +8,7 @@ import com.bluelight.question.dto.QuestionDetailDto;
 
 import com.bluelight.question.dto.TopQuestionDto;
 
+import com.bluelight.question.entity.Question;
 import com.bluelight.question.mapper.QuestionMapper;
 import com.bluelight.question.service.QuestionService;
 import com.bluelight.question.service.QuestionTagService;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -31,6 +33,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping
@@ -51,11 +55,15 @@ public class QuestionController {
 
     @PostMapping("/questions/ask")
     public ResponseEntity postQuestion(
+        UriComponentsBuilder uriComponentsBuilder,
         @Valid @RequestBody AskQuestionDto.Post requestBody) {
 
-        questionService.createQuestion(requestBody);
+        Question question = questionService.createQuestion(requestBody);
+        UriComponents uriComponents = uriComponentsBuilder.path("/questions/ask/{id}").buildAndExpand(question.getQuestionId());
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setLocation(uriComponents.toUri());
+        return new ResponseEntity(httpHeaders, HttpStatus.CREATED);
     }
 
     @GetMapping

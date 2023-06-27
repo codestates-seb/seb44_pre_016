@@ -10,6 +10,7 @@ public class TagDto {
 
     @Getter
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class Request {
         @JsonProperty(value = "tagName")
         private String tagName;
