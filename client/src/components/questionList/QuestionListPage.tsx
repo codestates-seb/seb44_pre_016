@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import TopQuestionList from './TopQuestionList';
 import Button from '../button/Button';
 import {
@@ -16,6 +17,7 @@ import { QuestionListPageProps } from '../../common/interface/QuestionList.inter
 import SearchQuestionList from './SearchQuestionList';
 
 function QuestionListPage({ page }: QuestionListPageProps) {
+  const navigate = useNavigate();
   const totalQuestion = useSelector(
     (state: RootState) => state.PaginationReducer.totalQuestionCnt,
   );
@@ -48,7 +50,9 @@ function QuestionListPage({ page }: QuestionListPageProps) {
             {QUESTION_PAGE_TITLE[page]}
           </h1>
           <ContentButtonContainer className="ml-3">
-            <Button>Ask Question</Button>
+            <Button onClick={() => navigate('/questions/ask')}>
+              Ask Question
+            </Button>
           </ContentButtonContainer>
         </ContentHeader>
         {page === 'Search' && (
