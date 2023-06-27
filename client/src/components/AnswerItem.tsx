@@ -1,11 +1,20 @@
+import axios from 'axios';
 import hljs from 'highlight.js';
 import React, { useEffect, useRef } from 'react';
 import tw from 'tailwind-styled-components';
-import { AnswerListItem } from '../common/data/detailData';
 
 import { UserBox, Blank, UserName } from '../pages/QuestionDetail/QuestionDetail.styled';
 import './AnswerItemStyle.css';
 import VoteBox from './vote/VoteBox';
+
+export interface AnswerListItem {
+  memberId: number;
+  answerId: number;
+  answerContent: string;
+  profileImage: string;
+  displayName: string;
+  createdAt: string;
+}
 
 const Container = tw.div`
   flex
@@ -28,6 +37,8 @@ hover:text-stone-700
 function AnswerItem({answer}: {answer:AnswerListItem}) {
   const contentRef = useRef(null);
 
+  const id = answer.answerId;
+
   useEffect(() => {
     if (contentRef && contentRef.current) {
       contentRef.current.querySelectorAll("pre").forEach((block) => {
@@ -35,6 +46,21 @@ function AnswerItem({answer}: {answer:AnswerListItem}) {
       });
     }
   }, [contentRef, answer.answerContent]);
+
+  const deleteAnswer = async () => {
+    try{
+      const res = await axios.delete(`${process.env.REACT_APP_BASE_URL}/questions/answer/${id}`,
+      {
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+        },
+      });
+      window.location.reload();
+    } catch (error) {
+      console.error("Error deleting the answer:", error);
+      alert("Only writer can delete this answer.");
+    }
+  }
   
   return (
     <div className='flex w-full mb-5'>
@@ -46,7 +72,7 @@ function AnswerItem({answer}: {answer:AnswerListItem}) {
           dangerouslySetInnerHTML={{ __html: answer.answerContent }}
         />
         <Foot>
-          <TextBtn>delete</TextBtn>
+          <TextBtn onClick={deleteAnswer}>delete</TextBtn>
           <UserBox>
             <Blank />
             <div className='flex grow-0 mr-10'>

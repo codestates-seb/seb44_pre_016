@@ -5,4 +5,6 @@ pre.ql-syntax {
   border-radius: 5px;
   min-width: 500px;
   max-width: 800px;
+  width: 100%;
+  white-space: pre-wrap;
 }
