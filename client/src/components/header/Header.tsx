@@ -59,9 +59,9 @@ function Header() {
 
   const handleLogOut = () => {
     localStorage.clear();
+    navigate('/');
     setIsLogoutModal(false);
     window.location.reload();
-    navigate('/');
   };
 
   const closeModal = e => {
