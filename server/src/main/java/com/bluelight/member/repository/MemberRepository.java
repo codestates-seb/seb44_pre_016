@@ -1,0 +1,9 @@
+package com.bluelight.member.repository;
+
+import com.bluelight.member.entity.Member;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MemberRepository extends JpaRepository<Member, Long> {
+    Optional<Member> findByEmail(String email);
+}
