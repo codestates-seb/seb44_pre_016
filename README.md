@@ -40,9 +40,15 @@ npm start
 
 
 ## 팀원
-| <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/e09ce90c-1f3d-4d97-a8dc-c6eb934d803e" width="150" height="150"/> | <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/51310a0f-8b12-49b0-8fd3-1e9773e2aaa2" width="150" height="150"/> | <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/ab2ae20e-6494-47e8-a857-3a8fc7c7aa8f" width="150" height="150"/> | <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/f4dfd3dc-089c-4f15-9357-4fb8446dbbbd" width="150" height="150"/> | <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/ca97ea2f-0c9c-4f7b-ae5d-b8f69ce05b07" width="150" height="150"/> | <img src="" width="150" height="150"/> |
-| --- | --- | --- | --- | --- | --- |
-| [김준표(팀장)](https://github.com/KimJunpyo) | [송혜수](https://github.com/shyesoo) | [이은희](https://github.com/joywhy) | [송영범](https://github.com/withme1221) | [유승연](https://github.com/Seungyeon3) | [이준기(부팀장)](https://github.com/ljg980708) |
+### FE
+| <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/e09ce90c-1f3d-4d97-a8dc-c6eb934d803e" width="150" height="150"/> | <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/51310a0f-8b12-49b0-8fd3-1e9773e2aaa2" width="150" height="150"/> | <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/ab2ae20e-6494-47e8-a857-3a8fc7c7aa8f" width="150" height="150"/> |
+| --- | --- | --- |
+| [김준표(팀장)](https://github.com/KimJunpyo) | [송혜수](https://github.com/shyesoo) | [이은희](https://github.com/joywhy) |
+
+### BE
+| <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/f4dfd3dc-089c-4f15-9357-4fb8446dbbbd" width="150" height="150"/> | <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/ca97ea2f-0c9c-4f7b-ae5d-b8f69ce05b07" width="150" height="150"/> |  |
+| --- | --- | --- |
+| [송영범](https://github.com/withme1221) | [유승연](https://github.com/Seungyeon3) | [이준기(부팀장)](https://github.com/ljg980708) |
 
 
 
