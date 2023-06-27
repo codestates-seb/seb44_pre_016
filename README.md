@@ -40,9 +40,9 @@ npm start
 
 
 ## 팀원
-| <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/e09ce90c-1f3d-4d97-a8dc-c6eb934d803e" width="180" height="180"/> | <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/51310a0f-8b12-49b0-8fd3-1e9773e2aaa2" width="180" height="180"/> | <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/ab2ae20e-6494-47e8-a857-3a8fc7c7aa8f" width="180" height="180"/> | <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/f4dfd3dc-089c-4f15-9357-4fb8446dbbbd" width="180" height="180"/> | <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/ca97ea2f-0c9c-4f7b-ae5d-b8f69ce05b07" width="180" height="180"/> | <img src="" width="180" height="180"/> |
+| <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/e09ce90c-1f3d-4d97-a8dc-c6eb934d803e" width="150" height="150"/> | <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/51310a0f-8b12-49b0-8fd3-1e9773e2aaa2" width="150" height="150"/> | <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/ab2ae20e-6494-47e8-a857-3a8fc7c7aa8f" width="150" height="150"/> | <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/f4dfd3dc-089c-4f15-9357-4fb8446dbbbd" width="150" height="150"/> | <img src="https://github.com/codestates-seb/seb44_pre_016/assets/100808381/ca97ea2f-0c9c-4f7b-ae5d-b8f69ce05b07" width="150" height="150"/> | <img src="" width="150" height="150"/> |
 | --- | --- | --- | --- | --- | --- |
-| [김준표](https://github.com/KimJunpyo) | [송혜수](https://github.com/shyesoo) | [이은희](https://github.com/joywhy) | [송영범](https://github.com/withme1221) | [유승연](https://github.com/Seungyeon3) | [이준기](https://github.com/ljg980708) |
+| [김준표(팀장)](https://github.com/KimJunpyo) | [송혜수](https://github.com/shyesoo) | [이은희](https://github.com/joywhy) | [송영범](https://github.com/withme1221) | [유승연](https://github.com/Seungyeon3) | [이준기(부팀장)](https://github.com/ljg980708) |
 
 
 
@@ -53,18 +53,15 @@ npm start
 - 로그인 시, 헤더에 유저의 정보가 표시되며, 로그아웃 버튼이 생성되어 로그아웃 할 수 있습니다.
 
 ### 검색(tag 포함)
-![무비모달](https://github.com/FE-Sprint-Study/Movie-Wiki/assets/100808381/6dfb08ab-7a98-464c-a06b-eb301d1475f3)
 - 일반 검색했을 때, 제목에 입력한 검색어가 포함된 데이터를 출력합니다.
 - 검색어에 대괄호를 감싸면 태그 검색이 진행되어 태그가 포함된 데이터를 출력합니다.
 
 ### 질문 등록하기
-![무한스크롤1](https://github.com/FE-Sprint-Study/Movie-Wiki/assets/100808381/b41aee1f-a613-47bd-abff-53e930541975)
 - 제목, 내용, 태그를 입력하여 질문을 등록할 수 있습니다.
 - 특정 글자 수를 넘기지 못하면 다음 입력 칸으로 넘어갈 수 없습니다.
 - 본문에는 코드 작성 기능과 서식 기능 등이 구현되어있습니다.
 - 태그는 자동검색 기능이 있어 태그 리스트에서 키워드가 포함된 태그들이 있다면 표시해주고 클릭 시 태그가 저장됩니다.
 
 ### 질문 상세보기
-![캐러셀](https://github.com/FE-Sprint-Study/Movie-Wiki/assets/100808381/ffd460e8-0232-4944-8c18-4c28b9bc23ed)
 - 질문의 제목, 내용, 태그, 작성자, 작성일자가 표시됩니다.
 - 질문에 답변을 달 수 있습니다.
