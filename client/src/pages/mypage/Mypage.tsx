@@ -24,6 +24,7 @@ function Mypage() {
   const profileImage = useSelector(
     (state: RootState) => state.userInfoReducer.profileImage,
   );
+  console.log(profileImage);
   const profileTitle = useSelector(
     (state: RootState) => state.userInfoReducer.profileTitle,
   );
@@ -32,7 +33,7 @@ function Mypage() {
       <div className="flex flex-row w-[100%] h-[200px] p-5  justify-between">
         <div className="flex">
           <img
-            src={`${profileImage}`}
+            src={`/${profileImage}`}
             alt="프로필사진"
             className="w-[100px] h-[120px]"
           />
